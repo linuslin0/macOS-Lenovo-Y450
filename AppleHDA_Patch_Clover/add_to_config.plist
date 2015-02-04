@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>KernelAndKextPatches</key>
+	<dict>
+		<key>KextsToPatch</key>
+		<array>
+			<dict>
+				<key>Comment</key>
+				<string>Patch_ALC269_Y450</string>
+				<key>Find</key>
+				<data>eG1sLnps</data>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>eHh4Lnps</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Patch_ALC269_Y450</string>
+				<key>Find</key>
+				<data>YgLsEA==</data>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>aQLsEA==</data>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>
