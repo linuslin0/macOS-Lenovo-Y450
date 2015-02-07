@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLrQDGLy.aml, Sat Feb  7 14:58:13 2015
+ * Disassembly of iASLk7XlhA.aml, Sat Feb  7 15:00:09 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A30B (41739)
+ *     Length           0x0000A265 (41573)
  *     Revision         0x02
- *     Checksum         0x4A
+ *     Checksum         0x31
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20091013 (537464851)
  */
-DefinitionBlock ("iASLrQDGLy.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLk7XlhA.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -4958,44 +4958,6 @@ DefinitionBlock ("iASLrQDGLy.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
-                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-                    {
-                        Store (Package (0x0A)
-                            {
-                                "AAPL,slot-name", 
-                                Buffer (0x08)
-                                {
-                                    "AirPort"
-                                }, 
-
-                                "device_type", 
-                                Buffer (0x08)
-                                {
-                                    "AirPort"
-                                }, 
-
-                                "device-id", 
-                                Buffer (0x04)
-                                {
-                                     0x12, 0x43, 0x00, 0x00                         
-                                }, 
-
-                                "model", 
-                                Buffer (0x2A)
-                                {
-                                    "Broadcom BCM4312 Wireless Network Adapter"
-                                }, 
-
-                                "built-in", 
-                                Buffer (One)
-                                {
-                                     0x00                                           
-                                }
-                            }, Local0)
-                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                        Return (Local0)
-                    }
-
                     Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
                     {
                         0x09, 
