@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASL4XpUSN.aml, Sat Feb  7 14:47:12 2015
+ * Disassembly of iASLk4pB4S.aml, Sat Feb  7 14:53:04 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x00009921 (39201)
+ *     Length           0x0000A44D (42061)
  *     Revision         0x02
- *     Checksum         0x6C
+ *     Checksum         0x4E
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20050624 (537200164)
+ *     Compiler Version 0x20091013 (537464851)
  */
-DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLk4pB4S.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -113,7 +113,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
     Name (ESCS, 0x48)
     Name (PDBR, 0x4D)
     Name (SMBL, 0x10)
-    OperationRegion (GNVS, SystemMemory, 0xBDF9EDBC, 0x0100)
+    OperationRegion (GNVS, SystemMemory, 0x7FD9EDBC, 0x0100)
     Field (GNVS, AnyAcc, Lock, Preserve)
     {
         OSYS,   16, 
@@ -250,6 +250,35 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         DB05,   8, 
         DB06,   8, 
         DB07,   8
+    }
+
+    Method (DTGP, 5, NotSerialized)
+    {
+        If (LEqual (Arg0, ToUUID ("a0b5b7c6-1318-441c-b0c9-fe695eaf949b")))
+        {
+            If (LEqual (Arg1, One))
+            {
+                If (LEqual (Arg2, Zero))
+                {
+                    Store (Buffer (One)
+                        {
+                             0x03                                           
+                        }, Arg4)
+                    Return (One)
+                }
+
+                If (LEqual (Arg2, One))
+                {
+                    Return (One)
+                }
+            }
+        }
+
+        Store (Buffer (One)
+            {
+                 0x00                                           
+            }, Arg4)
+        Return (Zero)
     }
 
     Scope (_SB)
@@ -1084,6 +1113,137 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         Alias (PRSA, PRSH)
         Device (PCI0)
         {
+            Device (PEGP)
+            {
+                Name (_ADR, 0x00010000)  // _ADR: Address
+                Device (GFX0)
+                {
+                    Name (_ADR, Zero)  // _ADR: Address
+                    Name (_SUN, One)  // _SUN: Slot User Number
+                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    {
+                        Store (Package (0x24)
+                            {
+                                "@0,compatible", 
+                                Buffer (0x0B)
+                                {
+                                    "NVDA,NVMac"
+                                }, 
+
+                                "@0,device_type", 
+                                Buffer (0x08)
+                                {
+                                    "display"
+                                }, 
+
+                                "@0,name", 
+                                Buffer (0x0F)
+                                {
+                                    "NVDA,Display-A"
+                                }, 
+
+                                "@1,compatible", 
+                                Buffer (0x0B)
+                                {
+                                    "NVDA,NVMac"
+                                }, 
+
+                                "@1,device_type", 
+                                Buffer (0x08)
+                                {
+                                    "display"
+                                }, 
+
+                                "@1,name", 
+                                Buffer (0x0F)
+                                {
+                                    "NVDA,Display-B"
+                                }, 
+
+                                "NVCAP", 
+                                Buffer (0x18)
+                                {
+                                    /* 0000 */  0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00,
+                                    /* 0008 */  0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07,
+                                    /* 0010 */  0x00, 0x00, 0x00, 0x00                         
+                                }, 
+
+                                "VRAM,totalsize", 
+                                Buffer (0x04)
+                                {
+                                     0x00, 0x00, 0x00, 0x20                         
+                                }, 
+
+                                "device_type", 
+                                Buffer (0x0D)
+                                {
+                                    "NVDA,GeForce"
+                                }, 
+
+                                "model", 
+                                Buffer (0x17)
+                                {
+                                    "nVidia GeForce GT 240M"
+                                }, 
+
+                                "@0,built-in", 
+                                Unicode ("\x01"), 
+                                "AAPL,aux-power-connected", 
+                                Unicode ("\x01"), 
+                                "AAPL,backlight-control", 
+                                Unicode ("\x01"), 
+                                "@0,backlight-control", 
+                                Unicode ("\x01"), 
+                                "@0,display-cfg", 
+                                Buffer (0x04)
+                                {
+                                     0x03, 0x01, 0x00, 0x00                         
+                                }, 
+
+                                "@0,pwm-info", 
+                                Buffer (0x14)
+                                {
+                                    /* 0000 */  0x01, 0x14, 0x00, 0x64, 0xA8, 0x61, 0x00, 0x00,
+                                    /* 0008 */  0x08, 0x52, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+                                    /* 0010 */  0x00, 0x04, 0x00, 0x00                         
+                                }, 
+
+                                "hda-gfx", 
+                                Buffer (0x0A)
+                                {
+                                    "onboard-1"
+                                }, 
+
+                                "rom-revision", 
+                                Buffer (0x25)
+                                {
+                                    "nVidia GeForce GT 240M OpenGL Engine"
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
+                }
+
+                Device (HDAU)
+                {
+                    Name (_ADR, One)  // _ADR: Address
+                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    {
+                        Store (Package (0x02)
+                            {
+                                "hda-gfx", 
+                                Buffer (0x0A)
+                                {
+                                    "onboard-1"
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
+                }
+            }
+
             Name (_HID, EisaId ("PNP0A08"))  // _HID: Hardware ID
             Name (_CID, EisaId ("PNP0A03"))  // _CID: Compatible ID
             Name (_ADR, Zero)  // _ADR: Address
@@ -1493,26 +1653,12 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Device (P0P2)
             {
-                Name (_ADR, 0x00010000)  // _ADR: Address
-                Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
-                {
-                    0x09, 
-                    0x04
-                })
-                Method (_PRT, 0, NotSerialized)  // _PRT: PCI Routing Table
-                {
-                    If (PICM)
-                    {
-                        Return (AR02)
-                    }
-
-                    Return (PR02)
-                }
             }
 
             Device (GFX0)
             {
                 Name (_ADR, 0x00020000)  // _ADR: Address
+                Name (_SUN, One)  // _SUN: Slot User Number
                 Method (_DOS, 1, NotSerialized)  // _DOS: Disable Output Switching
                 {
                     Store (And (Arg0, 0x07), DSEN)
@@ -2792,6 +2938,20 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Device (LPCB)
             {
                 Name (_ADR, 0x001F0000)  // _ADR: Address
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                 0x18, 0x3A, 0x00, 0x00                         
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Scope (\_SB)
                 {
                     Device (DBTN)
@@ -2848,7 +3008,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                     Scope (\_SB)
                     {
-                        OperationRegion (TCG1, SystemMemory, 0xBDF9EDB5, 0x00000007)
+                        OperationRegion (TCG1, SystemMemory, 0x7FD9EDB5, 0x07)
                         Field (TCG1, AnyAcc, NoLock, Preserve)
                         {
                             SSS1,   8, 
@@ -2896,13 +3056,13 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             Return (Zero)
                         }
 
-                        OperationRegion (SMI0, SystemIO, 0x0000FE00, 0x00000002)
+                        OperationRegion (SMI0, SystemIO, 0xFE00, 0x02)
                         Field (SMI0, AnyAcc, NoLock, Preserve)
                         {
                             SMIC,   8
                         }
 
-                        OperationRegion (SMI1, SystemMemory, 0xBDF9EEBD, 0x00000090)
+                        OperationRegion (SMI1, SystemMemory, 0x7FD9EEBD, 0x90)
                         Field (SMI1, AnyAcc, NoLock, Preserve)
                         {
                             BCMD,   8, 
@@ -3379,56 +3539,28 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Device (HPET)
                 {
                     Name (_HID, EisaId ("PNP0103"))  // _HID: Hardware ID
-                    Name (_CID, EisaId ("PNP0C01"))  // _CID: Compatible ID
-                    Name (BUF0, ResourceTemplate ()
+                    Name (ATT3, ResourceTemplate ()
                     {
-                        Memory32Fixed (ReadOnly,
+                        IRQNoFlags ()
+                            {0}
+                        IRQNoFlags ()
+                            {8}
+                        Memory32Fixed (ReadWrite,
                             0xFED00000,         // Address Base
                             0x00000400,         // Address Length
-                            _Y0E)
+                            )
+                    })
+                    Name (ATT4, ResourceTemplate ()
+                    {
                     })
                     Method (_STA, 0, NotSerialized)  // _STA: Status
                     {
-                        If (LGreaterEqual (OSYS, 0x07D1))
-                        {
-                            If (HPAE)
-                            {
-                                Return (0x0F)
-                            }
-                        }
-                        Else
-                        {
-                            If (HPAE)
-                            {
-                                Return (0x0B)
-                            }
-                        }
-
-                        Return (Zero)
+                        Return (0x0F)
                     }
 
-                    Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
+                    Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
                     {
-                        If (HPAE)
-                        {
-                            CreateDWordField (BUF0, \_SB.PCI0.LPCB.HPET._Y0E._BAS, HPT0)  // _BAS: Base Address
-                            If (LEqual (HPAS, One))
-                            {
-                                Store (0xFED01000, HPT0)
-                            }
-
-                            If (LEqual (HPAS, 0x02))
-                            {
-                                Store (0xFED02000, HPT0)
-                            }
-
-                            If (LEqual (HPAS, 0x03))
-                            {
-                                Store (0xFED03000, HPT0)
-                            }
-                        }
-
-                        Return (BUF0)
+                        Return (ATT3)
                     }
                 }
 
@@ -3752,10 +3884,8 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             0x0070,             // Range Minimum
                             0x0070,             // Range Maximum
                             0x01,               // Alignment
-                            0x08,               // Length
+                            0x02,               // Length
                             )
-                        IRQNoFlags ()
-                            {8}
                     })
                 }
 
@@ -3776,8 +3906,6 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             0x10,               // Alignment
                             0x04,               // Length
                             )
-                        IRQNoFlags ()
-                            {0}
                     })
                 }
 
@@ -3911,6 +4039,48 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x03, 
                     0x03
                 })
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x0F)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                 0x34, 0x3A, 0x00, 0x00                         
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                 0x0A                                           
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
             }
 
             Device (USB1)
@@ -3949,6 +4119,48 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x04, 
                     0x03
                 })
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x0F)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                 0x35, 0x3A, 0x00, 0x00                         
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                 0x0A                                           
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
             }
 
             Device (USB2)
@@ -3985,14 +4197,125 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
                 {
                     0x0C, 
-                    0x03
+                    One
                 })
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x0F)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                 0x36, 0x3A, 0x00, 0x00                         
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                 0x0A                                           
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Device (HUB0)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
                     Device (BLTH)
                     {
                         Name (_ADR, One)  // _ADR: Address
+                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
+                        {
+                            Zero, 
+                            0xFF, 
+                            Zero, 
+                            Zero
+                        })
+                    }
+                }
+            }
+
+            Device (EHC1)
+            {
+                Name (_ADR, 0x001D0007)  // _ADR: Address
+                Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
+                {
+                    0x0D, 
+                    One
+                })
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x0F)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                 0x3A, 0x3A, 0x00, 0x00                         
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                 0x0A                                           
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
+                Device (HUB0)
+                {
+                    Name (_ADR, Zero)  // _ADR: Address
+                    Device (WEBC)
+                    {
+                        Name (_ADR, 0x03)  // _ADR: Address
                         Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
                         {
                             Zero, 
@@ -4042,31 +4365,6 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 })
             }
 
-            Device (EHC1)
-            {
-                Name (_ADR, 0x001D0007)  // _ADR: Address
-                Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
-                {
-                    0x0D, 
-                    0x03
-                })
-                Device (HUB0)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
-                    Device (WEBC)
-                    {
-                        Name (_ADR, 0x03)  // _ADR: Address
-                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
-                        {
-                            Zero, 
-                            0xFF, 
-                            Zero, 
-                            Zero
-                        })
-                    }
-                }
-            }
-
             Device (USB3)
             {
                 Name (_ADR, 0x001A0000)  // _ADR: Address
@@ -4103,6 +4401,48 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x0E, 
                     0x03
                 })
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x0F)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                 0x37, 0x3A, 0x00, 0x00                         
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                 0x0A                                           
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
             }
 
             Device (USB4)
@@ -4141,6 +4481,48 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x05, 
                     0x03
                 })
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x0F)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                 0x38, 0x3A, 0x00, 0x00                         
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                 0x0A                                           
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
             }
 
             Device (USB5)
@@ -4179,6 +4561,49 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x20, 
                     0x03
                 })
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x0F)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                 0x39, 0x3A, 0x00, 0x00                         
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                 0x0A                                           
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Device (HUB0)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
@@ -4216,6 +4641,49 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x0D, 
                     0x03
                 })
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x0F)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                 0x3C, 0x3A, 0x00, 0x00                         
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                 0x0A                                           
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            Buffer (One)
+                            {
+                                 0x00                                           
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Device (HUB0)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
@@ -4261,10 +4729,45 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     PMES,   1
                 }
 
+                Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                {
+                    Store (Package (0x0A)
+                        {
+                            "codec-id", 
+                            Buffer (0x04)
+                            {
+                                 0x69, 0x02, 0xEC, 0x10                         
+                            }, 
+
+                            "layout-id", 
+                            Buffer (0x04)
+                            {
+                                 0x0D, 0x01, 0x00, 0x00                         
+                            }, 
+
+                            "device-type", 
+                            Buffer (0x24)
+                            {
+                                "Realtek ALC269 @ Intel 82801IB ICH9"
+                            }, 
+
+                            "hda-gfx", 
+                            Buffer (0x0A)
+                            {
+                                "onboard-1"
+                            }, 
+
+                            "PinConfigurations", 
+                            Buffer (Zero) {}
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
                 {
                     0x0D, 
-                    0x04
+                    0x02
                 })
             }
 
@@ -4455,6 +4958,44 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
+                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    {
+                        Store (Package (0x0A)
+                            {
+                                "AAPL,slot-name", 
+                                Buffer (0x08)
+                                {
+                                    "AirPort"
+                                }, 
+
+                                "device_type", 
+                                Buffer (0x08)
+                                {
+                                    "AirPort"
+                                }, 
+
+                                "device-id", 
+                                Buffer (0x04)
+                                {
+                                     0x12, 0x43, 0x00, 0x00                         
+                                }, 
+
+                                "model", 
+                                Buffer (0x2A)
+                                {
+                                    "Broadcom BCM4312 Wireless Network Adapter"
+                                }, 
+
+                                "built-in", 
+                                Buffer (One)
+                                {
+                                     0x00                                           
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
+
                     Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
                     {
                         0x09, 
@@ -4674,6 +5215,33 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
+                    Name (_SUN, 0x05)  // _SUN: Slot User Number
+                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    {
+                        Store (Package (0x06)
+                            {
+                                "device_type", 
+                                Buffer (0x14)
+                                {
+                                    "Ethernet Controller"
+                                }, 
+
+                                "model", 
+                                Buffer (0x34)
+                                {
+                                    "Broadcom BCM5784M PCI-E Gigabit Ethernet Controller"
+                                }, 
+
+                                "built-in", 
+                                Buffer (One)
+                                {
+                                     0x00                                           
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
+
                     Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
                     {
                         0x09, 
@@ -4705,6 +5273,179 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         Processor (CPU1, 0x01, 0x00000410, 0x06) {}
         Processor (CPU2, 0x02, 0x00000410, 0x06) {}
         Processor (CPU3, 0x03, 0x00000410, 0x06) {}
+    }
+
+    Scope (_PR.CPU0)
+    {
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (Package (0x06)
+            {
+                Package (0x06)
+                {
+                    Zero, 
+                    Zero, 
+                    0x10, 
+                    0x10, 
+                    0x0B23, 
+                    Zero
+                }, 
+
+                Package (0x06)
+                {
+                    Zero, 
+                    Zero, 
+                    0x10, 
+                    0x10, 
+                    0x0A21, 
+                    One
+                }, 
+
+                Package (0x06)
+                {
+                    Zero, 
+                    Zero, 
+                    0x10, 
+                    0x10, 
+                    0x091D, 
+                    0x02
+                }, 
+
+                Package (0x06)
+                {
+                    Zero, 
+                    Zero, 
+                    0x10, 
+                    0x10, 
+                    0x081A, 
+                    0x03
+                }, 
+
+                Package (0x06)
+                {
+                    Zero, 
+                    Zero, 
+                    0x10, 
+                    0x10, 
+                    0x0716, 
+                    0x04
+                }, 
+
+                Package (0x06)
+                {
+                    Zero, 
+                    Zero, 
+                    0x10, 
+                    0x10, 
+                    0x0613, 
+                    0x05
+                }
+            })
+        }
+
+        Method (_PSD, 0, NotSerialized)  // _PSD: Power State Dependencies
+        {
+            Return (Package (0x05)
+            {
+                0x05, 
+                Zero, 
+                Zero, 
+                0xFC, 
+                0x04
+            })
+        }
+
+        Method (_CST, 0, NotSerialized)  // _CST: C-States
+        {
+            Return (Package (0x02)
+            {
+                One, 
+                Package (0x04)
+                {
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW, 
+                            0x01,               // Bit Width
+                            0x02,               // Bit Offset
+                            0x0000000000000000, // Address
+                            0x01,               // Access Size
+                            )
+                    }, 
+
+                    One, 
+                    0x9D, 
+                    0x03E8
+                }
+            })
+        }
+    }
+
+    Scope (_PR.CPU1)
+    {
+        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
+        {
+            Return (^^CPU0._PSS ())
+        }
+
+        Method (_PSD, 0, NotSerialized)  // _PSD: Power State Dependencies
+        {
+            Return (^^CPU0._PSD ())
+        }
+
+        Method (_CST, 0, NotSerialized)  // _CST: C-States
+        {
+            Return (Package (0x04)
+            {
+                0x03, 
+                Package (0x04)
+                {
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW, 
+                            0x01,               // Bit Width
+                            0x02,               // Bit Offset
+                            0x0000000000000000, // Address
+                            ,)
+                    }, 
+
+                    One, 
+                    Zero, 
+                    0x03E8
+                }, 
+
+                Package (0x04)
+                {
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW, 
+                            0x08,               // Bit Width
+                            0x00,               // Bit Offset
+                            0x0000000000000414, // Address
+                            ,)
+                    }, 
+
+                    0x02, 
+                    One, 
+                    0x01F4
+                }, 
+
+                Package (0x04)
+                {
+                    ResourceTemplate ()
+                    {
+                        Register (FFixedHW, 
+                            0x08,               // Bit Width
+                            0x00,               // Bit Offset
+                            0x0000000000000415, // Address
+                            ,)
+                    }, 
+
+                    0x03, 
+                    0x55, 
+                    0xFA
+                }
+            })
+        }
     }
 
     Scope (_TZ)
@@ -5013,15 +5754,6 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         {
             Store (Zero, \_SB.FL14)
             Store (Zero, \_SB.PCI0.LPCB.EC0.FVIS)
-        }
-
-        If (LGreaterEqual (OSYS, 0x07D9))
-        {
-            Store (One, \_SB.PCI0.LPCB.EC0.W7FG)
-        }
-        Else
-        {
-            Store (Zero, \_SB.PCI0.LPCB.EC0.W7FG)
         }
 
         If (LEqual (Arg0, 0x03))
@@ -5582,10 +6314,14 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Memory32Fixed (ReadWrite,
                     0x00000000,         // Address Base
                     0x00004000,         // Address Length
-                    _Y0F)
+                    _Y0E)
                 Memory32Fixed (ReadWrite,
                     0x00000000,         // Address Base
                     0x00004000,         // Address Length
+                    _Y0F)
+                Memory32Fixed (ReadWrite,
+                    0x00000000,         // Address Base
+                    0x00001000,         // Address Length
                     _Y10)
                 Memory32Fixed (ReadWrite,
                     0x00000000,         // Address Base
@@ -5593,12 +6329,8 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     _Y11)
                 Memory32Fixed (ReadWrite,
                     0x00000000,         // Address Base
-                    0x00001000,         // Address Length
-                    _Y12)
-                Memory32Fixed (ReadWrite,
-                    0x00000000,         // Address Base
                     0x00000000,         // Address Length
-                    _Y13)
+                    _Y12)
                 Memory32Fixed (ReadWrite,
                     0xFED20000,         // Address Base
                     0x00020000,         // Address Length
@@ -5610,17 +6342,17 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             })
             Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y0F._BAS, RBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y0E._BAS, RBR0)  // _BAS: Base Address
                 ShiftLeft (^^LPCB.RCBA, 0x0E, RBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y10._BAS, MBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y0F._BAS, MBR0)  // _BAS: Base Address
                 ShiftLeft (MHBR, 0x0E, MBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y11._BAS, DBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y10._BAS, DBR0)  // _BAS: Base Address
                 ShiftLeft (DIBR, 0x0C, DBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y12._BAS, EBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y11._BAS, EBR0)  // _BAS: Base Address
                 ShiftLeft (EPBR, 0x0C, EBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y13._BAS, XBR0)  // _BAS: Base Address
+                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y12._BAS, XBR0)  // _BAS: Base Address
                 ShiftLeft (PXBR, 0x1A, XBR0)
-                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y13._LEN, XSZ0)  // _LEN: Length
+                CreateDWordField (BUF0, \_SB.PCI0.PDRC._Y12._LEN, XSZ0)  // _LEN: Length
                 ShiftRight (0x10000000, PXSZ, XSZ0)
                 Return (BUF0)
             }
@@ -6808,6 +7540,13 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         Zero, 
         Zero
     })
+    Name (_S2, Package (0x04)  // _S2_: S2 System State
+    {
+        0x04, 
+        Zero, 
+        Zero, 
+        Zero
+    })
     Name (_S3, Package (0x04)  // _S3_: S3 System State
     {
         0x05, 
@@ -7001,8 +7740,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 CFN2,   1, 
                 SFN2,   1, 
                 TPNT,   1, 
-                W7FG,   1, 
-                    ,   1, 
+                    ,   2, 
                 LNON,   1, 
                 Offset (0x66), 
                 BLVL,   8, 
@@ -7193,15 +7931,6 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         {
                             ISBC (^^^GFX0.PWMC)
                         }
-                    }
-
-                    If (LGreaterEqual (OSYS, 0x07D9))
-                    {
-                        Store (One, W7FG)
-                    }
-                    Else
-                    {
-                        Store (Zero, W7FG)
                     }
 
                     Store (One, ^^^GFX0.CLID)
@@ -8219,15 +8948,15 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         0x0000,             // Range Maximum
                         0x04,               // Alignment
                         0x08,               // Length
-                        _Y14)
-                    IRQNoFlags (_Y15)
+                        _Y13)
+                    IRQNoFlags (_Y14)
                         {}
                 })
-                CreateByteField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y14._MIN, IOLO)  // _MIN: Minimum Base Address
+                CreateByteField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y13._MIN, IOLO)  // _MIN: Minimum Base Address
                 CreateByteField (BUF1, 0x03, IOHI)
-                CreateByteField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y14._MAX, IORL)  // _MAX: Maximum Base Address
+                CreateByteField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y13._MAX, IORL)  // _MAX: Maximum Base Address
                 CreateByteField (BUF1, 0x05, IORH)
-                CreateWordField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y15._INT, IRQW)  // _INT: Interrupts
+                CreateWordField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y14._INT, IRQW)  // _INT: Interrupts
                 ENFG ()
                 Store (0x0A, LDN)
                 Store (IOAL, IOLO)
@@ -8323,18 +9052,18 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         {
             Name (_HID, "VPC2004")  // _HID: Hardware ID
             Name (_UID, Zero)  // _UID: Unique ID
-            Name (_VPC, Zero)
+            Name (VPC, Zero)
             Name (VPCD, Zero)
             Method (_STA, 0, NotSerialized)  // _STA: Status
             {
                 Return (0x0F)
             }
 
-            Method (_CFG, 0, NotSerialized)
+            Method (CFG, 0, NotSerialized)
             {
                 Store (ILDD (), Local0)
-                Store (Local0, _VPC)
-                Return (_VPC)
+                Store (Local0, VPC)
+                Return (VPC)
             }
 
             Method (VPCR, 1, Serialized)
@@ -8370,22 +9099,22 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Method (VPCM, 2, Serialized)
             {
                 Acquire (VXXX, 0xFFFF)
-                Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                Store (ToInteger (Arg0), _T_0)
-                If (LEqual (_T_0, 0x12))
+                Name (T_0, Zero)
+                Store (ToInteger (Arg0), T_0)
+                If (LEqual (T_0, 0x12))
                 {
                     Store (BLVL, Local0)
                 }
                 Else
                 {
-                    If (LEqual (_T_0, 0x13))
+                    If (LEqual (T_0, 0x13))
                     {
                         Store (Arg1, BLVL)
                         Store (BLVL, Local0)
                     }
                     Else
                     {
-                        If (LEqual (_T_0, 0x29))
+                        If (LEqual (T_0, 0x29))
                         {
                             Store (GCPU, Local0)
                         }
@@ -8689,6 +9418,11 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         Device (ACAD)
         {
             Name (_HID, "ACPI0003")  // _HID: Hardware ID
+            Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
+            {
+                0x18, 
+                0x03
+            })
             Name (_PCL, Package (0x01)  // _PCL: Power Consumer List
             {
                 _SB
@@ -9018,6 +9752,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     If (^^PCI0.LPCB.EC0.LDS0)
                     {
                         Store (Zero, LIDS)
+                        Notify (SLPB, 0x80)
                         Return (Zero)
                     }
                     Else
@@ -9055,6 +9790,14 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         Device (PWRB)
         {
             Name (_HID, EisaId ("PNP0C0C"))  // _HID: Hardware ID
+        }
+
+        Device (PNLF)
+        {
+            Name (_HID, EisaId ("APP0002"))  // _HID: Hardware ID
+            Name (_CID, "backlight")  // _CID: Compatible ID
+            Name (_UID, 0x0C)  // _UID: Unique ID
+            Name (_STA, 0x0B)  // _STA: Status
         }
 
         Device (SLPB)
@@ -9245,9 +9988,9 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Method (CPSR, 1, NotSerialized)
             {
                 Store (Arg0, INBF)
-                Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                Store (BY00, _T_0)
-                If (LEqual (_T_0, One))
+                Name (T_0, Zero)
+                Store (BY00, T_0)
+                If (LEqual (T_0, One))
                 {
                     If (LNotEqual (BY01, 0x10))
                     {
@@ -9260,6 +10003,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
 
                 CMD0 (BY08, BY09, BY10, One, BY16)
+                Return (Zero)
             }
 
             Method (_WED, 1, NotSerialized)  // _Wxx: Wake Event
@@ -9302,9 +10046,9 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (UWED, 3, NotSerialized)
             {
-                Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                Store (Arg0, _T_0)
-                If (LEqual (_T_0, One))
+                Name (T_0, Zero)
+                Store (Arg0, T_0)
+                If (LEqual (T_0, One))
                 {
                     Store (Arg0, EID1)
                     SBSW ()
@@ -9312,14 +10056,14 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
                 Else
                 {
-                    If (LEqual (_T_0, 0x02))
+                    If (LEqual (T_0, 0x02))
                     {
                         Store (Arg0, EID2)
                         Return (BUF2)
                     }
                     Else
                     {
-                        If (LEqual (_T_0, 0x08))
+                        If (LEqual (T_0, 0x08))
                         {
                             Store (Arg0, EID1)
                             If (Arg2)
@@ -9335,7 +10079,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         }
                         Else
                         {
-                            If (LEqual (_T_0, 0x09))
+                            If (LEqual (T_0, 0x09))
                             {
                                 Store (Arg0, EID1)
                                 If (Arg2)
@@ -9351,7 +10095,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             }
                             Else
                             {
-                                If (LEqual (_T_0, 0x0A))
+                                If (LEqual (T_0, 0x0A))
                                 {
                                     Store (Arg0, EID1)
                                     If (Arg2)
@@ -9371,7 +10115,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 }
                                 Else
                                 {
-                                    If (LEqual (_T_0, 0x0B))
+                                    If (LEqual (T_0, 0x0B))
                                     {
                                         Store (Arg0, EID1)
                                         If (Arg2)
@@ -9387,7 +10131,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_0, 0x0C))
+                                        If (LEqual (T_0, 0x0C))
                                         {
                                             Store (Arg0, EID1)
                                             If (Arg2)
@@ -9403,7 +10147,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x0D))
+                                            If (LEqual (T_0, 0x0D))
                                             {
                                                 Store (Arg0, EID1)
                                                 If (Arg2)
@@ -9419,7 +10163,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                             }
                                             Else
                                             {
-                                                If (LEqual (_T_0, 0x0E))
+                                                If (LEqual (T_0, 0x0E))
                                                 {
                                                     Store (Arg0, EID1)
                                                     If (Arg2)
@@ -9435,7 +10179,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                                 }
                                                 Else
                                                 {
-                                                    If (LEqual (_T_0, 0x0F))
+                                                    If (LEqual (T_0, 0x0F))
                                                     {
                                                         Store (Arg0, EID1)
                                                         If (Arg2)
@@ -9451,7 +10195,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                                     }
                                                     Else
                                                     {
-                                                        If (LEqual (_T_0, 0x19))
+                                                        If (LEqual (T_0, 0x19))
                                                         {
                                                             Store (Arg0, EID1)
                                                             Store (Arg2, SKEY)
@@ -9459,7 +10203,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                                         }
                                                         Else
                                                         {
-                                                            If (LEqual (_T_0, 0x2A))
+                                                            If (LEqual (T_0, 0x2A))
                                                             {
                                                                 Store (Arg0, EID1)
                                                                 Store (^^PCI0.LPCB.EC0.SLB0, SBR0)
@@ -9469,43 +10213,43 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                                             }
                                                             Else
                                                             {
-                                                                If (LEqual (_T_0, 0x2B))
+                                                                If (LEqual (T_0, 0x2B))
                                                                 {
                                                                     Store (Arg0, EID1)
-                                                                    Name (_T_1, Zero)  // _T_x: Emitted by ASL Compiler
-                                                                    Store (Arg1, _T_1)
-                                                                    If (LEqual (_T_1, One))
+                                                                    Name (T_1, Zero)
+                                                                    Store (Arg1, T_1)
+                                                                    If (LEqual (T_1, One))
                                                                     {
                                                                         SBSW ()
                                                                     }
                                                                     Else
                                                                     {
-                                                                        If (LEqual (_T_1, 0x03))
+                                                                        If (LEqual (T_1, 0x03))
                                                                         {
-                                                                            Name (_T_2, Zero)  // _T_x: Emitted by ASL Compiler
-                                                                            Store (Arg2, _T_2)
-                                                                            If (LEqual (_T_2, Zero))
+                                                                            Name (T_2, Zero)
+                                                                            Store (Arg2, T_2)
+                                                                            If (LEqual (T_2, Zero))
                                                                             {
                                                                                 Store (Zero, SBBR)
                                                                                 SBSV ()
                                                                             }
                                                                             Else
                                                                             {
-                                                                                If (LEqual (_T_2, One))
+                                                                                If (LEqual (T_2, One))
                                                                                 {
                                                                                     Store (One, SBBR)
                                                                                     SBSV ()
                                                                                 }
                                                                                 Else
                                                                                 {
-                                                                                    If (LEqual (_T_2, 0x10))
+                                                                                    If (LEqual (T_2, 0x10))
                                                                                     {
                                                                                         Store (Zero, SBLI)
                                                                                         SBSV ()
                                                                                     }
                                                                                     Else
                                                                                     {
-                                                                                        If (LEqual (_T_2, 0x11))
+                                                                                        If (LEqual (T_2, 0x11))
                                                                                         {
                                                                                             Store (One, SBLI)
                                                                                             SBSV ()
@@ -9523,22 +10267,22 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                                                 }
                                                                 Else
                                                                 {
-                                                                    If (LEqual (_T_0, 0x30))
+                                                                    If (LEqual (T_0, 0x30))
                                                                     {
                                                                         Store (Arg0, EID1)
-                                                                        Name (_T_3, Zero)  // _T_x: Emitted by ASL Compiler
-                                                                        Store (Arg1, _T_3)
-                                                                        If (LEqual (_T_3, 0x03))
+                                                                        Name (T_3, Zero)
+                                                                        Store (Arg1, T_3)
+                                                                        If (LEqual (T_3, 0x03))
                                                                         {
-                                                                            Name (_T_4, Zero)  // _T_x: Emitted by ASL Compiler
-                                                                            Store (Arg2, _T_4)
-                                                                            If (LEqual (_T_4, 0x02)) {}
+                                                                            Name (T_4, Zero)
+                                                                            Store (Arg2, T_4)
+                                                                            If (LEqual (T_4, 0x02)) {}
                                                                             Else
                                                                             {
-                                                                                If (LEqual (_T_4, 0x03)) {}
+                                                                                If (LEqual (T_4, 0x03)) {}
                                                                                 Else
                                                                                 {
-                                                                                    If (LEqual (_T_4, 0x04))
+                                                                                    If (LEqual (T_4, 0x04))
                                                                                     {
                                                                                         Store (One, ^^PCI0.LPCB.EC0.TPDS)
                                                                                         Store (One, ^^PCI0.LPCB.EC0.TPNT)
@@ -9550,10 +10294,10 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                                                                     }
                                                                                     Else
                                                                                     {
-                                                                                        If (LEqual (_T_4, 0x05)) {}
+                                                                                        If (LEqual (T_4, 0x05)) {}
                                                                                         Else
                                                                                         {
-                                                                                            If (LEqual (_T_4, 0x06)) {}
+                                                                                            If (LEqual (T_4, 0x06)) {}
                                                                                             Else
                                                                                             {
                                                                                             }
@@ -9570,7 +10314,10 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                                                     }
                                                                     Else
                                                                     {
+                                                                        Return (Zero)
                                                                     }
+
+                                                                    Return (Zero)
                                                                 }
                                                             }
                                                         }
@@ -9588,30 +10335,30 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (SBSW, 0, NotSerialized)
             {
-                Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                Store (CMSB, _T_0)
-                If (LEqual (_T_0, Zero))
+                Name (T_0, Zero)
+                Store (CMSB, T_0)
+                If (LEqual (T_0, Zero))
                 {
                     Store (One, SBLI)
                     Store (One, SBBR)
                 }
                 Else
                 {
-                    If (LEqual (_T_0, One))
+                    If (LEqual (T_0, One))
                     {
                         Store (One, SBLI)
                         Store (Zero, SBBR)
                     }
                     Else
                     {
-                        If (LEqual (_T_0, 0x02))
+                        If (LEqual (T_0, 0x02))
                         {
                             Store (Zero, SBLI)
                             Store (Zero, SBBR)
                         }
                         Else
                         {
-                            If (LEqual (_T_0, 0x03))
+                            If (LEqual (T_0, 0x03))
                             {
                                 Store (Zero, SBLI)
                                 Store (One, SBBR)
@@ -9631,19 +10378,19 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Method (SBSV, 0, Serialized)
             {
                 Acquire (MEC0, 0xFFFF)
-                Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                Store (SBLI, _T_0)
-                If (LEqual (_T_0, Zero))
+                Name (T_0, Zero)
+                Store (SBLI, T_0)
+                If (LEqual (T_0, Zero))
                 {
-                    Name (_T_1, Zero)  // _T_x: Emitted by ASL Compiler
-                    Store (SBBR, _T_1)
-                    If (LEqual (_T_1, Zero))
+                    Name (T_1, Zero)
+                    Store (SBBR, T_1)
+                    If (LEqual (T_1, Zero))
                     {
                         Store (0x02, CMSB)
                     }
                     Else
                     {
-                        If (LEqual (_T_1, One))
+                        If (LEqual (T_1, One))
                         {
                             Store (0x03, CMSB)
                         }
@@ -9654,17 +10401,17 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
                 Else
                 {
-                    If (LEqual (_T_0, One))
+                    If (LEqual (T_0, One))
                     {
-                        Name (_T_2, Zero)  // _T_x: Emitted by ASL Compiler
-                        Store (SBBR, _T_2)
-                        If (LEqual (_T_2, Zero))
+                        Name (T_2, Zero)
+                        Store (SBBR, T_2)
+                        If (LEqual (T_2, Zero))
                         {
                             Store (One, CMSB)
                         }
                         Else
                         {
-                            If (LEqual (_T_2, One))
+                            If (LEqual (T_2, One))
                             {
                                 Store (Zero, CMSB)
                             }
@@ -9684,9 +10431,9 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (UWEA, 3, NotSerialized)
             {
-                Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                Store (Arg0, _T_0)
-                If (LEqual (_T_0, 0x19))
+                Name (T_0, Zero)
+                Store (Arg0, T_0)
+                If (LEqual (T_0, 0x19))
                 {
                     Store (Arg0, EID1)
                     Store (Arg2, SKEY)
@@ -9694,7 +10441,7 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
                 Else
                 {
-                    If (LEqual (_T_0, 0x2A))
+                    If (LEqual (T_0, 0x2A))
                     {
                         Store (Arg0, EID1)
                         Store (^^PCI0.LPCB.EC0.SLB0, SBR0)
@@ -9704,15 +10451,18 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     }
                     Else
                     {
+                        Return (Zero)
                     }
+
+                    Return (Zero)
                 }
             }
 
             Method (UWEB, 3, NotSerialized)
             {
-                Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                Store (Arg0, _T_0)
-                If (LEqual (_T_0, 0x0A))
+                Name (T_0, Zero)
+                Store (Arg0, T_0)
+                If (LEqual (T_0, 0x0A))
                 {
                     Store (Arg0, EID1)
                     If (Arg2)
@@ -9732,43 +10482,43 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
                 Else
                 {
-                    If (LEqual (_T_0, 0x2B))
+                    If (LEqual (T_0, 0x2B))
                     {
                         Store (Arg0, EID1)
-                        Name (_T_1, Zero)  // _T_x: Emitted by ASL Compiler
-                        Store (Arg1, _T_1)
-                        If (LEqual (_T_1, One))
+                        Name (T_1, Zero)
+                        Store (Arg1, T_1)
+                        If (LEqual (T_1, One))
                         {
                             SBSW ()
                         }
                         Else
                         {
-                            If (LEqual (_T_1, 0x03))
+                            If (LEqual (T_1, 0x03))
                             {
-                                Name (_T_2, Zero)  // _T_x: Emitted by ASL Compiler
-                                Store (Arg2, _T_2)
-                                If (LEqual (_T_2, Zero))
+                                Name (T_2, Zero)
+                                Store (Arg2, T_2)
+                                If (LEqual (T_2, Zero))
                                 {
                                     Store (Zero, SBBR)
                                     SBSV ()
                                 }
                                 Else
                                 {
-                                    If (LEqual (_T_2, One))
+                                    If (LEqual (T_2, One))
                                     {
                                         Store (One, SBBR)
                                         SBSV ()
                                     }
                                     Else
                                     {
-                                        If (LEqual (_T_2, 0x10))
+                                        If (LEqual (T_2, 0x10))
                                         {
                                             Store (Zero, SBLI)
                                             SBSV ()
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_2, 0x11))
+                                            If (LEqual (T_2, 0x11))
                                             {
                                                 Store (One, SBLI)
                                                 SBSV ()
@@ -9786,7 +10536,10 @@ DefinitionBlock ("iASL4XpUSN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     }
                     Else
                     {
+                        Return (Zero)
                     }
+
+                    Return (Zero)
                 }
             }
 
