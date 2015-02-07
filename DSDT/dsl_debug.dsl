@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLoKfkfN.aml, Sat Feb  7 15:08:14 2015
+ * Disassembly of iASLd5t0ue.aml, Sat Feb  7 15:10:06 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A338 (41784)
+ *     Length           0x0000AB0E (43790)
  *     Revision         0x02
- *     Checksum         0x51
+ *     Checksum         0x7E
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20091013 (537464851)
+ *     Compiler Version 0x20111123 (537989411)
  */
-DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLd5t0ue.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -126,7 +126,10 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         LCKF,   8, 
         PRM4,   8, 
         PRM5,   8, 
-        P80D,   32, 
+        P8D0,   8, 
+        P8D1,   8, 
+        P8D2,   8, 
+        P8D3,   8, 
         LIDS,   8, 
         PWRS,   8, 
         DBGS,   8, 
@@ -279,6 +282,52 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                  0x00                                           
             }, Arg4)
         Return (Zero)
+    }
+
+    Method (B1B2, 2, NotSerialized)
+    {
+        Or (ShiftLeft (Arg1, 0x08), Arg0, Local0)
+        Return (Local0)
+    }
+
+    Method (B1B4, 4, NotSerialized)
+    {
+        Or (ShiftLeft (Arg1, 0x08), Arg0, Local0)
+        Or (ShiftLeft (Arg2, 0x10), Local0, Local0)
+        Or (ShiftLeft (Arg3, 0x18), Local0, Local0)
+        Return (Local0)
+    }
+
+    Method (L1L4, 4, NotSerialized)
+    {
+        Or (ShiftLeft (Arg1, 0x20), Arg0, Local0)
+        Or (ShiftLeft (Arg2, 0x40), Local0, Local0)
+        Or (ShiftLeft (Arg3, 0x60), Local0, Local0)
+        Return (Local0)
+    }
+
+    Method (L1L6, 6, NotSerialized)
+    {
+        Or (ShiftLeft (Arg1, 0x20), Arg0, Local0)
+        Or (ShiftLeft (Arg2, 0x40), Local0, Local0)
+        Or (ShiftLeft (Arg3, 0x60), Local0, Local0)
+        Or (ShiftLeft (Arg4, 0x80), Local0, Local0)
+        Or (ShiftLeft (Arg5, 0xA0), Local0, Local0)
+        Return (Local0)
+    }
+
+    Method (D2D4, 2, NotSerialized)
+    {
+        Or (ShiftLeft (Arg1, 0x80), Arg0, Local0)
+        Return (Local0)
+    }
+
+    Method (P8H4, 1, NotSerialized)
+    {
+        Store (Arg0, P8H0)
+        Store (Zero, P8H1)
+        Store (Zero, P8H2)
+        Store (Zero, P8H3)
     }
 
     Scope (_SB)
@@ -5484,32 +5533,38 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
     OperationRegion (PRT0, SystemIO, 0x80, 0x04)
     Field (PRT0, DWordAcc, Lock, Preserve)
     {
-        P80H,   32
+        P8H0,   8, 
+        P8H1,   8, 
+        P8H2,   8, 
+        P8H3,   8
     }
 
     Method (P8XH, 2, Serialized)
     {
         If (LEqual (Arg0, Zero))
         {
-            Store (Or (And (P80D, 0xFFFFFF00), Arg1), P80D)
+            Store (Arg1, P8D0)
         }
 
         If (LEqual (Arg0, One))
         {
-            Store (Or (And (P80D, 0xFFFF00FF), ShiftLeft (Arg1, 0x08)), P80D)
+            Store (Arg1, P8D1)
         }
 
         If (LEqual (Arg0, 0x02))
         {
-            Store (Or (And (P80D, 0xFF00FFFF), ShiftLeft (Arg1, 0x10)), P80D)
+            Store (Arg1, P8D2)
         }
 
         If (LEqual (Arg0, 0x03))
         {
-            Store (Or (And (P80D, 0x00FFFFFF), ShiftLeft (Arg1, 0x18)), P80D)
+            Store (Arg1, P8D3)
         }
 
-        Store (P80D, P80H)
+        Store (P8D0, P8H0)
+        Store (P8D1, P8H1)
+        Store (P8D2, P8H2)
+        Store (P8D3, P8H3)
     }
 
     OperationRegion (SPRT, SystemIO, 0xB2, 0x02)
@@ -5526,7 +5581,10 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
-        Store (Zero, P80D)
+        Store (Zero, P8D0)
+        Store (Zero, P8D1)
+        Store (Zero, P8D2)
+        Store (Zero, P8D3)
         P8XH (Zero, Arg0)
         If (LEqual (Arg0, 0x03))
         {
@@ -5706,7 +5764,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Notify (\_PR.CPU0, 0x81)
         }
 
-        Notify (\_SB.BAT1, 0x80)
+        Notify (_SB, 0x80)
     }
 
     Method (TRAP, 2, Serialized)
@@ -7438,7 +7496,38 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 SMST,   8, 
                 SMAD,   8, 
                 SMCM,   8, 
-                SMD0,   256, 
+                SM00,   8, 
+                SM01,   8, 
+                SM02,   8, 
+                SM03,   8, 
+                SM04,   8, 
+                SM05,   8, 
+                SM06,   8, 
+                SM07,   8, 
+                SM08,   8, 
+                SM09,   8, 
+                SM10,   8, 
+                SM11,   8, 
+                SM12,   8, 
+                SM13,   8, 
+                SM14,   8, 
+                SM15,   8, 
+                SM16,   8, 
+                SM17,   8, 
+                SM18,   8, 
+                SM19,   8, 
+                SM20,   8, 
+                SM21,   8, 
+                SM22,   8, 
+                SM23,   8, 
+                SM24,   8, 
+                SM25,   8, 
+                SM26,   8, 
+                SM27,   8, 
+                SM28,   8, 
+                SM29,   8, 
+                SM30,   8, 
+                SM31,   8, 
                 BCNT,   8, 
                 SMAA,   8, 
                 BATD,   16, 
@@ -7626,9 +7715,12 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 G3RS,   1, 
                 TPDS,   1, 
                 Offset (0xC1), 
-                MCUR,   16, 
-                MBRM,   16, 
-                MBVG,   16, 
+                MCU0,   8, 
+                MCU1,   8, 
+                MBR0,   8, 
+                MBR1,   8, 
+                MBV0,   8, 
+                MBV1,   8, 
                 Offset (0xC8), 
                 ACUR,   16, 
                 ABRM,   16, 
@@ -7651,7 +7743,8 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Offset (0xDF), 
                 WLNS,   1, 
                 Offset (0xE0), 
-                B1FC,   16, 
+                BFC0,   8, 
+                BFC1,   8, 
                 B2FC,   16, 
                 Offset (0xE7), 
                 GQKS,   7, 
@@ -7673,8 +7766,10 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     ,   3, 
                 ODD1,   2, 
                 Offset (0xFA), 
-                STCC,   16, 
-                SPCC,   16
+                STC0,   8, 
+                STC1,   8, 
+                SPC0,   8, 
+                SPC1,   8
             }
 
             Name (BATO, Zero)
@@ -7909,7 +8004,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Method (_Q8F, 0, NotSerialized)  // _Qxx: EC Query
             {
                 Store ("_Q8F : Hot Key Event", Debug)
-                Store (0x8F, P80H)
+                P8H4 (0x8F)
                 If (GI19)
                 {
                     If (CCDE)
@@ -7973,7 +8068,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Method (DR10, 0, NotSerialized)
             {
                 Store ("_DAA : Hot Key Event", Debug)
-                Store (0xAA, P80H)
+                P8H4 (0xAA)
                 If (GSWS)
                 {
                     If (WLSE)
@@ -8033,7 +8128,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (_Q90, 0, NotSerialized)  // _Qxx: EC Query
             {
-                Store (0x90, P80H)
+                P8H4 (0x90)
                 If (LGreaterEqual (OSYS, 0x07D6))
                 {
                     If (IGDS)
@@ -8085,7 +8180,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (_Q91, 0, NotSerialized)  // _Qxx: EC Query
             {
-                Store (0x91, P80H)
+                P8H4 (0x91)
                 If (LGreaterEqual (OSYS, 0x07D6))
                 {
                     If (IGDS)
@@ -8139,7 +8234,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Method (_Q26, 0, NotSerialized)  // _Qxx: EC Query
             {
                 Acquire (Q26X, 0xFFFF)
-                Store (0x26, P80H)
+                P8H4 (0x26)
                 If (^^^RP05.PDSX)
                 {
                     Store (Zero, ^^^RP05.J380.D3EF)
@@ -8154,7 +8249,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (_Q27, 0, NotSerialized)  // _Qxx: EC Query
             {
-                Store (0x27, P80H)
+                P8H4 (0x27)
                 Store (One, ^^^RP05.J380.D3EF)
             }
 
@@ -8162,7 +8257,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Method (_Q92, 0, NotSerialized)  // _Qxx: EC Query
             {
                 Store ("_Q92 : Switch Display Event", Debug)
-                Store (0x92, P80H)
+                P8H4 (0x92)
                 If (LNot (^VPC0.APDT))
                 {
                     Store (Zero, ^VPC0.GCPU)
@@ -8205,14 +8300,14 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (_Q94, 0, NotSerialized)  // _Qxx: EC Query
             {
-                Store (0x94, P80H)
+                P8H4 (0x94)
                 Store (LNot (BLIS), GO20)
             }
 
             Method (_QE0, 0, NotSerialized)  // _Qxx: EC Query
             {
                 Store ("_QE0 : LID Switch Event", Debug)
-                Store (0xE0, P80H)
+                P8H4 (0xE0)
                 If (IGDS)
                 {
                     If (LDS0)
@@ -8278,13 +8373,13 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (_QE2, 0, NotSerialized)  // _Qxx: EC Query
             {
-                Store (0xE2, P80H)
+                P8H4 (0xE2)
                 Notify (SLPB, 0x80)
             }
 
             Method (_QE3, 0, NotSerialized)  // _Qxx: EC Query
             {
-                Store (0xE3, P80H)
+                P8H4 (0xE3)
                 If (S5SB)
                 {
                     Store (0x02, SEBT)
@@ -8298,13 +8393,13 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (_Q43, 0, NotSerialized)  // _Qxx: EC Query
             {
-                Store (0x43, P80H)
+                P8H4 (0x43)
                 ^^^^WMI2.CMD2 (0x2A, One, One)
             }
 
             Method (_QE5, 0, NotSerialized)  // _Qxx: EC Query
             {
-                Store (0xE5, P80H)
+                P8H4 (0xE5)
                 Notify (DBTN, 0x80)
             }
 
@@ -8327,7 +8422,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 If (LEqual (Zero, ADT0))
                 {
                     Acquire (QE8X, 0xFFFF)
-                    Store (0xE8, P80H)
+                    P8H4 (0xE8)
                     Store (One, ADT0)
                     PHSR (0x9C)
                     Release (QE8X)
@@ -8340,7 +8435,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 If (LEqual (One, ADT0))
                 {
                     Acquire (QE9X, 0xFFFF)
-                    Store (0xE9, P80H)
+                    P8H4 (0xE9)
                     Store (Zero, ADT0)
                     PHSR (0x9B)
                     Release (QE9X)
@@ -8355,7 +8450,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     If (LEqual (Zero, SPL2))
                     {
                         Acquire (QEAX, 0xFFFF)
-                        Store (0xEA, P80H)
+                        P8H4 (0xEA)
                         Store (One, SPL2)
                         Sleep (0x32)
                         Store (0x03, \_PR.CPU0._PPC)
@@ -8381,7 +8476,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             If (LNotEqual (SPL3, One))
                             {
                                 Acquire (QEBX, 0xFFFF)
-                                Store (0xEB, P80H)
+                                P8H4 (0xEB)
                                 Store (One, SPL0)
                                 Sleep (0x32)
                                 Store (0x02, \_PR.CPU0._PPC)
@@ -8405,7 +8500,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     If (LEqual (Zero, SPL1))
                     {
                         Acquire (QECX, 0xFFFF)
-                        Store (0xEC, P80H)
+                        P8H4 (0xEC)
                         Store (One, SPL1)
                         Sleep (0x32)
                         Store (0x03, \_PR.CPU0._PPC)
@@ -8427,7 +8522,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     If (LEqual (Zero, SPL3))
                     {
                         Acquire (QEDX, 0xFFFF)
-                        Store (0xED, P80H)
+                        P8H4 (0xED)
                         Store (One, SPL3)
                         Sleep (0x32)
                         Store (0x03, \_PR.CPU0._PPC)
@@ -8447,7 +8542,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 If (LEqual (Zero, ADT0))
                 {
                     Acquire (QEEX, 0xFFFF)
-                    Store (0xEE, P80H)
+                    P8H4 (0xEE)
                     Store (Zero, SPL0)
                     Store (Zero, SPL1)
                     Store (Zero, SPL2)
@@ -8466,7 +8561,8 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Field (ERAM, ByteAcc, NoLock, Preserve)
             {
                 Offset (0x1C), 
-                SMW0,   16
+                SMW0,   8, 
+                SMW1,   8
             }
 
             Field (ERAM, ByteAcc, NoLock, Preserve)
@@ -8484,19 +8580,88 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Field (ERAM, ByteAcc, NoLock, Preserve)
             {
                 Offset (0x1C), 
-                FLD1,   128
+                DL10,   8, 
+                DL11,   8, 
+                DL12,   8, 
+                DL13,   8, 
+                DL14,   8, 
+                DL15,   8, 
+                DL16,   8, 
+                DL17,   8, 
+                DL18,   8, 
+                DL19,   8, 
+                DL1A,   8, 
+                DL1B,   8, 
+                DL1C,   8, 
+                DL1D,   8, 
+                DL1E,   8, 
+                DL1F,   8
             }
 
             Field (ERAM, ByteAcc, NoLock, Preserve)
             {
                 Offset (0x1C), 
-                FLD2,   192
+                DL20,   8, 
+                DL21,   8, 
+                DL22,   8, 
+                DL23,   8, 
+                DL24,   8, 
+                DL25,   8, 
+                DL26,   8, 
+                DL27,   8, 
+                DL28,   8, 
+                DL29,   8, 
+                DL2A,   8, 
+                DL2B,   8, 
+                DL2C,   8, 
+                DL2D,   8, 
+                DL2E,   8, 
+                DL2F,   8, 
+                DL2G,   8, 
+                DL2H,   8, 
+                DL2I,   8, 
+                DL2J,   8, 
+                DL2K,   8, 
+                DL2L,   8, 
+                DL2M,   8, 
+                DL2N,   8
             }
 
             Field (ERAM, ByteAcc, NoLock, Preserve)
             {
                 Offset (0x1C), 
-                FLD3,   256
+                DL30,   8, 
+                DL31,   8, 
+                DL32,   8, 
+                DL33,   8, 
+                DL34,   8, 
+                DL35,   8, 
+                DL36,   8, 
+                DL37,   8, 
+                DL38,   8, 
+                DL39,   8, 
+                DL3A,   8, 
+                DL3B,   8, 
+                DL3C,   8, 
+                DL3D,   8, 
+                DL3E,   8, 
+                DL3F,   8, 
+                DL3G,   8, 
+                DL3H,   8, 
+                DL3I,   8, 
+                DL3J,   8, 
+                DL3K,   8, 
+                DL3L,   8, 
+                DL3M,   8, 
+                DL3N,   8, 
+                DL3O,   8, 
+                DL3P,   8, 
+                DL3Q,   8, 
+                DL3R,   8, 
+                DL3S,   8, 
+                DL3T,   8, 
+                DL3U,   8, 
+                DL3V,   8
             }
 
             Mutex (MUT0, 0x00)
@@ -8564,7 +8729,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                     If (LEqual (Arg0, 0x09))
                     {
-                        Store (SMW0, Arg3)
+                        Store (B1B2 (SMW0, SMW1), Arg3)
                     }
 
                     If (LEqual (Arg0, 0x0B))
@@ -8578,17 +8743,23 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                         If (LLess (Local3, 0x11))
                         {
-                            Store (FLD1, Local2)
+                            Store (L1L4 (B1B4 (DL10, DL11, DL12, DL13), B1B4 (DL14, DL15, DL16, DL17), 
+                                B1B4 (DL18, DL19, DL1A, DL1B), B1B4 (DL1C, DL1D, DL1E, DL1F)), Local2)
                         }
                         Else
                         {
                             If (LLess (Local3, 0x19))
                             {
-                                Store (FLD2, Local2)
+                                Store (L1L6 (B1B4 (DL20, DL21, DL22, DL23), B1B4 (DL24, DL25, DL26, DL27), 
+                                    B1B4 (DL28, DL29, DL2A, DL2B), B1B4 (DL2C, DL2D, DL2E, DL2F), B1B4 (DL2G, DL2H, 
+                                    DL2I, DL2J), B1B4 (DL2K, DL2L, DL2M, DL2N)), Local2)
                             }
                             Else
                             {
-                                Store (FLD3, Local2)
+                                Store (D2D4 (L1L4 (B1B4 (DL30, DL31, DL32, DL33), B1B4 (DL34, DL35, DL36, 
+                                    DL37), B1B4 (DL38, DL39, DL3A, DL3B), B1B4 (DL3C, DL3D, DL3E, DL3F)), L1L4 (B1B4 (
+                                    DL3G, DL3H, DL3I, DL3J), B1B4 (DL3K, DL3L, DL3M, DL3N), B1B4 (DL3O, DL3P, DL3Q, 
+                                    DL3R), B1B4 (DL3S, DL3T, DL3U, DL3V))), Local2)
                             }
                         }
 
@@ -8598,7 +8769,166 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         Store (Zero, Local5)
                         While (LGreater (Local3, Local5))
                         {
-                            GBFE (Local2, Local5, RefOf (Local6))
+                            If (LEqual (Local5, Zero))
+                            {
+                                Store (SM00, Local6)
+                            }
+
+                            If (LEqual (Local5, One))
+                            {
+                                Store (SM01, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x02))
+                            {
+                                Store (SM02, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x03))
+                            {
+                                Store (SM03, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x04))
+                            {
+                                Store (SM04, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x05))
+                            {
+                                Store (SM05, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x06))
+                            {
+                                Store (SM06, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x07))
+                            {
+                                Store (SM07, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x08))
+                            {
+                                Store (SM08, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x09))
+                            {
+                                Store (SM09, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x0A))
+                            {
+                                Store (SM10, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x0B))
+                            {
+                                Store (SM11, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x0C))
+                            {
+                                Store (SM12, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x0D))
+                            {
+                                Store (SM13, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x0E))
+                            {
+                                Store (SM14, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x0F))
+                            {
+                                Store (SM15, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x10))
+                            {
+                                Store (SM16, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x11))
+                            {
+                                Store (SM17, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x12))
+                            {
+                                Store (SM18, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x13))
+                            {
+                                Store (SM19, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x14))
+                            {
+                                Store (SM20, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x15))
+                            {
+                                Store (SM21, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x16))
+                            {
+                                Store (SM22, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x17))
+                            {
+                                Store (SM23, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x18))
+                            {
+                                Store (SM24, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x19))
+                            {
+                                Store (SM25, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x1A))
+                            {
+                                Store (SM26, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x1B))
+                            {
+                                Store (SM27, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x1C))
+                            {
+                                Store (SM28, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x1D))
+                            {
+                                Store (SM29, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x1E))
+                            {
+                                Store (SM30, Local6)
+                            }
+
+                            If (LEqual (Local5, 0x1F))
+                            {
+                                Store (SM31, Local6)
+                            }
+
                             PBFE (Local4, Local5, Local6)
                             Increment (Local5)
                         }
@@ -8641,12 +8971,183 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                     If (LEqual (Arg0, 0x08))
                     {
-                        Store (Arg3, SMW0)
+                        Store (And (Arg3, 0xFF), SMW0)
+                        Store (ShiftRight (Arg3, 0x08), SMW1)
                     }
 
                     If (LEqual (Arg0, 0x0A))
                     {
-                        Store (Arg3, SMD0)
+                        Store (SizeOf (Arg3), Local3)
+                        And (Local3, 0x1F, Local3)
+                        Store (Arg3, Local4)
+                        Store (Zero, Local5)
+                        While (LGreater (Local3, Local5))
+                        {
+                            GBFE (Local4, Local5, RefOf (Local6))
+                            If (LEqual (Local5, Zero))
+                            {
+                                Store (Local6, SM00)
+                            }
+
+                            If (LEqual (Local5, One))
+                            {
+                                Store (Local6, SM01)
+                            }
+
+                            If (LEqual (Local5, 0x02))
+                            {
+                                Store (Local6, SM02)
+                            }
+
+                            If (LEqual (Local5, 0x03))
+                            {
+                                Store (Local6, SM03)
+                            }
+
+                            If (LEqual (Local5, 0x04))
+                            {
+                                Store (Local6, SM04)
+                            }
+
+                            If (LEqual (Local5, 0x05))
+                            {
+                                Store (Local6, SM05)
+                            }
+
+                            If (LEqual (Local5, 0x06))
+                            {
+                                Store (Local6, SM06)
+                            }
+
+                            If (LEqual (Local5, 0x07))
+                            {
+                                Store (Local6, SM07)
+                            }
+
+                            If (LEqual (Local5, 0x08))
+                            {
+                                Store (Local6, SM08)
+                            }
+
+                            If (LEqual (Local5, 0x09))
+                            {
+                                Store (Local6, SM09)
+                            }
+
+                            If (LEqual (Local5, 0x0A))
+                            {
+                                Store (Local6, SM10)
+                            }
+
+                            If (LEqual (Local5, 0x0B))
+                            {
+                                Store (Local6, SM11)
+                            }
+
+                            If (LEqual (Local5, 0x0C))
+                            {
+                                Store (Local6, SM12)
+                            }
+
+                            If (LEqual (Local5, 0x0D))
+                            {
+                                Store (Local6, SM13)
+                            }
+
+                            If (LEqual (Local5, 0x0E))
+                            {
+                                Store (Local6, SM14)
+                            }
+
+                            If (LEqual (Local5, 0x0F))
+                            {
+                                Store (Local6, SM15)
+                            }
+
+                            If (LEqual (Local5, 0x10))
+                            {
+                                Store (Local6, SM16)
+                            }
+
+                            If (LEqual (Local5, 0x11))
+                            {
+                                Store (Local6, SM17)
+                            }
+
+                            If (LEqual (Local5, 0x12))
+                            {
+                                Store (Local6, SM18)
+                            }
+
+                            If (LEqual (Local5, 0x13))
+                            {
+                                Store (Local6, SM19)
+                            }
+
+                            If (LEqual (Local5, 0x14))
+                            {
+                                Store (Local6, SM20)
+                            }
+
+                            If (LEqual (Local5, 0x15))
+                            {
+                                Store (Local6, SM21)
+                            }
+
+                            If (LEqual (Local5, 0x16))
+                            {
+                                Store (Local6, SM22)
+                            }
+
+                            If (LEqual (Local5, 0x17))
+                            {
+                                Store (Local6, SM23)
+                            }
+
+                            If (LEqual (Local5, 0x18))
+                            {
+                                Store (Local6, SM24)
+                            }
+
+                            If (LEqual (Local5, 0x19))
+                            {
+                                Store (Local6, SM25)
+                            }
+
+                            If (LEqual (Local5, 0x1A))
+                            {
+                                Store (Local6, SM26)
+                            }
+
+                            If (LEqual (Local5, 0x1B))
+                            {
+                                Store (Local6, SM27)
+                            }
+
+                            If (LEqual (Local5, 0x1C))
+                            {
+                                Store (Local6, SM28)
+                            }
+
+                            If (LEqual (Local5, 0x1D))
+                            {
+                                Store (Local6, SM29)
+                            }
+
+                            If (LEqual (Local5, 0x1E))
+                            {
+                                Store (Local6, SM30)
+                            }
+
+                            If (LEqual (Local5, 0x1F))
+                            {
+                                Store (Local6, SM31)
+                            }
+
+                            Increment (Local5)
+                        }
+
+                        Store (And (Local3, 0x1F), BCNT)
                     }
 
                     And (SMST, 0x40, SMST)
@@ -8951,7 +9452,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         }
                         Else
                         {
-                            Store (0x77, P80H)
+                            P8H4 (0x77)
                             Store ("No Match Case in VPCM", Debug)
                         }
                     }
@@ -8990,9 +9491,11 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Method (BASL, 1, Serialized)
             {
                 Store (Arg0, Local0)
-                Store (Arg0, STCC)
+                Store (And (Arg0, 0xFF), STC0)
+                Store (ShiftRight (Arg0, 0x08), STC1)
                 ShiftRight (Local0, 0x10, Local0)
-                Store (Local0, SPCC)
+                Store (And (Local0, 0xFF), SPC0)
+                Store (ShiftRight (Local0, 0x08), SPC1)
             }
 
             Method (HALS, 0, NotSerialized)
@@ -9126,7 +9629,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
         Method (_Q41, 0, NotSerialized)  // _Qxx: EC Query
         {
-            Store (0x41, P80H)
+            P8H4 (0x41)
             Notify (VPC0, 0x80)
         }
 
@@ -9134,7 +9637,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         Name (VQ01, 0x64)
         Method (_Q42, 0, NotSerialized)  // _Qxx: EC Query
         {
-            Store (0x42, P80H)
+            P8H4 (0x42)
             Store (BLVL, VQ00)
             If (LNotEqual (BRNS, VQ00))
             {
@@ -9487,7 +9990,7 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (UPBI, 0, NotSerialized)
             {
-                Store (^^PCI0.LPCB.EC0.B1FC, Index (PBIF, 0x02))
+                Store (B1B2 (^^PCI0.LPCB.EC0.BFC0, ^^PCI0.LPCB.EC0.BFC1), Index (PBIF, 0x02))
                 Store (0x1FFF, Local2)
                 ^^PCI0.LPCB.EC0.SMWR (0x08, 0x14, One, Local2)
                 ^^PCI0.LPCB.EC0.SMRD (0x09, 0x14, One, RefOf (Local3))
@@ -9523,13 +10026,13 @@ DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Method (UPBS, 0, NotSerialized)
             {
-                Store (^^PCI0.LPCB.EC0.MCUR, Local5)
+                Store (B1B2 (^^PCI0.LPCB.EC0.MCU0, ^^PCI0.LPCB.EC0.MCU1), Local5)
                 Store (POSW (Local5), Index (PBST, One))
-                Store (^^PCI0.LPCB.EC0.MBRM, Index (PBST, 0x02))
-                Store (^^PCI0.LPCB.EC0.MBVG, Index (PBST, 0x03))
+                Store (B1B2 (^^PCI0.LPCB.EC0.MBR0, ^^PCI0.LPCB.EC0.MBR1), Index (PBST, 0x02))
+                Store (B1B2 (^^PCI0.LPCB.EC0.MBV0, ^^PCI0.LPCB.EC0.MBV1), Index (PBST, 0x03))
                 If (LNotEqual (Local5, Zero))
                 {
-                    Store (0xB1, P80H)
+                    P8H4 (0xB1)
                     If (^^PCI0.LPCB.EC0.MBTC)
                     {
                         Store (0x02, Index (PBST, Zero))
