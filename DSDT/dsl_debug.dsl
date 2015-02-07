@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLdoPwUb.aml, Sat Feb  7 15:15:32 2015
+ * Disassembly of iASLvoEeRD.aml, Sat Feb  7 15:17:08 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000AB03 (43779)
+ *     Length           0x0000AC2F (44079)
  *     Revision         0x02
- *     Checksum         0xAF
+ *     Checksum         0xC0
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20120420 (538051616)
+ *     Compiler Version 0x20140627 (538183207)
  */
-DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -1171,7 +1171,7 @@ DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Name (_SUN, One)  // _SUN: Slot User Number
                     Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                     {
-                        Store (Package (0x26)
+                        Store (Package (0x2A)
                             {
                                 "@0,compatible", 
                                 Buffer (0x0B)
@@ -1241,6 +1241,10 @@ DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 Unicode ("\x01"), 
                                 "AAPL,backlight-control", 
                                 Unicode ("\x01"), 
+                                "@0,use-backlight-blanking", 
+                                Buffer (Zero) {}, 
+                                "@0,AAPL,boot-display", 
+                                Buffer (Zero) {}, 
                                 "@0,NVMT", 
                                 Buffer (0x60)
                                 {
@@ -3006,12 +3010,30 @@ DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Name (_ADR, 0x001F0000)  // _ADR: Address
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x02)
+                    Store (Package (0x08)
                         {
                             "device-id", 
                             Buffer (0x04)
                             {
-                                 0x18, 0x3A, 0x00, 0x00                         
+                                 0x16, 0x29, 0x00, 0x00                         
+                            }, 
+
+                            "compatible", 
+                            Buffer (0x0D)
+                            {
+                                "pci8086,2916"
+                            }, 
+
+                            "IOName", 
+                            Buffer (0x0D)
+                            {
+                                "pci8086,2916"
+                            }, 
+
+                            "name", 
+                            Buffer (0x0D)
+                            {
+                                "pci8086,2916"
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -4327,6 +4349,15 @@ DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Device (EHC1)
             {
+                OperationRegion (EOWN, PCI_Config, 0x68, 0x04)
+                Field (EOWN, ByteAcc, NoLock, Preserve)
+                {
+                    Offset (0x02), 
+                    HCBO,   1, 
+                    Offset (0x03), 
+                    HCOO,   1
+                }
+
                 Name (_ADR, 0x001D0007)  // _ADR: Address
                 Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
                 {
@@ -4701,6 +4732,15 @@ DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Device (EHC2)
             {
+                OperationRegion (EOWN, PCI_Config, 0x68, 0x04)
+                Field (EOWN, ByteAcc, NoLock, Preserve)
+                {
+                    Offset (0x02), 
+                    HCBO,   1, 
+                    Offset (0x03), 
+                    HCOO,   1
+                }
+
                 Name (_ADR, 0x001A0007)  // _ADR: Address
                 Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
                 {
@@ -5613,8 +5653,17 @@ DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         \_SB.PHSR (0x81)
     }
 
+    Method (PINI, 0, NotSerialized)
+    {
+        Store (Zero, \_SB.PCI0.EHC1.HCBO)
+        Store (One, \_SB.PCI0.EHC1.HCOO)
+        Store (Zero, \_SB.PCI0.EHC2.HCBO)
+        Store (One, \_SB.PCI0.EHC2.HCOO)
+    }
+
     Method (_WAK, 1, NotSerialized)  // _WAK: Wake
     {
+        PINI ()
         P8XH (Zero, 0xAB)
         If (IGDS)
         {
@@ -6136,6 +6185,7 @@ DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
         Method (_INI, 0, NotSerialized)  // _INI: Initialize
         {
+            PINI ()
             Store (0x07D0, OSYS)
             If (CondRefOf (_OSI, Local0))
             {
@@ -9284,10 +9334,10 @@ DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     IRQNoFlags (_Y14)
                         {}
                 })
-                CreateByteField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y13._MIN, IOLO)  // _MIN: Minimum Base Address
-                CreateByteField (BUF1, 0x03, IOHI)
-                CreateByteField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y13._MAX, IORL)  // _MAX: Maximum Base Address
-                CreateByteField (BUF1, 0x05, IORH)
+                CreateWordField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y13._MIN, IOLO)  // _MIN: Minimum Base Address
+                CreateWordField (BUF1, 0x03, IOHI)
+                CreateWordField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y13._MAX, IORL)  // _MAX: Maximum Base Address
+                CreateWordField (BUF1, 0x05, IORH)
                 CreateWordField (BUF1, \_SB.PCI0.LPCB.CIR._CRS._Y14._INT, IRQW)  // _INT: Interrupts
                 ENFG ()
                 Store (0x0A, LDN)
@@ -10133,7 +10183,7 @@ DefinitionBlock ("iASLdoPwUb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         {
             Name (_HID, EisaId ("APP0002"))  // _HID: Hardware ID
             Name (_CID, "backlight")  // _CID: Compatible ID
-            Name (_UID, 0x0C)  // _UID: Unique ID
+            Name (_UID, 0x0A)  // _UID: Unique ID
             Name (_STA, 0x0B)  // _STA: Status
         }
 
