@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLk7XlhA.aml, Sat Feb  7 15:00:09 2015
+ * Disassembly of iASL8qUw9Y.aml, Sat Feb  7 15:01:59 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A265 (41573)
+ *     Length           0x0000A264 (41572)
  *     Revision         0x02
- *     Checksum         0x31
+ *     Checksum         0x64
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20091013 (537464851)
+ *     Compiler Version 0x20101013 (537923603)
  */
-DefinitionBlock ("iASLk7XlhA.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -1175,9 +1175,9 @@ DefinitionBlock ("iASLk7XlhA.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 }, 
 
                                 "device_type", 
-                                Buffer (0x0D)
+                                Buffer (0x0C)
                                 {
-                                    "NVDA,GeForce"
+                                    "NVDA,Parent"
                                 }, 
 
                                 "model", 
