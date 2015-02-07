@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLvoEeRD.aml, Sat Feb  7 15:17:08 2015
+ * Disassembly of iASLqGprVO.aml, Sat Feb  7 15:18:51 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000AC2F (44079)
+ *     Length           0x0000ABA8 (43944)
  *     Revision         0x02
- *     Checksum         0xC0
+ *     Checksum         0x86
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20140627 (538183207)
+ *     Compiler Version 0x20140828 (538183720)
  */
-DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLqGprVO.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -1171,8 +1171,20 @@ DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Name (_SUN, One)  // _SUN: Slot User Number
                     Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                     {
-                        Store (Package (0x2A)
+                        Store (Package (0x30)
                             {
+                                "@0,connector-type", 
+                                Buffer (0x04)
+                                {
+                                     0x00, 0x08, 0x00, 0x00                         
+                                }, 
+
+                                "@1,connector-type", 
+                                Buffer (0x04)
+                                {
+                                     0x00, 0x08, 0x00, 0x00                         
+                                }, 
+
                                 "@0,compatible", 
                                 Buffer (0x0B)
                                 {
@@ -1183,6 +1195,12 @@ DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 Buffer (0x08)
                                 {
                                     "display"
+                                }, 
+
+                                "@0,display-type", 
+                                Buffer (0x08)
+                                {
+                                    "LCD"
                                 }, 
 
                                 "@0,name", 
@@ -1723,6 +1741,7 @@ DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             Device (P0P2)
             {
+                Name (_ADR, 0x00010000)  // _ADR: Address
             }
 
             Device (GFX0)
@@ -4329,22 +4348,6 @@ DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
                 }
-
-                Device (HUB0)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
-                    Device (BLTH)
-                    {
-                        Name (_ADR, One)  // _ADR: Address
-                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
-                        {
-                            Zero, 
-                            0xFF, 
-                            Zero, 
-                            Zero
-                        })
-                    }
-                }
             }
 
             Device (EHC1)
@@ -4431,18 +4434,6 @@ DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Field (U1CS, DWordAcc, NoLock, Preserve)
                 {
                     U1EN,   2
-                }
-
-                Method (_PSW, 1, NotSerialized)  // _PSW: Power State Wake
-                {
-                    If (Arg0)
-                    {
-                        Store (0x03, U1EN)
-                    }
-                    Else
-                    {
-                        Store (Zero, U1EN)
-                    }
                 }
 
                 Method (_S3D, 0, NotSerialized)  // _S3D: S3 Device State
@@ -4631,18 +4622,6 @@ DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     U1EN,   2
                 }
 
-                Method (_PSW, 1, NotSerialized)  // _PSW: Power State Wake
-                {
-                    If (Arg0)
-                    {
-                        Store (0x03, U1EN)
-                    }
-                    Else
-                    {
-                        Store (Zero, U1EN)
-                    }
-                }
-
                 Method (_S3D, 0, NotSerialized)  // _S3D: S3 Device State
                 {
                     Return (0x02)
@@ -4699,34 +4678,6 @@ DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
-                }
-
-                Device (HUB0)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
-                    Device (UWAN)
-                    {
-                        Name (_ADR, One)  // _ADR: Address
-                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
-                        {
-                            Zero, 
-                            0xFF, 
-                            Zero, 
-                            Zero
-                        })
-                    }
-
-                    Device (ULAN)
-                    {
-                        Name (_ADR, 0x02)  // _ADR: Address
-                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
-                        {
-                            Zero, 
-                            0xFF, 
-                            Zero, 
-                            Zero
-                        })
-                    }
                 }
             }
 
@@ -4788,34 +4739,6 @@ DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
-                }
-
-                Device (HUB0)
-                {
-                    Name (_ADR, Zero)  // _ADR: Address
-                    Device (EWAN)
-                    {
-                        Name (_ADR, 0x05)  // _ADR: Address
-                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
-                        {
-                            Zero, 
-                            0xFF, 
-                            Zero, 
-                            Zero
-                        })
-                    }
-
-                    Device (ELAN)
-                    {
-                        Name (_ADR, 0x06)  // _ADR: Address
-                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
-                        {
-                            Zero, 
-                            0xFF, 
-                            Zero, 
-                            Zero
-                        })
-                    }
                 }
             }
 
@@ -10172,7 +10095,7 @@ DefinitionBlock ("iASLvoEeRD.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
     {
         Device (PWRB)
         {
-            Name (_CID, EisaId ("PNP0C0C"))  // _CID: Compatible ID
+            Name (_HID, EisaId ("PNP0C0C"))  // _HID: Hardware ID
             Method (_STA, 0, NotSerialized)  // _STA: Status
             {
                 Return (0x0B)
