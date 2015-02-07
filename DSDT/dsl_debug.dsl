@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLk4pB4S.aml, Sat Feb  7 14:53:04 2015
+ * Disassembly of iASLrQDGLy.aml, Sat Feb  7 14:58:13 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A44D (42061)
+ *     Length           0x0000A30B (41739)
  *     Revision         0x02
- *     Checksum         0x4E
+ *     Checksum         0x4A
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20091013 (537464851)
  */
-DefinitionBlock ("iASLk4pB4S.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLrQDGLy.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -5273,179 +5273,6 @@ DefinitionBlock ("iASLk4pB4S.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         Processor (CPU1, 0x01, 0x00000410, 0x06) {}
         Processor (CPU2, 0x02, 0x00000410, 0x06) {}
         Processor (CPU3, 0x03, 0x00000410, 0x06) {}
-    }
-
-    Scope (_PR.CPU0)
-    {
-        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
-        {
-            Return (Package (0x06)
-            {
-                Package (0x06)
-                {
-                    Zero, 
-                    Zero, 
-                    0x10, 
-                    0x10, 
-                    0x0B23, 
-                    Zero
-                }, 
-
-                Package (0x06)
-                {
-                    Zero, 
-                    Zero, 
-                    0x10, 
-                    0x10, 
-                    0x0A21, 
-                    One
-                }, 
-
-                Package (0x06)
-                {
-                    Zero, 
-                    Zero, 
-                    0x10, 
-                    0x10, 
-                    0x091D, 
-                    0x02
-                }, 
-
-                Package (0x06)
-                {
-                    Zero, 
-                    Zero, 
-                    0x10, 
-                    0x10, 
-                    0x081A, 
-                    0x03
-                }, 
-
-                Package (0x06)
-                {
-                    Zero, 
-                    Zero, 
-                    0x10, 
-                    0x10, 
-                    0x0716, 
-                    0x04
-                }, 
-
-                Package (0x06)
-                {
-                    Zero, 
-                    Zero, 
-                    0x10, 
-                    0x10, 
-                    0x0613, 
-                    0x05
-                }
-            })
-        }
-
-        Method (_PSD, 0, NotSerialized)  // _PSD: Power State Dependencies
-        {
-            Return (Package (0x05)
-            {
-                0x05, 
-                Zero, 
-                Zero, 
-                0xFC, 
-                0x04
-            })
-        }
-
-        Method (_CST, 0, NotSerialized)  // _CST: C-States
-        {
-            Return (Package (0x02)
-            {
-                One, 
-                Package (0x04)
-                {
-                    ResourceTemplate ()
-                    {
-                        Register (FFixedHW, 
-                            0x01,               // Bit Width
-                            0x02,               // Bit Offset
-                            0x0000000000000000, // Address
-                            0x01,               // Access Size
-                            )
-                    }, 
-
-                    One, 
-                    0x9D, 
-                    0x03E8
-                }
-            })
-        }
-    }
-
-    Scope (_PR.CPU1)
-    {
-        Method (_PSS, 0, NotSerialized)  // _PSS: Performance Supported States
-        {
-            Return (^^CPU0._PSS ())
-        }
-
-        Method (_PSD, 0, NotSerialized)  // _PSD: Power State Dependencies
-        {
-            Return (^^CPU0._PSD ())
-        }
-
-        Method (_CST, 0, NotSerialized)  // _CST: C-States
-        {
-            Return (Package (0x04)
-            {
-                0x03, 
-                Package (0x04)
-                {
-                    ResourceTemplate ()
-                    {
-                        Register (FFixedHW, 
-                            0x01,               // Bit Width
-                            0x02,               // Bit Offset
-                            0x0000000000000000, // Address
-                            ,)
-                    }, 
-
-                    One, 
-                    Zero, 
-                    0x03E8
-                }, 
-
-                Package (0x04)
-                {
-                    ResourceTemplate ()
-                    {
-                        Register (FFixedHW, 
-                            0x08,               // Bit Width
-                            0x00,               // Bit Offset
-                            0x0000000000000414, // Address
-                            ,)
-                    }, 
-
-                    0x02, 
-                    One, 
-                    0x01F4
-                }, 
-
-                Package (0x04)
-                {
-                    ResourceTemplate ()
-                    {
-                        Register (FFixedHW, 
-                            0x08,               // Bit Width
-                            0x00,               // Bit Offset
-                            0x0000000000000415, // Address
-                            ,)
-                    }, 
-
-                    0x03, 
-                    0x55, 
-                    0xFA
-                }
-            })
-        }
     }
 
     Scope (_TZ)
