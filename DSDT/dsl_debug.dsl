@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLGB0MgP.aml, Sat Feb  7 15:06:44 2015
+ * Disassembly of iASLoKfkfN.aml, Sat Feb  7 15:08:14 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A2CA (41674)
+ *     Length           0x0000A338 (41784)
  *     Revision         0x02
- *     Checksum         0x12
+ *     Checksum         0x51
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20101013 (537923603)
+ *     Compiler Version 0x20091013 (537464851)
  */
-DefinitionBlock ("iASLGB0MgP.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLoKfkfN.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -1122,7 +1122,7 @@ DefinitionBlock ("iASLGB0MgP.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Name (_SUN, One)  // _SUN: Slot User Number
                     Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                     {
-                        Store (Package (0x24)
+                        Store (Package (0x26)
                             {
                                 "@0,compatible", 
                                 Buffer (0x0B)
@@ -1192,6 +1192,23 @@ DefinitionBlock ("iASLGB0MgP.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 Unicode ("\x01"), 
                                 "AAPL,backlight-control", 
                                 Unicode ("\x01"), 
+                                "@0,NVMT", 
+                                Buffer (0x60)
+                                {
+                                    /* 0000 */  0x0B, 0x03, 0xFF, 0x20, 0x06, 0x10, 0x90, 0x9C,
+                                    /* 0008 */  0x00, 0x05, 0x20, 0x03, 0x8F, 0x05, 0x30, 0x05,
+                                    /* 0010 */  0x50, 0x05, 0x00, 0x00, 0x4E, 0x03, 0x23, 0x03,
+                                    /* 0018 */  0x29, 0x03, 0x00, 0x00, 0x20, 0x43, 0x52, 0x04,
+                                    /* 0020 */  0x00, 0x00, 0x01, 0x01, 0xE0, 0x00, 0x00, 0x00,
+                                    /* 0028 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0030 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0038 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0040 */  0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00,
+                                    /* 0048 */  0x00, 0x00, 0x00, 0x00, 0x40, 0xFF, 0x10, 0x05,
+                                    /* 0050 */  0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                    /* 0058 */  0x00, 0x08, 0x00, 0x00, 0x30, 0x02, 0x03, 0x03 
+                                }, 
+
                                 "@0,backlight-control", 
                                 Unicode ("\x01"), 
                                 "@0,display-cfg", 
