@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASL8qUw9Y.aml, Sat Feb  7 15:01:59 2015
+ * Disassembly of iASLGB0MgP.aml, Sat Feb  7 15:06:44 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A264 (41572)
+ *     Length           0x0000A2CA (41674)
  *     Revision         0x02
- *     Checksum         0x64
+ *     Checksum         0x12
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20101013 (537923603)
  */
-DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLGB0MgP.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -113,7 +113,7 @@ DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
     Name (ESCS, 0x48)
     Name (PDBR, 0x4D)
     Name (SMBL, 0x10)
-    OperationRegion (GNVS, SystemMemory, 0x7FD9EDBC, 0x0100)
+    OperationRegion (GNVS, SystemMemory, 0xBDF9EDBC, 0x0100)
     Field (GNVS, AnyAcc, Lock, Preserve)
     {
         OSYS,   16, 
@@ -1475,14 +1475,14 @@ DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x00000000,         // Range Minimum
                     0xFEBFFFFF,         // Range Maximum
                     0x00000000,         // Translation Offset
-                    0x00000000,         // Length
+                    0xFEC00000,         // Length
                     ,, _Y0D, AddressRangeMemory, TypeStatic)
                 DWordMemory (ResourceProducer, PosDecode, MinFixed, MaxFixed, Cacheable, ReadWrite,
                     0x00000000,         // Granularity
                     0xFED40000,         // Range Minimum
                     0xFED44FFF,         // Range Maximum
                     0x00000000,         // Translation Offset
-                    0x00000000,         // Length
+                    0x00005000,         // Length
                     ,, , AddressRangeMemory, TypeStatic)
             })
             Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
@@ -3008,7 +3008,7 @@ DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                     Scope (\_SB)
                     {
-                        OperationRegion (TCG1, SystemMemory, 0x7FD9EDB5, 0x07)
+                        OperationRegion (TCG1, SystemMemory, 0xBDF9EDB5, 0x07)
                         Field (TCG1, AnyAcc, NoLock, Preserve)
                         {
                             SSS1,   8, 
@@ -3062,7 +3062,7 @@ DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             SMIC,   8
                         }
 
-                        OperationRegion (SMI1, SystemMemory, 0x7FD9EEBD, 0x90)
+                        OperationRegion (SMI1, SystemMemory, 0xBDF9EEBD, 0x90)
                         Field (SMI1, AnyAcc, NoLock, Preserve)
                         {
                             BCMD,   8, 
@@ -5005,6 +5005,25 @@ DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         ,   30, 
                     HPSX,   1, 
                     PMSX,   1
+                }
+
+                Device (FRWR)
+                {
+                    Name (_ADR, Zero)  // _ADR: Address
+                    Name (_GPE, 0x1A)  // _GPE: General Purpose Events
+                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    {
+                        Store (Package (0x02)
+                            {
+                                "fwhub", 
+                                Buffer (0x04)
+                                {
+                                     0x00, 0x00, 0x00, 0x00                         
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
                 }
 
                 Device (PXSX)
@@ -7095,6 +7114,11 @@ DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
     Scope (_GPE)
     {
+        Method (_L1A, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
+        {
+            Notify (\_SB.PCI0.RP05.FRWR, Zero)
+        }
+
         Method (_L01, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
             Add (L01C, One, L01C)
@@ -7529,7 +7553,8 @@ DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 CFN2,   1, 
                 SFN2,   1, 
                 TPNT,   1, 
-                    ,   2, 
+                W7FG,   1, 
+                    ,   1, 
                 LNON,   1, 
                 Offset (0x66), 
                 BLVL,   8, 
@@ -9578,7 +9603,11 @@ DefinitionBlock ("iASL8qUw9Y.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
     {
         Device (PWRB)
         {
-            Name (_HID, EisaId ("PNP0C0C"))  // _HID: Hardware ID
+            Name (_CID, EisaId ("PNP0C0C"))  // _CID: Compatible ID
+            Method (_STA, 0, NotSerialized)  // _STA: Status
+            {
+                Return (0x0B)
+            }
         }
 
         Device (PNLF)
