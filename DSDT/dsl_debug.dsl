@@ -5,7 +5,7 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLqGprVO.aml, Sat Feb  7 15:18:51 2015
+ * Disassembly of iASLed7orp.aml, Sat Feb  7 15:20:54 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20140828 (538183720)
  */
-DefinitionBlock ("iASLqGprVO.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
