@@ -58,6 +58,14 @@
 		<dict>
 			<key>Configuration</key>
 			<dict>
+				<key>Keys</key>
+				<dict>
+					<key>ACID</key>
+					<array>
+						<string>ch8*</string>
+						<data>ut7DNVAFEGM=</data>
+					</array>
+				</dict>
 				<key>smc-compatible</key>
 				<string>smc-piketon</string>
 			</dict>
