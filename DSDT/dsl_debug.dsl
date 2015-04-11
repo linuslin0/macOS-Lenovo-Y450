@@ -1,24 +1,24 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20141107-64 [Nov 13 2014]
+ * AML/ASL+ Disassembler version 20141107-64 [Jan  2 2015]
  * Copyright (c) 2000 - 2014 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLed7orp.aml, Sat Feb  7 15:20:54 2015
+ * Disassembly of iASLqWwceJ.aml, Sat Apr 11 13:53:32 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000ABA8 (43944)
+ *     Length           0x0000AB85 (43909)
  *     Revision         0x02
- *     Checksum         0x86
+ *     Checksum         0xC8
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20140828 (538183720)
+ *     Compiler Version 0x20141107 (538185991)
  */
-DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLqWwceJ.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -1168,7 +1168,6 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Device (GFX0)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
-                    Name (_SUN, One)  // _SUN: Slot User Number
                     Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                     {
                         Store (Package (0x30)
@@ -1198,7 +1197,7 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 }, 
 
                                 "@0,display-type", 
-                                Buffer (0x08)
+                                Buffer (0x04)
                                 {
                                     "LCD"
                                 }, 
@@ -1250,7 +1249,7 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 "model", 
                                 Buffer (0x17)
                                 {
-                                    "nVidia GeForce GT 240M"
+                                    "NVIDIA GeForce GT 240M"
                                 }, 
 
                                 "@0,built-in", 
@@ -1296,16 +1295,16 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                     /* 0010 */  0x00, 0x04, 0x00, 0x00                         
                                 }, 
 
+                                "rom-revision", 
+                                Buffer (0x0F)
+                                {
+                                    "70.16.4e.00.07"
+                                }, 
+
                                 "hda-gfx", 
                                 Buffer (0x0A)
                                 {
-                                    "onboard-1"
-                                }, 
-
-                                "rom-revision", 
-                                Buffer (0x25)
-                                {
-                                    "nVidia GeForce GT 240M OpenGL Engine"
+                                    "onboard-2"
                                 }
                             }, Local0)
                         DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -1323,7 +1322,7 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 "hda-gfx", 
                                 Buffer (0x0A)
                                 {
-                                    "onboard-1"
+                                    "onboard-2"
                                 }
                             }, Local0)
                         DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -5042,7 +5041,7 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Name (_GPE, 0x1A)  // _GPE: General Purpose Events
                     Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                     {
-                        Store (Package (0x02)
+                        Store (Package (0x04)
                             {
                                 "fwhub", 
                                 Buffer (0x04)
@@ -5225,7 +5224,6 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
-                    Name (_SUN, 0x05)  // _SUN: Slot User Number
                     Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                     {
                         Store (Package (0x06)
@@ -5237,9 +5235,9 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 }, 
 
                                 "model", 
-                                Buffer (0x34)
+                                Buffer (0x2B)
                                 {
-                                    "Broadcom BCM5784M PCI-E Gigabit Ethernet Controller"
+                                    "Broadcom NetLink BCM5784M Gigabit Ethernet"
                                 }, 
 
                                 "built-in", 
@@ -5544,36 +5542,39 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
     Method (_PTS, 1, NotSerialized)  // _PTS: Prepare To Sleep
     {
-        Store (Zero, P8D0)
-        Store (Zero, P8D1)
-        Store (Zero, P8D2)
-        Store (Zero, P8D3)
-        P8XH (Zero, Arg0)
-        If (LEqual (Arg0, 0x03))
+        If (LNotEqual (Arg0, 0x05))
         {
-            If (LAnd (DTSE, MPEN))
+            Store (Zero, P8D0)
+            Store (Zero, P8D1)
+            Store (Zero, P8D2)
+            Store (Zero, P8D3)
+            P8XH (Zero, Arg0)
+            If (LEqual (Arg0, 0x03))
             {
-                TRAP (TRTD, 0x1E)
+                If (LAnd (DTSE, MPEN))
+                {
+                    TRAP (TRTD, 0x1E)
+                }
+
+                Store (One, G8WS)
+                Store (One, G8WE)
             }
 
-            Store (One, G8WS)
-            Store (One, G8WE)
-        }
+            If (LEqual (Arg0, 0x04))
+            {
+                Store (One, \_SB.PCI0.LPCB.EC0.PFLG)
+                Store (One, \_SB.INS4)
+            }
 
-        If (LEqual (Arg0, 0x04))
-        {
-            Store (One, \_SB.PCI0.LPCB.EC0.PFLG)
-            Store (One, \_SB.INS4)
-        }
+            If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04)))
+            {
+                Store (Zero, \_SB.S5SB)
+            }
 
-        If (LOr (LEqual (Arg0, 0x03), LEqual (Arg0, 0x04)))
-        {
-            Store (Zero, \_SB.S5SB)
+            Store (Zero, \_SB.PCI0.LPCB.EC0.FVIS)
+            Store (\_SB.PCI0.RP02.PDSX, \_SB.PCI0.RP02.PDSS)
+            \_SB.PHSR (0x81)
         }
-
-        Store (Zero, \_SB.PCI0.LPCB.EC0.FVIS)
-        Store (\_SB.PCI0.RP02.PDSX, \_SB.PCI0.RP02.PDSS)
-        \_SB.PHSR (0x81)
     }
 
     Method (PINI, 0, NotSerialized)
@@ -6132,7 +6133,7 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Store (0x07D2, OSYS)
                 }
 
-                If (_OSI ("Windows 2006"))
+                If (LOr (_OSI ("Darwin"), _OSI ("Windows 2006")))
                 {
                     Store (0x07D6, OSYS)
                 }
@@ -9725,15 +9726,6 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         Device (ACAD)
         {
             Name (_HID, "ACPI0003")  // _HID: Hardware ID
-            Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
-            {
-                0x18, 
-                0x03
-            })
-            Name (_PCL, Package (0x01)  // _PCL: Power Consumer List
-            {
-                _SB
-            })
             Mutex (MUTA, 0x00)
             Name (ACWT, Zero)
             Method (_PSR, 0, NotSerialized)  // _PSR: Power Source
@@ -9754,6 +9746,12 @@ DefinitionBlock ("iASLed7orp.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 Release (MUTA)
                 Return (ACST)
             }
+
+            Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
+            {
+                0x18, 
+                0x03
+            })
         }
     }
 
