@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLqWwceJ.aml, Sat Apr 11 13:53:32 2015
+ * Disassembly of iASLaAwClM.aml, Sat Apr 11 15:25:20 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000AB85 (43909)
+ *     Length           0x0000ABEB (44011)
  *     Revision         0x02
- *     Checksum         0xC8
+ *     Checksum         0xED
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20141107 (538185991)
  */
-DefinitionBlock ("iASLqWwceJ.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -5272,6 +5272,11 @@ DefinitionBlock ("iASLqWwceJ.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Return (PR05)
                 }
             }
+
+            Device (MCHC)
+            {
+                Name (_ADR, Zero)  // _ADR: Address
+            }
         }
     }
 
@@ -7157,6 +7162,33 @@ DefinitionBlock ("iASLqWwceJ.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             {
                 Or (HCON, 0x02, HCON)
                 Or (HSTS, 0xFF, HSTS)
+            }
+
+            Device (BUS0)
+            {
+                Name (_CID, "smbus")  // _CID: Compatible ID
+                Name (_ADR, Zero)  // _ADR: Address
+                Device (DVL0)
+                {
+                    Name (_ADR, 0x57)  // _ADR: Address
+                    Name (_CID, "diagsvault")  // _CID: Compatible ID
+                    Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+                    {
+                        If (LEqual (Arg2, Zero))
+                        {
+                            Return (Buffer (One)
+                            {
+                                 0x03                                           
+                            })
+                        }
+
+                        Return (Package (0x02)
+                        {
+                            "address", 
+                            0x57
+                        })
+                    }
+                }
             }
         }
     }
