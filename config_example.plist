@@ -29,7 +29,7 @@
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>kext-dev-mode=1</string>
+		<string>kext-dev-mode=1 rootless=0</string>
 		<key>Debug</key>
 		<false/>
 		<key>DefaultLoader</key>
@@ -108,7 +108,7 @@
 		<key>ScreenResolution</key>
 		<string>1360x768</string>
 		<key>Theme</key>
-		<string>black_green</string>
+		<string>embedded</string>
 	</dict>
 	<key>Graphics</key>
 	<dict>
