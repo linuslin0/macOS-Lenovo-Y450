@@ -18,12 +18,7 @@
 			<key>DropOem</key>
 			<false/>
 			<key>Generate</key>
-			<dict>
-				<key>CStates</key>
-				<true/>
-				<key>PStates</key>
-				<true/>
-			</dict>
+			<true/>
 		</dict>
 	</dict>
 	<key>Boot</key>
@@ -132,11 +127,15 @@
 				<key>Comment</key>
 				<string>TRIM function for non-Apple SSDs</string>
 				<key>Find</key>
-				<data>QVBQTEUgU1NEAA==</data>
+				<data>
+				QVBQTEUgU1NEAA==
+				</data>
 				<key>Name</key>
 				<string>IOAHCIBlockStorage</string>
 				<key>Replace</key>
-				<data>AAAAAAAAAAAAAA==</data>
+				<data>
+				AAAAAAAAAAAAAA==
+				</data>
 			</dict>
 		</array>
 	</dict>
@@ -191,11 +190,9 @@
 		<key>CustomUUID</key>
 		<string></string>
 		<key>InjectKexts</key>
-		<string>Detect</string>
+		<string>No</string>
 		<key>InjectSystemID</key>
 		<true/>
-		<key>NoCaches</key>
-		<false/>
 	</dict>
 </dict>
 </plist>
