@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		264150361B2A27D200AD92CD /* LenovoY450.h in Headers */ = {isa = PBXBuildFile; fileRef = 264150351B2A27D200AD92CD /* LenovoY450.h */; };
 		264150381B2A27D200AD92CD /* LenovoY450.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 264150371B2A27D200AD92CD /* LenovoY450.cpp */; };
+		26483D7C1B2B77B700E02ABC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 26483D7B1B2B77B700E02ABC /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		264150341B2A27D200AD92CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		264150351B2A27D200AD92CD /* LenovoY450.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LenovoY450.h; sourceTree = "<group>"; };
 		264150371B2A27D200AD92CD /* LenovoY450.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LenovoY450.cpp; sourceTree = "<group>"; };
+		26483D7B1B2B77B700E02ABC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +36,7 @@
 			children = (
 				264150321B2A27D200AD92CD /* LenovoY450 */,
 				264150311B2A27D200AD92CD /* Products */,
+				26483D7B1B2B77B700E02ABC /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26483D7C1B2B77B700E02ABC /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
