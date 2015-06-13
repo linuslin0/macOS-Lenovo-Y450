@@ -122,12 +122,6 @@
 	<string>Copyright © 2015 Linus. All rights reserved.</string>
 	<key>OSBundleLibraries</key>
 	<dict>
-		<key>com.apple.kpi.unsupported</key>
-		<string>10.6</string>
-		<key>com.apple.kpi.bsd</key>
-		<string>10.6</string>
-		<key>com.apple.kpi.mach</key>
-		<string>10.6</string>
 		<key>com.apple.kpi.iokit</key>
 		<string>10.6</string>
 		<key>com.apple.kpi.libkern</key>
