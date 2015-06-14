@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B7519D29-809E-42AA-9258-AE3F9FADAB73</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LenovoY450</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1D1670D9F53D93AA5919142619A101964A482EC5</key>
+		<string>https://github.com/linzhouyu/OS-X-Lenovo-Y450.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LenovoY450/LenovoY450.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1D1670D9F53D93AA5919142619A101964A482EC5</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/linzhouyu/OS-X-Lenovo-Y450.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1D1670D9F53D93AA5919142619A101964A482EC5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1D1670D9F53D93AA5919142619A101964A482EC5</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1D1670D9F53D93AA5919142619A101964A482EC5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>OS-X-Lenovo-Y450</string>
+		</dict>
+	</array>
+</dict>
+</plist>
