@@ -4349,7 +4349,7 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
             }
 
-            Device (EHC1)
+            Device (EHCO)
             {
                 OperationRegion (EOWN, PCI_Config, 0x68, 0x04)
                 Field (EOWN, ByteAcc, NoLock, Preserve)
@@ -4680,7 +4680,7 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
             }
 
-            Device (EHC2)
+            Device (EHCT)
             {
                 OperationRegion (EOWN, PCI_Config, 0x68, 0x04)
                 Field (EOWN, ByteAcc, NoLock, Preserve)
@@ -5584,10 +5584,10 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
     Method (PINI, 0, NotSerialized)
     {
-        Store (Zero, \_SB.PCI0.EHC1.HCBO)
-        Store (One, \_SB.PCI0.EHC1.HCOO)
-        Store (Zero, \_SB.PCI0.EHC2.HCBO)
-        Store (One, \_SB.PCI0.EHC2.HCOO)
+        Store (Zero, \_SB.PCI0.EHCO.HCBO)
+        Store (One, \_SB.PCI0.EHCO.HCOO)
+        Store (Zero, \_SB.PCI0.EHCT.HCBO)
+        Store (One, \_SB.PCI0.EHCT.HCOO)
     }
 
     Method (_WAK, 1, NotSerialized)  // _WAK: Wake
@@ -7411,8 +7411,8 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
         Method (_L0D, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            Notify (\_SB.PCI0.EHC1, 0x02)
-            Notify (\_SB.PCI0.EHC2, 0x02)
+            Notify (\_SB.PCI0.EHCO, 0x02)
+            Notify (\_SB.PCI0.EHCT, 0x02)
             Notify (\_SB.PCI0.HDEF, 0x02)
         }
 
