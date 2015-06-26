@@ -7,7 +7,7 @@ The Info.plist is fully configured for Lenovo IdeaPad Y450.
 Installation
 ------------
 
-Install to `/System/Library/Extensions`
+Install to `/Library/Extensions`(Recommended) or `/System/Library/Extensions`
 
 Method of installation
 
