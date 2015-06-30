@@ -96,7 +96,7 @@
 			<key>Mirror</key>
 			<false/>
 			<key>Speed</key>
-			<integer>2</integer>
+			<integer>7</integer>
 		</dict>
 		<key>Scan</key>
 		<true/>
@@ -116,25 +116,53 @@
 			<key>NVidia</key>
 			<false/>
 		</dict>
+		<key>NvidiaSingle</key>
+		<false/>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
 		<key>AppleRTC</key>
 		<false/>
+		<key>AsusAICPUPM</key>
+		<false/>
+		<key>Debug</key>
+		<false/>
+		<key>KernelCpu</key>
+		<false/>
+		<key>KernelHaswellE</key>
+		<false/>
+		<key>KernelLapic</key>
+		<false/>
+		<key>KernelPm</key>
+		<false/>
 		<key>KextsToPatch</key>
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>TRIM function for non-Apple SSDs</string>
+				<string>Patch_ALC269_Y450</string>
 				<key>Find</key>
 				<data>
-				QVBQTEUgU1NEAA==
+				YgLsEA==
 				</data>
 				<key>Name</key>
-				<string>IOAHCIBlockStorage</string>
+				<string>AppleHDA</string>
 				<key>Replace</key>
 				<data>
-				AAAAAAAAAAAAAA==
+				aQLsEA==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Patch_ALC269_Y450</string>
+				<key>Find</key>
+				<data>
+				eG1sLnps
+				</data>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				eHh4Lnps
 				</data>
 			</dict>
 		</array>
