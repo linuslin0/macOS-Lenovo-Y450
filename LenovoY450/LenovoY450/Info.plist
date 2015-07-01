@@ -24,6 +24,19 @@
 	<string>1</string>
 	<key>IOKitPersonalities</key>
 	<dict>
+		<key>com_apple_iokit_data_set_management</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.iokit.IOAHCIBlockStorage</string>
+			<key>Force Data Set Management</key>
+			<true/>
+			<key>IOClass</key>
+			<string>AppleAHCIDiskDriver</string>
+			<key>IOProbeScore</key>
+			<integer>5000</integer>
+			<key>IOProviderClass</key>
+			<string>IOAHCIDevice</string>
+		</dict>
 		<key>MacBookPro6,2-EHC1</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
