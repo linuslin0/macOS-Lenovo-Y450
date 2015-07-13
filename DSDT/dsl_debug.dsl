@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLaAwClM.aml, Sat Apr 11 15:25:20 2015
+ * Disassembly of iASLm48CQb.aml, Sun Jul 12 23:43:07 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000ABEB (44011)
+ *     Length           0x0000ADC7 (44487)
  *     Revision         0x02
- *     Checksum         0xED
+ *     Checksum         0x71
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20141107 (538185991)
  */
-DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -282,12 +282,6 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                  0x00                                           
             }, Arg4)
         Return (Zero)
-    }
-
-    Method (B1B2, 2, NotSerialized)
-    {
-        Or (ShiftLeft (Arg1, 0x08), Arg0, Local0)
-        Return (Local0)
     }
 
     Method (B1B4, 4, NotSerialized)
@@ -4636,6 +4630,34 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x20, 
                     0x03
                 })
+                Device (HUB0)
+                {
+                    Name (_ADR, Zero)  // _ADR: Address
+                    Device (UWAN)
+                    {
+                        Name (_ADR, One)  // _ADR: Address
+                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
+                        {
+                            Zero, 
+                            0xFF, 
+                            Zero, 
+                            Zero
+                        })
+                    }
+
+                    Device (ULAN)
+                    {
+                        Name (_ADR, 0x02)  // _ADR: Address
+                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
+                        {
+                            Zero, 
+                            0xFF, 
+                            Zero, 
+                            Zero
+                        })
+                    }
+                }
+
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
                     Store (Package (0x0F)
@@ -4697,6 +4719,34 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x0D, 
                     0x03
                 })
+                Device (HUB0)
+                {
+                    Name (_ADR, Zero)  // _ADR: Address
+                    Device (EWAN)
+                    {
+                        Name (_ADR, 0x05)  // _ADR: Address
+                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
+                        {
+                            Zero, 
+                            0xFF, 
+                            Zero, 
+                            Zero
+                        })
+                    }
+
+                    Device (ELAN)
+                    {
+                        Name (_ADR, 0x06)  // _ADR: Address
+                        Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
+                        {
+                            Zero, 
+                            0xFF, 
+                            Zero, 
+                            Zero
+                        })
+                    }
+                }
+
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
                     Store (Package (0x0F)
@@ -5104,7 +5154,7 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                     {
-                        If (_OSI ("Windows 2009"))
+                        If (LOr (_OSI ("Darwin"), _OSI ("Windows 2009")))
                         {
                             Return (Zero)
                         }
@@ -5120,7 +5170,7 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Name (_ADR, One)  // _ADR: Address
                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                     {
-                        If (_OSI ("Windows 2009"))
+                        If (LOr (_OSI ("Darwin"), _OSI ("Windows 2009")))
                         {
                             Return (Zero)
                         }
@@ -5136,7 +5186,7 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Name (_ADR, 0x02)  // _ADR: Address
                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                     {
-                        If (_OSI ("Windows 2009"))
+                        If (LOr (_OSI ("Darwin"), _OSI ("Windows 2009")))
                         {
                             Return (Zero)
                         }
@@ -5152,7 +5202,7 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Name (_ADR, 0x03)  // _ADR: Address
                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                     {
-                        If (_OSI ("Windows 2009"))
+                        If (LOr (_OSI ("Darwin"), _OSI ("Windows 2009")))
                         {
                             Return (Zero)
                         }
@@ -5168,7 +5218,7 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Name (_ADR, 0x04)  // _ADR: Address
                     Method (_RMV, 0, NotSerialized)  // _RMV: Removal Status
                     {
-                        If (_OSI ("Windows 2009"))
+                        If (LOr (_OSI ("Darwin"), _OSI ("Windows 2009")))
                         {
                             Return (Zero)
                         }
@@ -6138,12 +6188,12 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Store (0x07D2, OSYS)
                 }
 
-                If (LOr (_OSI ("Darwin"), _OSI ("Windows 2006")))
+                If (_OSI ("Windows 2006"))
                 {
                     Store (0x07D6, OSYS)
                 }
 
-                If (_OSI ("Windows 2009"))
+                If (LOr (_OSI ("Darwin"), _OSI ("Windows 2009")))
                 {
                     Store (0x07D9, OSYS)
                 }
@@ -7536,7 +7586,8 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 SM31,   8, 
                 BCNT,   8, 
                 SMAA,   8, 
-                BATD,   16, 
+                BA00,   8, 
+                BA01,   8, 
                 SW2S,   1, 
                 Offset (0x41), 
                     ,   4, 
@@ -7926,7 +7977,7 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         }
 
                         Notify (BAT1, 0x80)
-                        Store (BATD, BATO)
+                        Store (B1B2 (BA00, BA01), BATO)
                         And (SMST, 0xBF, SMST)
                     }
                 }
@@ -7936,19 +7987,21 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             {
                 If (SW2S)
                 {
-                    Or (BATD, 0xC0, BATD)
+                    Store (ShiftRight (Or (B1B2 (BA00, BA01), 0xC0), 0x08), BA01)
+                    Store (Or (B1B2 (BA00, BA01), 0xC0), BA00)
                     Or (BATO, 0xC0, BATO)
                 }
                 Else
                 {
-                    And (BATD, 0xFF3F, BATD)
+                    Store (ShiftRight (And (B1B2 (BA00, BA01), 0xC0), 0x08), BA01)
+                    Store (And (B1B2 (BA00, BA01), 0xC0), BA00)
                     And (BATO, 0xFF3F, BATO)
                 }
             }
 
             Method (SELE, 0, NotSerialized)
             {
-                Store (BATD, BATN)
+                Store (B1B2 (BA00, BA01), BATN)
                 Store (Zero, BATF)
                 If (And (0xC0, BATN))
                 {
@@ -8735,7 +8788,7 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                     If (LEqual (Arg0, 0x09))
                     {
-                        Store (B1B2 (SMW0, SMW1), Arg3)
+                        Store (B1B2 (B1B2 (SMW0, SMW1), SMW1), Arg3)
                     }
 
                     If (LEqual (Arg0, 0x0B))
@@ -9192,6 +9245,59 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                 Release (MUT0)
                 Return (Local0)
+            }
+
+            Method (RE1B, 1, NotSerialized)
+            {
+                OperationRegion (ERAM, EmbeddedControl, Arg0, One)
+                Field (ERAM, ByteAcc, NoLock, Preserve)
+                {
+                    BYTE,   8
+                }
+
+                Return (BYTE)
+            }
+
+            Method (RECB, 2, Serialized)
+            {
+                ShiftRight (Arg1, 0x03, Arg1)
+                Name (TEMP, Buffer (Arg1) {})
+                Add (Arg0, Arg1, Arg1)
+                Store (Zero, Local0)
+                While (LLess (Arg0, Arg1))
+                {
+                    Store (RE1B (Arg0), Index (TEMP, Local0))
+                    Increment (Arg0)
+                    Increment (Local0)
+                }
+
+                Return (TEMP)
+            }
+
+            Method (WE1B, 2, NotSerialized)
+            {
+                OperationRegion (ERAM, EmbeddedControl, Arg0, One)
+                Field (ERAM, ByteAcc, NoLock, Preserve)
+                {
+                    BYTE,   8
+                }
+
+                Store (Arg1, BYTE)
+            }
+
+            Method (WECB, 3, Serialized)
+            {
+                ShiftRight (Arg1, 0x03, Arg1)
+                Name (TEMP, Buffer (Arg1) {})
+                Store (Arg2, TEMP)
+                Add (Arg0, Arg1, Arg1)
+                Store (Zero, Local0)
+                While (LLess (Arg0, Arg1))
+                {
+                    WE1B (Arg0, DerefOf (Index (TEMP, Local0)))
+                    Increment (Arg0)
+                    Increment (Local0)
+                }
             }
         }
 
@@ -11378,6 +11484,11 @@ DefinitionBlock ("iASLaAwClM.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
         {
             Store (Arg0, ^^^LPCB.EC0.LNON)
         }
+    }
+
+    Method (B1B2, 2, NotSerialized)
+    {
+        Return (Or (Arg0, ShiftLeft (Arg1, 0x08)))
     }
 }
 

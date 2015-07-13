@@ -128,32 +128,6 @@
 			<key>model</key>
 			<string>MacBookPro6,2</string>
 		</dict>
-		<key>HDA Hardware Config Resource</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>com.apple.driver.AppleHDAHardwareConfigDriver</string>
-			<key>HDAConfigDefault</key>
-			<array>
-				<dict>
-					<key>AFGLowPowerState</key>
-					<data>AwAAAA==</data>
-					<key>CodecID</key>
-					<integer>283902569</integer>
-					<key>ConfigData</key>
-					<data>ARcc8AEXHQABFx4AARcfQAEnHBABJx0BASceoAEnH5ABRxxAAUcdAQFHHhMBRx+QAVccUAFXHUABVx4hAVcfAQFnHPABZx0AAWceAAFnH0ABhxwgAYcdkAGHHoEBhx8BAZcc8AGXHQABlx4AAZcfQAGnHPABpx0AAaceAAGnH0ABtxzwAbcdAAG3HgABtx9AAdcc8AHXHQAB1x4AAdcfQAHnHHAB5x0BAeceQwHnH5ABRwwC</data>
-					<key>FuncGroup</key>
-					<integer>1</integer>
-					<key>LayoutID</key>
-					<integer>86</integer>
-				</dict>
-			</array>
-			<key>IOClass</key>
-			<string>AppleHDAHardwareConfigDriver</string>
-			<key>IOMatchCategory</key>
-			<string>AppleHDAHardwareConfigDriver</string>
-			<key>IOProviderClass</key>
-			<string>AppleHDAHardwareConfigDriverLoader</string>
-		</dict>
 		<key>AppleIntelPanelA</key>
 		<dict>
 			<key>ApplePanels</key>
