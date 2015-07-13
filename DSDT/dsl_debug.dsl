@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLm48CQb.aml, Sun Jul 12 23:43:07 2015
+ * Disassembly of iASLhYjro5.aml, Mon Jul 13 15:43:03 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000ADC7 (44487)
+ *     Length           0x0000AA8B (43659)
  *     Revision         0x02
- *     Checksum         0x71
+ *     Checksum         0xAD
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20141107 (538185991)
  */
-DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLhYjro5.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -3037,16 +3037,9 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             }, 
 
                             "IOName", 
-                            Buffer (0x0D)
-                            {
-                                "pci8086,2916"
-                            }, 
-
+                            "pci8086,2916", 
                             "name", 
-                            Buffer (0x0D)
-                            {
-                                "pci8086,2916"
-                            }
+                            "pci8086,2916"
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
@@ -4103,7 +4096,7 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
             }
 
-            Device (USB0)
+            Device (UHC1)
             {
                 Name (_ADR, 0x001D0000)  // _ADR: Address
                 OperationRegion (U1CS, PCI_Config, 0xC4, 0x04)
@@ -4141,41 +4134,12 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 })
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x0F)
+                    Store (Package (0x02)
                         {
                             "device-id", 
                             Buffer (0x04)
                             {
                                  0x34, 0x3A, 0x00, 0x00                         
-                            }, 
-
-                            "AAPL,clock-id", 
-                            Buffer (One)
-                            {
-                                 0x0A                                           
-                            }, 
-
-                            "built-in", 
-                            Buffer (One)
-                            {
-                                 0x00                                           
-                            }, 
-
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
-                            }, 
-
-                            "AAPL,current-available", 
-                            0x04B0, 
-                            "AAPL,current-extra", 
-                            0x02BC, 
-                            "AAPL,current-in-sleep", 
-                            0x03E8, 
-                            Buffer (One)
-                            {
-                                 0x00                                           
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -4183,7 +4147,7 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
             }
 
-            Device (USB1)
+            Device (UHC2)
             {
                 Name (_ADR, 0x001D0001)  // _ADR: Address
                 OperationRegion (U1CS, PCI_Config, 0xC4, 0x04)
@@ -4221,41 +4185,12 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 })
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x0F)
+                    Store (Package (0x02)
                         {
                             "device-id", 
                             Buffer (0x04)
                             {
                                  0x35, 0x3A, 0x00, 0x00                         
-                            }, 
-
-                            "AAPL,clock-id", 
-                            Buffer (One)
-                            {
-                                 0x0A                                           
-                            }, 
-
-                            "built-in", 
-                            Buffer (One)
-                            {
-                                 0x00                                           
-                            }, 
-
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
-                            }, 
-
-                            "AAPL,current-available", 
-                            0x04B0, 
-                            "AAPL,current-extra", 
-                            0x02BC, 
-                            "AAPL,current-in-sleep", 
-                            0x03E8, 
-                            Buffer (One)
-                            {
-                                 0x00                                           
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -4263,7 +4198,7 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
             }
 
-            Device (USB2)
+            Device (UHC3)
             {
                 Name (_ADR, 0x001D0002)  // _ADR: Address
                 OperationRegion (U1CS, PCI_Config, 0xC4, 0x04)
@@ -4301,41 +4236,12 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 })
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x0F)
+                    Store (Package (0x02)
                         {
                             "device-id", 
                             Buffer (0x04)
                             {
                                  0x36, 0x3A, 0x00, 0x00                         
-                            }, 
-
-                            "AAPL,clock-id", 
-                            Buffer (One)
-                            {
-                                 0x0A                                           
-                            }, 
-
-                            "built-in", 
-                            Buffer (One)
-                            {
-                                 0x00                                           
-                            }, 
-
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
-                            }, 
-
-                            "AAPL,current-available", 
-                            0x04B0, 
-                            "AAPL,current-extra", 
-                            0x02BC, 
-                            "AAPL,current-in-sleep", 
-                            0x03E8, 
-                            Buffer (One)
-                            {
-                                 0x00                                           
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -4446,7 +4352,7 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 })
             }
 
-            Device (USB3)
+            Device (UHC4)
             {
                 Name (_ADR, 0x001A0000)  // _ADR: Address
                 OperationRegion (U1CS, PCI_Config, 0xC4, 0x04)
@@ -4484,41 +4390,12 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 })
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x0F)
+                    Store (Package (0x02)
                         {
                             "device-id", 
                             Buffer (0x04)
                             {
                                  0x37, 0x3A, 0x00, 0x00                         
-                            }, 
-
-                            "AAPL,clock-id", 
-                            Buffer (One)
-                            {
-                                 0x0A                                           
-                            }, 
-
-                            "built-in", 
-                            Buffer (One)
-                            {
-                                 0x00                                           
-                            }, 
-
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
-                            }, 
-
-                            "AAPL,current-available", 
-                            0x04B0, 
-                            "AAPL,current-extra", 
-                            0x02BC, 
-                            "AAPL,current-in-sleep", 
-                            0x03E8, 
-                            Buffer (One)
-                            {
-                                 0x00                                           
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -4526,7 +4403,7 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
             }
 
-            Device (USB4)
+            Device (UHC5)
             {
                 Name (_ADR, 0x001A0001)  // _ADR: Address
                 OperationRegion (U1CS, PCI_Config, 0xC4, 0x04)
@@ -4564,41 +4441,12 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 })
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x0F)
+                    Store (Package (0x02)
                         {
                             "device-id", 
                             Buffer (0x04)
                             {
                                  0x38, 0x3A, 0x00, 0x00                         
-                            }, 
-
-                            "AAPL,clock-id", 
-                            Buffer (One)
-                            {
-                                 0x0A                                           
-                            }, 
-
-                            "built-in", 
-                            Buffer (One)
-                            {
-                                 0x00                                           
-                            }, 
-
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
-                            }, 
-
-                            "AAPL,current-available", 
-                            0x04B0, 
-                            "AAPL,current-extra", 
-                            0x02BC, 
-                            "AAPL,current-in-sleep", 
-                            0x03E8, 
-                            Buffer (One)
-                            {
-                                 0x00                                           
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -4606,7 +4454,7 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
             }
 
-            Device (USB5)
+            Device (UHC6)
             {
                 Name (_ADR, 0x001A0002)  // _ADR: Address
                 OperationRegion (U1CS, PCI_Config, 0xC4, 0x04)
@@ -4660,41 +4508,12 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x0F)
+                    Store (Package (0x02)
                         {
                             "device-id", 
                             Buffer (0x04)
                             {
                                  0x39, 0x3A, 0x00, 0x00                         
-                            }, 
-
-                            "AAPL,clock-id", 
-                            Buffer (One)
-                            {
-                                 0x0A                                           
-                            }, 
-
-                            "built-in", 
-                            Buffer (One)
-                            {
-                                 0x00                                           
-                            }, 
-
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
-                            }, 
-
-                            "AAPL,current-available", 
-                            0x04B0, 
-                            "AAPL,current-extra", 
-                            0x02BC, 
-                            "AAPL,current-in-sleep", 
-                            0x03E8, 
-                            Buffer (One)
-                            {
-                                 0x00                                           
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -7440,23 +7259,23 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
         Method (_L03, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            Notify (\_SB.PCI0.USB0, 0x02)
+            Notify (\_SB.PCI0.UHC1, 0x02)
         }
 
         Method (_L04, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            Notify (\_SB.PCI0.USB1, 0x02)
+            Notify (\_SB.PCI0.UHC2, 0x02)
         }
 
         Method (_L0C, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            Notify (\_SB.PCI0.USB2, 0x02)
+            Notify (\_SB.PCI0.UHC3, 0x02)
         }
 
         Method (_L20, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
             Notify (\_SB.PCI0.USBR, 0x02)
-            Notify (\_SB.PCI0.USB5, 0x02)
+            Notify (\_SB.PCI0.UHC6, 0x02)
         }
 
         Method (_L0D, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
@@ -7468,12 +7287,12 @@ DefinitionBlock ("iASLm48CQb.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
         Method (_L0E, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            Notify (\_SB.PCI0.USB3, 0x02)
+            Notify (\_SB.PCI0.UHC4, 0x02)
         }
 
         Method (_L05, 0, NotSerialized)  // _Lxx: Level-Triggered GPE
         {
-            Notify (\_SB.PCI0.USB4, 0x02)
+            Notify (\_SB.PCI0.UHC5, 0x02)
         }
     }
 
