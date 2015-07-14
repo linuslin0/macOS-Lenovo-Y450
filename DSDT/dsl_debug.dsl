@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLhYjro5.aml, Mon Jul 13 15:43:03 2015
+ * Disassembly of iASLpNGkF8.aml, Mon Jul 13 20:54:10 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000AA8B (43659)
+ *     Length           0x0000AB0D (43789)
  *     Revision         0x02
- *     Checksum         0xAD
+ *     Checksum         0x50
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20141107 (538185991)
  */
-DefinitionBlock ("iASLhYjro5.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLpNGkF8.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -4268,7 +4268,7 @@ DefinitionBlock ("iASLhYjro5.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 })
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x0F)
+                    Store (Package (0x13)
                         {
                             "device-id", 
                             Buffer (0x04)
@@ -4295,10 +4295,14 @@ DefinitionBlock ("iASLhYjro5.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             }, 
 
                             "AAPL,current-available", 
-                            0x04B0, 
+                            0x05DC, 
                             "AAPL,current-extra", 
-                            0x02BC, 
-                            "AAPL,current-in-sleep", 
+                            0x04B0, 
+                            "AAPL,current-extra-in-sleep", 
+                            0x03E8, 
+                            "AAPL,device-internal", 
+                            0x02, 
+                            "AAPL,max-port-current-in-sleep", 
                             0x03E8, 
                             Buffer (One)
                             {
@@ -4568,7 +4572,7 @@ DefinitionBlock ("iASLhYjro5.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x0F)
+                    Store (Package (0x13)
                         {
                             "device-id", 
                             Buffer (0x04)
@@ -4595,10 +4599,14 @@ DefinitionBlock ("iASLhYjro5.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             }, 
 
                             "AAPL,current-available", 
-                            0x04B0, 
+                            0x05DC, 
                             "AAPL,current-extra", 
-                            0x02BC, 
-                            "AAPL,current-in-sleep", 
+                            0x04B0, 
+                            "AAPL,current-extra-in-sleep", 
+                            0x03E8, 
+                            "AAPL,device-internal", 
+                            0x02, 
+                            "AAPL,max-port-current-in-sleep", 
                             0x03E8, 
                             Buffer (One)
                             {
