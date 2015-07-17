@@ -5,20 +5,20 @@
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLpNGkF8.aml, Mon Jul 13 20:54:10 2015
+ * Disassembly of iASLYYg2aq.aml, Fri Jul 17 15:43:35 2015
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000AB0D (43789)
+ *     Length           0x0000A99F (43423)
  *     Revision         0x02
- *     Checksum         0x50
+ *     Checksum         0xBE
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20141107 (538185991)
  */
-DefinitionBlock ("iASLpNGkF8.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
     /*
      * iASL Warning: There were 1 external control methods found during
@@ -4268,7 +4268,7 @@ DefinitionBlock ("iASLpNGkF8.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 })
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x13)
+                    Store (Package (0x04)
                         {
                             "device-id", 
                             Buffer (0x04)
@@ -4279,34 +4279,7 @@ DefinitionBlock ("iASLpNGkF8.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             "AAPL,clock-id", 
                             Buffer (One)
                             {
-                                 0x0A                                           
-                            }, 
-
-                            "built-in", 
-                            Buffer (One)
-                            {
-                                 0x00                                           
-                            }, 
-
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
-                            }, 
-
-                            "AAPL,current-available", 
-                            0x05DC, 
-                            "AAPL,current-extra", 
-                            0x04B0, 
-                            "AAPL,current-extra-in-sleep", 
-                            0x03E8, 
-                            "AAPL,device-internal", 
-                            0x02, 
-                            "AAPL,max-port-current-in-sleep", 
-                            0x03E8, 
-                            Buffer (One)
-                            {
-                                 0x00                                           
+                                 0x01                                           
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -4572,7 +4545,7 @@ DefinitionBlock ("iASLpNGkF8.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
-                    Store (Package (0x13)
+                    Store (Package (0x04)
                         {
                             "device-id", 
                             Buffer (0x04)
@@ -4583,34 +4556,7 @@ DefinitionBlock ("iASLpNGkF8.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             "AAPL,clock-id", 
                             Buffer (One)
                             {
-                                 0x0A                                           
-                            }, 
-
-                            "built-in", 
-                            Buffer (One)
-                            {
-                                 0x00                                           
-                            }, 
-
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
-                            }, 
-
-                            "AAPL,current-available", 
-                            0x05DC, 
-                            "AAPL,current-extra", 
-                            0x04B0, 
-                            "AAPL,current-extra-in-sleep", 
-                            0x03E8, 
-                            "AAPL,device-internal", 
-                            0x02, 
-                            "AAPL,max-port-current-in-sleep", 
-                            0x03E8, 
-                            Buffer (One)
-                            {
-                                 0x00                                           
+                                 0x02                                           
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
