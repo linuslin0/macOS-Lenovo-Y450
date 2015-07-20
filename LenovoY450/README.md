@@ -1,9 +1,15 @@
 LenovoY450
 ==========
 
-This is an empty IOKit Driver which can be used as Info.plist injector for other drivers in OS X.
+This is an IOKit Driver which can be used as Info.plist injector for other kexts.
+And this driver would also check CSR config flags on 10.11 El Capitan.
 The Info.plist is configured for Lenovo IdeaPad Y450.
 Additional properties for injection can be found in Info_Y450.plist
+
+Requirement
+-----------
+
+OS X 10.10 and above.
 
 Installation
 ------------

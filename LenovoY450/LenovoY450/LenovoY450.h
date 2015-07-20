@@ -32,7 +32,7 @@
 #define LenovoY450 org_linus_driver_LenovoY450
 
 typedef uint32_t csr_config_t;
-typedef uint32_t csr_op_t;
+//typedef uint32_t csr_op_t;
 
 /* Rootless configuration flags */
 #define CSR_ALLOW_UNTRUSTED_KEXTS		(1 << 0)
@@ -61,4 +61,6 @@ public:
     virtual IOService *probe(IOService *provider, SInt32 *score);
     virtual bool start(IOService *provider);
     virtual void stop(IOService *provider);
+private:
+    void csrcheck(void);
 };
