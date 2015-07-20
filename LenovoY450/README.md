@@ -17,7 +17,7 @@ Method of installation
 License
 -------
 
-This project is released under the APPLE PUBLIC SOURCE LICENSE. Please
-see APPLE_LICENSE file or <http://www.opensource.apple.com/apsl/> for detailed
-license information.
+This project is released under the APPLE PUBLIC SOURCE LICENSE. 
+Please see APPLE_LICENSE file or <http://www.opensource.apple.com/apsl/> 
+for detailed license information.
 

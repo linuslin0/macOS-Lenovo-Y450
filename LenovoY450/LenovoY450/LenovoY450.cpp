@@ -9,7 +9,6 @@
 #include <pexpert/pexpert.h>
 #include "LenovoY450.h"
 
-
 // This required macro defines the class's constructors, destructors,
 // and several other methods I/O Kit requires.
 OSDefineMetaClassAndStructors(LenovoY450, IOService)
