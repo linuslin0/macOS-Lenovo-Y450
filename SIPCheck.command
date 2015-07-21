@@ -19,7 +19,7 @@ SYS_VER=`sw_vers -productVersion`
 # check system version
 case ${SYS_VER} in
 10.11* ) SYS_NAME="El Capitan"
-I;;
+;;
 10.10* ) SYS_NAME="Yosemite"
 ;;
 * )
@@ -46,6 +46,8 @@ sudo kextload $WORK_DIR/SIPCheck.kext
 sleep 2
 sudo kextunload $WORK_DIR/SIPCheck.kext
 syslog -F '$(Sender)[$(PID)]: $Message' -k Sender kernel -k Time ge -1m | grep Y450
+echo "If you see nothing, please check the kernel log using Console or Terminal."
+echo "Log file: /private/var/log/system.log"
 
 # Clean...
 rm -f $WORK_DIR/SIPCheck.kext.zip
