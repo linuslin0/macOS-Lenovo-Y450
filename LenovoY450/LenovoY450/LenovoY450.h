@@ -62,5 +62,7 @@ public:
     virtual bool start(IOService *provider);
     virtual void stop(IOService *provider);
 private:
-    void csrcheck(void);
+    void checkCSRFlags(void);
+    void checkBootArgsFlags(void);
+    bool needCheckCSRFlags = false;
 };
