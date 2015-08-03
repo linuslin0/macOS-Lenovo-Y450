@@ -3,7 +3,7 @@ LenovoY450
 
 This is an IOKit Driver which can be used as Info.plist injector for other kexts.
 
-And this driver would also check CSR config and bootargs flags.
+And this driver would also check CSR valid and bootargs flags.
 
 The Info.plist is configured for Lenovo IdeaPad Y450.
 
@@ -14,7 +14,7 @@ Requirement
 
 OS X 10.10 and above.
 
-OS X 10.11 for the CSR config flags check.
+OS X 10.11 for the CSR valid flags check.
 
 Installation
 ------------
@@ -35,6 +35,10 @@ for detailed license information.
 
 Change Log
 ----------
+
+08/03/2015 v1.2.1
+
+* Add properties in Info.plist to enable/disable bootargs & CSR valid flags scan.
 
 07/31/2015 v1.2.0
 

@@ -65,4 +65,5 @@ private:
     void checkCSRFlags(void);
     void checkBootArgsFlags(void);
     bool needCheckCSRFlags = false;
+    bool needCheckBootargsFlags = false;
 };
