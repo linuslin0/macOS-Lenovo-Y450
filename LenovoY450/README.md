@@ -12,7 +12,7 @@ Additional properties for injection can be found in Info_Y450.plist
 Requirement
 -----------
 
-OS X 10.10 and above.
+OS X 10.9 and above.
 
 OS X 10.11 for the CSR valid flags check.
 
