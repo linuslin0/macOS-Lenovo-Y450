@@ -24,7 +24,7 @@
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>kext-dev-mode=1 rootless=0</string>
+		<string>kext-dev-mode=1</string>
 		<key>Debug</key>
 		<false/>
 		<key>DefaultLoader</key>
