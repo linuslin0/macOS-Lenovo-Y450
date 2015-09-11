@@ -142,20 +142,6 @@
 				<string>Patch_ALC269_Y450</string>
 				<key>Find</key>
 				<data>
-				YgLsEA==
-				</data>
-				<key>Name</key>
-				<string>AppleHDA</string>
-				<key>Replace</key>
-				<data>
-				aQLsEA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Patch_ALC269_Y450</string>
-				<key>Find</key>
-				<data>
 				eG1sLnps
 				</data>
 				<key>Name</key>
@@ -165,10 +151,26 @@
 				eHh4Lnps
 				</data>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Patch_ALC269_Y450</string>
+				<key>Find</key>
+				<data>
+				YgLsEA==
+				</data>
+				<key>Name</key>
+				<string>AppleHDA</string>
+				<key>Replace</key>
+				<data>
+				aQLsEA==
+				</data>
+			</dict>
 		</array>
 	</dict>
 	<key>RtVariables</key>
 	<dict>
+		<key>CsrActiveConfig</key>
+		<string>0x11</string>
 		<key>ROM</key>
 		<string>UseMacAddr0</string>
 	</dict>
