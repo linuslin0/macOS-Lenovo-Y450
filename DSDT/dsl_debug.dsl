@@ -4261,11 +4261,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
 
                 Name (_ADR, 0x001D0007)  // _ADR: Address
-                Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
-                {
-                    0x0D, 
-                    One
-                })
+
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
                     Store (Package (0x04)
@@ -4510,11 +4506,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
 
                 Name (_ADR, 0x001A0007)  // _ADR: Address
-                Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
-                {
-                    0x0D, 
-                    0x03
-                })
+
                 Device (HUB0)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
