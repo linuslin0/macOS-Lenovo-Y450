@@ -129,8 +129,8 @@ void LenovoY450::checkBootArgsFlags(void)
     } else {
         needCheckCSRFlags = false;
     }
-    if (args->flags & kBootArgsFlagCSRPendingConfig)
-        IOLog("LenovoY450: [4] CSRPendingConfig\n");
+    if (args->flags & kBootArgsFlagCSRConfigMode)
+        IOLog("LenovoY450: [4] CSRConfigMode\n");
     if (args->flags & kBootArgsFlagCSRBoot)
         IOLog("LenovoY450: [5] CSRBoot\n");
     if (args->flags & kBootArgsFlagBlackBg)

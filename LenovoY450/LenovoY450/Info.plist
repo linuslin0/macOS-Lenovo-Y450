@@ -9,7 +9,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>1.2.1, Copyright © 2015 Linus. All rights reserved.</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.linus.driver.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -71,7 +71,9 @@
 			<key>IOProviderMergeProperties</key>
 			<dict>
 				<key>port-count</key>
-				<data>AwAAAA==</data>
+				<data>
+				AwAAAA==
+				</data>
 				<key>ports</key>
 				<dict>
 					<key>PRT1</key>
@@ -79,21 +81,27 @@
 						<key>UsbConnector</key>
 						<integer>0</integer>
 						<key>port</key>
-						<data>AQAAAA==</data>
+						<data>
+						AQAAAA==
+						</data>
 					</dict>
 					<key>PRT2</key>
 					<dict>
 						<key>UsbConnector</key>
 						<integer>0</integer>
 						<key>port</key>
-						<data>AgAAAA==</data>
+						<data>
+						AgAAAA==
+						</data>
 					</dict>
 					<key>PRT3</key>
 					<dict>
 						<key>UsbConnector</key>
 						<integer>255</integer>
 						<key>port</key>
-						<data>AwAAAA==</data>
+						<data>
+						AwAAAA==
+						</data>
 					</dict>
 				</dict>
 			</dict>
@@ -113,7 +121,9 @@
 			<key>IOProviderMergeProperties</key>
 			<dict>
 				<key>port-count</key>
-				<data>BgAAAA==</data>
+				<data>
+				BgAAAA==
+				</data>
 				<key>ports</key>
 				<dict>
 					<key>PRT3</key>
@@ -121,28 +131,36 @@
 						<key>UsbConnector</key>
 						<integer>0</integer>
 						<key>port</key>
-						<data>AwAAAA==</data>
+						<data>
+						AwAAAA==
+						</data>
 					</dict>
 					<key>PRT4</key>
 					<dict>
 						<key>UsbConnector</key>
 						<integer>0</integer>
 						<key>port</key>
-						<data>BAAAAA==</data>
+						<data>
+						BAAAAA==
+						</data>
 					</dict>
 					<key>PRT5</key>
 					<dict>
 						<key>UsbConnector</key>
 						<integer>255</integer>
 						<key>port</key>
-						<data>BQAAAA==</data>
+						<data>
+						BQAAAA==
+						</data>
 					</dict>
 					<key>PRT6</key>
 					<dict>
 						<key>UsbConnector</key>
 						<integer>255</integer>
 						<key>port</key>
-						<data>BgAAAA==</data>
+						<data>
+						BgAAAA==
+						</data>
 					</dict>
 				</dict>
 			</dict>
@@ -167,11 +185,11 @@
 	<string>Copyright © 2015 Linus. All rights reserved.</string>
 	<key>OSBundleLibraries</key>
 	<dict>
-		<key>com.apple.kpi.unsupported</key>
-		<string>13.0</string>
 		<key>com.apple.kpi.iokit</key>
 		<string>13.0</string>
 		<key>com.apple.kpi.libkern</key>
+		<string>13.0</string>
+		<key>com.apple.kpi.unsupported</key>
 		<string>13.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
