@@ -36,6 +36,10 @@ for detailed license information.
 Change Log
 ----------
 
+09/17/2015 v1.2.2
+
+* Add 10.11 SDK support, change some flag names.
+
 08/03/2015 v1.2.1
 
 * Add properties in Info.plist to enable/disable bootargs & CSR valid flags scan.

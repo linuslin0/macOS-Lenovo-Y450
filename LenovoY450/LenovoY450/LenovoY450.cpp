@@ -24,7 +24,7 @@ bool LenovoY450::init(OSDictionary *dict)
 {
     if (!super::init(dict))
         return false;
-    IOLog("LenovoY450 v1.2.1 Copyright 2015 Linus. All rights reserved.\n");
+    IOLog("LenovoY450 v1.2.2 Copyright 2015 Linus. All rights reserved.\n");
     IOLog("LenovoY450 (Build date/time: %s %s)\n", __DATE__, __TIME__);
     
     OSBoolean* scanRequired = OSDynamicCast(OSBoolean, dict->getObject(kScanBootargsFlags));
@@ -96,6 +96,7 @@ void LenovoY450::checkCSRFlags(void)
     csr_config_t config;
     boot_args *args = (boot_args *)PE_state.bootArgs;
     config = args->csrActiveConfig & CSR_VALID_FLAGS;
+    IOLog("LenovoY450: csrActiveConfig = 0x%08x\n", config);
     if (config & CSR_ALLOW_UNTRUSTED_KEXTS)
         IOLog("LenovoY450: [0] Allow untrusted kexts.\n");
     if (config & CSR_ALLOW_UNRESTRICTED_FS)
@@ -104,12 +105,14 @@ void LenovoY450::checkCSRFlags(void)
         IOLog("LenovoY450: [2] Allow test_for_pid().\n");
     if (config & CSR_ALLOW_KERNEL_DEBUGGER)
         IOLog("LenovoY450: [3] Allow kernel debugger.\n");
-    if (config & CSR_ALLOW_APPLE_INTERNAL)
+    if (config & CSR_ALLOW_APPLE_INTERNAL)  //cannot be set start with 10.11.1
         IOLog("LenovoY450: [4] Allow Apple internal.\n");
     if (config & CSR_ALLOW_UNRESTRICTED_DTRACE)
         IOLog("LenovoY450: [5] Allow unrestricted dtrace.\n");
     if (config & CSR_ALLOW_UNRESTRICTED_NVRAM)
         IOLog("LenovoY450: [6] Allow unrestricted NVRAM.\n");
+    if (config & CSR_ALLOW_DEVICE_CONFIGURATION)
+        IOLog("LenovoY450: [7] Allow device configuration.\n");
 
 }
 
@@ -118,6 +121,7 @@ void LenovoY450::checkBootArgsFlags(void)
     //check bootargs flags
     IOLog("LenovoY450: Scanning bootargs flags.\n");
     boot_args *args = (boot_args *)PE_state.bootArgs;
+    IOLog("LenovoY450: Bootargs flags = 0x%08x\n", args->flags);
     if (args->flags & kBootArgsFlagRebootOnPanic)
         IOLog("LenovoY450: [0] RebootOnPanic\n");
     if (args->flags & kBootArgsFlagHiDPI)
@@ -137,5 +141,7 @@ void LenovoY450::checkBootArgsFlags(void)
         IOLog("LenovoY450: [6] BlackBg\n");
     if (args->flags & kBootArgsFlagLoginUI)
         IOLog("LenovoY450: [7] LoginUI\n");
+    if (args->flags & kBootArgsFlagInstallUI)
+        IOLog("LenovoY450: [8] InstallUI\n");
 
 }

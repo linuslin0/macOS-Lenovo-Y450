@@ -40,9 +40,9 @@ typedef uint32_t csr_config_t;
 #define CSR_ALLOW_TASK_FOR_PID			(1 << 2)
 #define CSR_ALLOW_KERNEL_DEBUGGER		(1 << 3)
 #define CSR_ALLOW_APPLE_INTERNAL		(1 << 4)
-#define CSR_ALLOW_DESTRUCTIVE_DTRACE	(1 << 5) /* name deprecated */
 #define CSR_ALLOW_UNRESTRICTED_DTRACE	(1 << 5)
 #define CSR_ALLOW_UNRESTRICTED_NVRAM	(1 << 6)
+#define CSR_ALLOW_DEVICE_CONFIGURATION	(1 << 7)
 
 #define CSR_VALID_FLAGS (CSR_ALLOW_UNTRUSTED_KEXTS | \
 CSR_ALLOW_UNRESTRICTED_FS | \
@@ -50,17 +50,18 @@ CSR_ALLOW_TASK_FOR_PID | \
 CSR_ALLOW_KERNEL_DEBUGGER | \
 CSR_ALLOW_APPLE_INTERNAL | \
 CSR_ALLOW_UNRESTRICTED_DTRACE | \
-CSR_ALLOW_UNRESTRICTED_NVRAM)
+CSR_ALLOW_UNRESTRICTED_NVRAM | \
+CSR_ALLOW_DEVICE_CONFIGURATION)
 
 class LenovoY450 : public IOService
 {
     OSDeclareDefaultStructors(LenovoY450)
 public:
-    virtual bool init(OSDictionary *dictionary = 0);
-    virtual void free(void);
-    virtual IOService *probe(IOService *provider, SInt32 *score);
-    virtual bool start(IOService *provider);
-    virtual void stop(IOService *provider);
+    virtual bool init(OSDictionary *dictionary = 0) override;
+    virtual void free(void) override;
+    virtual IOService *probe(IOService *provider, SInt32 *score) override;
+    virtual bool start(IOService *provider) override;
+    virtual void stop(IOService *provider) override;
 private:
     void checkCSRFlags(void);
     void checkBootArgsFlags(void);

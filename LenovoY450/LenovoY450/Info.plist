@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleGetInfoString</key>
-	<string>1.2.1, Copyright © 2015 Linus. All rights reserved.</string>
+	<string>1.2.2, Copyright © 2015 Linus. All rights reserved.</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -17,30 +17,13 @@
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.1</string>
+	<string>1.2.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>ICH9MAHCI</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>com.apple.driver.AppleAHCIPort</string>
-			<key>Chipset Name</key>
-			<string>ICH9-M AHCI</string>
-			<key>IOClass</key>
-			<string>AppleAHCI</string>
-			<key>IOPCIPrimaryMatch</key>
-			<string>0x29298086</string>
-			<key>IOProbeScore</key>
-			<integer>2000</integer>
-			<key>IOProviderClass</key>
-			<string>IOPCIDevice</string>
-			<key>Vendor Name</key>
-			<string>Intel</string>
-		</dict>
 		<key>LenovoY450</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
@@ -57,128 +40,6 @@
 			<true/>
 			<key>Scan CSR Valid Flags</key>
 			<true/>
-		</dict>
-		<key>MacBookPro6,2-EHC1</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>com.apple.driver.AppleUSBMergeNub</string>
-			<key>IOClass</key>
-			<string>AppleUSBMergeNub</string>
-			<key>IONameMatch</key>
-			<string>EHCO</string>
-			<key>IOProviderClass</key>
-			<string>AppleUSBEHCIPCI</string>
-			<key>IOProviderMergeProperties</key>
-			<dict>
-				<key>port-count</key>
-				<data>
-				AwAAAA==
-				</data>
-				<key>ports</key>
-				<dict>
-					<key>PRT1</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>0</integer>
-						<key>port</key>
-						<data>
-						AQAAAA==
-						</data>
-					</dict>
-					<key>PRT2</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>0</integer>
-						<key>port</key>
-						<data>
-						AgAAAA==
-						</data>
-					</dict>
-					<key>PRT3</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>255</integer>
-						<key>port</key>
-						<data>
-						AwAAAA==
-						</data>
-					</dict>
-				</dict>
-			</dict>
-			<key>model</key>
-			<string>MacBookPro6,2</string>
-		</dict>
-		<key>MacBookPro6,2-EHC2</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>com.apple.driver.AppleUSBMergeNub</string>
-			<key>IOClass</key>
-			<string>AppleUSBMergeNub</string>
-			<key>IONameMatch</key>
-			<string>EHCT</string>
-			<key>IOProviderClass</key>
-			<string>AppleUSBEHCIPCI</string>
-			<key>IOProviderMergeProperties</key>
-			<dict>
-				<key>port-count</key>
-				<data>
-				BgAAAA==
-				</data>
-				<key>ports</key>
-				<dict>
-					<key>PRT3</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>0</integer>
-						<key>port</key>
-						<data>
-						AwAAAA==
-						</data>
-					</dict>
-					<key>PRT4</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>0</integer>
-						<key>port</key>
-						<data>
-						BAAAAA==
-						</data>
-					</dict>
-					<key>PRT5</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>255</integer>
-						<key>port</key>
-						<data>
-						BQAAAA==
-						</data>
-					</dict>
-					<key>PRT6</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>255</integer>
-						<key>port</key>
-						<data>
-						BgAAAA==
-						</data>
-					</dict>
-				</dict>
-			</dict>
-			<key>model</key>
-			<string>MacBookPro6,2</string>
-		</dict>
-		<key>com_apple_iokit_data_set_management</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>com.apple.iokit.IOAHCIBlockStorage</string>
-			<key>Force Data Set Management</key>
-			<true/>
-			<key>IOClass</key>
-			<string>AppleAHCIDiskDriver</string>
-			<key>IOProbeScore</key>
-			<integer>5000</integer>
-			<key>IOProviderClass</key>
-			<string>IOAHCIDevice</string>
 		</dict>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
