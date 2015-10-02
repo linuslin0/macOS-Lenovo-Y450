@@ -8,6 +8,7 @@
 
 #include <IOKit/IOLib.h>
 #include <pexpert/pexpert.h>
+#include <libkern/version.h>
 #include "LenovoY450.h"
 
 // This required macro defines the class's constructors, destructors,
@@ -18,13 +19,13 @@ OSDefineMetaClassAndStructors(LenovoY450, IOService)
 #define super IOService
 
 #define kScanBootargsFlags  "Scan Bootargs Flags"
-#define kScanCSRValidFlags  "Scan CSR Valid Flags"
+#define kScanCSRFlags  "Scan CSR Flags"
 
 bool LenovoY450::init(OSDictionary *dict)
 {
     if (!super::init(dict))
         return false;
-    IOLog("LenovoY450 v1.2.2 Copyright 2015 Linus. All rights reserved.\n");
+    IOLog("LenovoY450 v1.2.3 Copyright 2015 Linus. All rights reserved.\n");
     IOLog("LenovoY450 (Build date/time: %s %s)\n", __DATE__, __TIME__);
     
     OSBoolean* scanRequired = OSDynamicCast(OSBoolean, dict->getObject(kScanBootargsFlags));
@@ -32,7 +33,7 @@ bool LenovoY450::init(OSDictionary *dict)
         needCheckBootargsFlags = true;
     }
     
-    scanRequired = OSDynamicCast(OSBoolean, dict->getObject(kScanCSRValidFlags));
+    scanRequired = OSDynamicCast(OSBoolean, dict->getObject(kScanCSRFlags));
     if (scanRequired && scanRequired->isTrue()) {
         needCheckCSRFlags = true;
     }
@@ -64,8 +65,24 @@ bool LenovoY450::start(IOService *provider)
     if (needCheckBootargsFlags) {
         checkBootArgsFlags();
     }
-    if (needCheckCSRFlags) {
-        checkCSRFlags();
+    
+    //CSR flags check on 10.11
+    if (version_major == 15) {
+        //deprecated boot-args check
+        int rootless_boot_arg;
+        if (PE_parse_boot_argn("rootless", &rootless_boot_arg, sizeof(rootless_boot_arg))
+            && rootless_boot_arg == 0) {
+            IOLog("LenovoY450: WARNING: Found deprecated boot-args rootless=0.\n");
+        }
+        int kext_dev_mode_boot_arg;
+        if (PE_parse_boot_argn("kext-dev-mode", &kext_dev_mode_boot_arg, sizeof(kext_dev_mode_boot_arg))
+            && kext_dev_mode_boot_arg == 1) {
+            IOLog("LenovoY450: WARNING: Found deprecated boot-args kext-dev-mode=1.\n");
+        }
+    
+        if (needCheckCSRFlags) {
+            checkCSRFlags();
+        }
     }
     
     return true;
@@ -79,40 +96,34 @@ void LenovoY450::stop(IOService *provider)
 
 void LenovoY450::checkCSRFlags(void)
 {
-    //check CSR valid flags
-    IOLog("LenovoY450: Scanning CSR valid flags.\n");
-    
-    int rootless_boot_arg;
-    if (PE_parse_boot_argn("rootless", &rootless_boot_arg, sizeof(rootless_boot_arg))
-        && rootless_boot_arg == 0) {
-        IOLog("LenovoY450: WARNING: Found deprecated boot-args rootless=0.\n");
-    }
-    int kext_dev_mode_boot_arg;
-    if (PE_parse_boot_argn("kext-dev-mode", &kext_dev_mode_boot_arg, sizeof(kext_dev_mode_boot_arg))
-        && kext_dev_mode_boot_arg == 1) {
-        IOLog("LenovoY450: WARNING: Found deprecated boot-args kext-dev-mode=1.\n");
-    }
+    //check CSR flags
+    IOLog("LenovoY450: Scanning CSR flags.\n");
     
     csr_config_t config;
     boot_args *args = (boot_args *)PE_state.bootArgs;
-    config = args->csrActiveConfig & CSR_VALID_FLAGS;
-    IOLog("LenovoY450: csrActiveConfig = 0x%08x\n", config);
-    if (config & CSR_ALLOW_UNTRUSTED_KEXTS)
-        IOLog("LenovoY450: [0] Allow untrusted kexts.\n");
-    if (config & CSR_ALLOW_UNRESTRICTED_FS)
-        IOLog("LenovoY450: [1] Allow unrestricted file system.\n");
-    if (config & CSR_ALLOW_TASK_FOR_PID)
-        IOLog("LenovoY450: [2] Allow test_for_pid().\n");
-    if (config & CSR_ALLOW_KERNEL_DEBUGGER)
-        IOLog("LenovoY450: [3] Allow kernel debugger.\n");
-    if (config & CSR_ALLOW_APPLE_INTERNAL)  //cannot be set start with 10.11.1
-        IOLog("LenovoY450: [4] Allow Apple internal.\n");
-    if (config & CSR_ALLOW_UNRESTRICTED_DTRACE)
-        IOLog("LenovoY450: [5] Allow unrestricted dtrace.\n");
-    if (config & CSR_ALLOW_UNRESTRICTED_NVRAM)
-        IOLog("LenovoY450: [6] Allow unrestricted NVRAM.\n");
-    if (config & CSR_ALLOW_DEVICE_CONFIGURATION)
-        IOLog("LenovoY450: [7] Allow device configuration.\n");
+    if (needCheckCSRActiveConfig) {
+        config = args->csrActiveConfig & CSR_VALID_FLAGS;
+        IOLog("LenovoY450: csrActiveConfig = 0x%08x\n", config);
+        if (config & CSR_ALLOW_UNTRUSTED_KEXTS)
+            IOLog("LenovoY450: [0] Allow untrusted kexts.\n");
+        if (config & CSR_ALLOW_UNRESTRICTED_FS)
+            IOLog("LenovoY450: [1] Allow unrestricted file system.\n");
+        if (config & CSR_ALLOW_TASK_FOR_PID)
+            IOLog("LenovoY450: [2] Allow test_for_pid().\n");
+        if (config & CSR_ALLOW_KERNEL_DEBUGGER)
+            IOLog("LenovoY450: [3] Allow kernel debugger.\n");
+        if (config & CSR_ALLOW_APPLE_INTERNAL)  //cannot be set start with 10.11.1
+            IOLog("LenovoY450: [4] Allow Apple internal.\n");
+        if (config & CSR_ALLOW_UNRESTRICTED_DTRACE)
+            IOLog("LenovoY450: [5] Allow unrestricted dtrace.\n");
+        if (config & CSR_ALLOW_UNRESTRICTED_NVRAM)
+            IOLog("LenovoY450: [6] Allow unrestricted NVRAM.\n");
+        if (config & CSR_ALLOW_DEVICE_CONFIGURATION)
+            IOLog("LenovoY450: [7] Allow device configuration.\n");
+    }
+    
+    config = args->csrCapabilities & CSR_VALID_FLAGS;
+    IOLog("LenovoY450: csrCapabilities = 0x%08x\n", config);
 
 }
 
@@ -130,8 +141,7 @@ void LenovoY450::checkBootArgsFlags(void)
         IOLog("LenovoY450: [2] Black\n");
     if (args->flags & kBootArgsFlagCSRActiveConfig) {
         IOLog("LenovoY450: [3] CSRActiveConfig\n");
-    } else {
-        needCheckCSRFlags = false;
+        needCheckCSRActiveConfig = true;
     }
     if (args->flags & kBootArgsFlagCSRConfigMode)
         IOLog("LenovoY450: [4] CSRConfigMode\n");
