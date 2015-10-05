@@ -123,7 +123,8 @@ void LenovoY450::checkCSRFlags(void)
     }
     
     config = args->csrCapabilities & CSR_VALID_FLAGS;
-    IOLog("LenovoY450: csrCapabilities = 0x%08x\n", config);
+    //if (config != 0)
+        IOLog("LenovoY450: csrCapabilities = 0x%08x\n", config);
 
 }
 
