@@ -25,7 +25,7 @@ bool LenovoY450::init(OSDictionary *dict)
 {
     if (!super::init(dict))
         return false;
-    IOLog("LenovoY450 v1.2.3 Copyright 2015 Linus. All rights reserved.\n");
+    IOLog("LenovoY450 v1.2.3 Copyright 2016 Linus. All rights reserved.\n");
     IOLog("LenovoY450 (Build date/time: %s %s)\n", __DATE__, __TIME__);
     
     OSBoolean* scanRequired = OSDynamicCast(OSBoolean, dict->getObject(kScanBootargsFlags));
