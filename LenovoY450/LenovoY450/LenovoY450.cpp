@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Linus. All rights reserved.
+ * Copyright (c) 2016 Linus. All rights reserved.
  *
  * This IOKit driver is written for the Info.plist properties injection
  * and CSR config flags checking.
@@ -25,7 +25,7 @@ bool LenovoY450::init(OSDictionary *dict)
 {
     if (!super::init(dict))
         return false;
-    IOLog("LenovoY450 v1.2.3 Copyright 2016 Linus. All rights reserved.\n");
+    IOLog("LenovoY450 v1.2.4 Copyright 2016 Linus. All rights reserved.\n");
     IOLog("LenovoY450 (Build date/time: %s %s)\n", __DATE__, __TIME__);
     
     OSBoolean* scanRequired = OSDynamicCast(OSBoolean, dict->getObject(kScanBootargsFlags));
@@ -66,8 +66,8 @@ bool LenovoY450::start(IOService *provider)
         checkBootArgsFlags();
     }
     
-    //CSR flags check on 10.11
-    if (version_major == 15) {
+    //CSR flags check begin with 10.11
+    if (version_major >= 15) {
         //deprecated boot-args check
         int rootless_boot_arg;
         if (PE_parse_boot_argn("rootless", &rootless_boot_arg, sizeof(rootless_boot_arg))
@@ -105,21 +105,23 @@ void LenovoY450::checkCSRFlags(void)
         config = args->csrActiveConfig & CSR_VALID_FLAGS;
         IOLog("LenovoY450: csrActiveConfig = 0x%08x\n", config);
         if (config & CSR_ALLOW_UNTRUSTED_KEXTS)
-            IOLog("LenovoY450: [0] Allow untrusted kexts.\n");
+            IOLog("LenovoY450: [0] Allow Untrusted Kexts\n");
         if (config & CSR_ALLOW_UNRESTRICTED_FS)
-            IOLog("LenovoY450: [1] Allow unrestricted file system.\n");
+            IOLog("LenovoY450: [1] Allow Unrestricted FS\n");
         if (config & CSR_ALLOW_TASK_FOR_PID)
-            IOLog("LenovoY450: [2] Allow test_for_pid().\n");
+            IOLog("LenovoY450: [2] Allow Task for PID\n");
         if (config & CSR_ALLOW_KERNEL_DEBUGGER)
-            IOLog("LenovoY450: [3] Allow kernel debugger.\n");
-        if (config & CSR_ALLOW_APPLE_INTERNAL)  //cannot be set start with 10.11.1
-            IOLog("LenovoY450: [4] Allow Apple internal.\n");
+            IOLog("LenovoY450: [3] Allow Kernel Debugger\n");
+        if (config & CSR_ALLOW_APPLE_INTERNAL)
+            IOLog("LenovoY450: [4] Allow Apple Internal\n");
         if (config & CSR_ALLOW_UNRESTRICTED_DTRACE)
-            IOLog("LenovoY450: [5] Allow unrestricted dtrace.\n");
+            IOLog("LenovoY450: [5] Allow Unrestricted DTrace\n");
         if (config & CSR_ALLOW_UNRESTRICTED_NVRAM)
-            IOLog("LenovoY450: [6] Allow unrestricted NVRAM.\n");
+            IOLog("LenovoY450: [6] Allow Unrestricted NVRAM\n");
         if (config & CSR_ALLOW_DEVICE_CONFIGURATION)
-            IOLog("LenovoY450: [7] Allow device configuration.\n");
+            IOLog("LenovoY450: [7] Allow Device Configuration\n");
+        if (config & CSR_PLACEHOLDER_BASESYSTEM)  // new in 10.12
+            IOLog("LenovoY450: [8] PLACEHOLDER for BaseSystem Verification\n");
     }
     
     config = args->csrCapabilities & CSR_VALID_FLAGS;
