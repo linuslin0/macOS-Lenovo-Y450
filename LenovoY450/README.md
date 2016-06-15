@@ -9,12 +9,14 @@ The Info.plist is configured for Lenovo IdeaPad Y450.
 
 Additional properties for injection can be found in Info_Y450.plist
 
+For now, this kext is provided for TEST PURPOSE ONLY and no signed version available at this time.
+
 Requirement
 -----------
 
 OS X 10.9 and above.
 
-OS X 10.11 for the CSR valid flags check.
+OS X 10.11 or higher version required for the CSR valid flags check.
 
 Installation
 ------------
@@ -24,6 +26,10 @@ Install to `/Library/Extensions`
 Method of installation
 
 * Manually copy the kext to /L/E, repair permissions and rebuild kernel cache.
+
+* Use Clover EFI Bootloader to inject this kext.
+
+* Load kext directly via kextload tool.
 
 License
 -------
@@ -35,6 +41,10 @@ for detailed license information.
 
 Change Log
 ----------
+
+06/15/2016 v1.2.4
+
+* Initial support for 10.12 for new SIP flag.
 
 09/17/2015 v1.2.2
 
