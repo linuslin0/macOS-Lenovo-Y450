@@ -42,6 +42,10 @@ for detailed license information.
 Change Log
 ----------
 
+08/03/2015 v1.2.5
+
+* Add CSR capability flag check, some log cleanup.
+
 06/15/2016 v1.2.4
 
 * Initial support for 10.12 for new SIP flag.

@@ -30,9 +30,11 @@
 #include <IOKit/IOService.h>
 
 #define LenovoY450 org_linus_driver_LenovoY450
+#define VERSION "1.2.5"
+#define iLog(msg...) do { IOLog("LenovoY450: " msg); } while (0);
 
 typedef uint32_t csr_config_t;
-//typedef uint32_t csr_op_t;
+typedef uint32_t csr_op_t;
 
 /* Rootless configuration flags */
 #define CSR_ALLOW_UNTRUSTED_KEXTS		(1 << 0)
@@ -54,6 +56,13 @@ CSR_ALLOW_UNRESTRICTED_DTRACE | \
 CSR_ALLOW_UNRESTRICTED_NVRAM | \
 CSR_ALLOW_DEVICE_CONFIGURATION | \
 CSR_PLACEHOLDER_BASESYSTEM)
+
+/* CSR capabilities that a booter can give to the system */
+#define CSR_CAPABILITY_UNLIMITED				(1 << 0)
+#define CSR_CAPABILITY_CONFIG					(1 << 1)
+#define CSR_CAPABILITY_APPLE_INTERNAL			(1 << 2)
+
+#define CSR_VALID_CAPABILITIES (CSR_CAPABILITY_UNLIMITED | CSR_CAPABILITY_CONFIG | CSR_CAPABILITY_APPLE_INTERNAL)
 
 class LenovoY450 : public IOService
 {
