@@ -3,20 +3,20 @@ LenovoY450
 
 This is an IOKit Driver which can be used as Info.plist injector for other kexts.
 
-And this driver would also check CSR valid and bootargs flags.
+And this driver would also check CSR and bootargs flags.
 
 The Info.plist is configured for Lenovo IdeaPad Y450.
 
 Additional properties for injection can be found in Info_Y450.plist
 
-For now, this kext is provided for TEST PURPOSE ONLY and no signed version available at this time.
+This kext is provided for TEST PURPOSE ONLY.
 
 Requirement
 -----------
 
 OS X 10.9 and above.
 
-OS X 10.11 or higher version required for the CSR valid flags check.
+OS X 10.11 or higher version required for the CSR flags check.
 
 Installation
 ------------
@@ -25,18 +25,18 @@ Install to `/Library/Extensions`
 
 Method of installation
 
-* Manually copy the kext to /L/E, repair permissions and rebuild kernel cache.
+* Install to `/Library/Extensions`.
 
 * Use Clover EFI Bootloader to inject this kext.
 
-* Load kext directly via kextload tool.
+* Load kext directly via kextload.
 
 License
 -------
 
-This project is released under the APPLE PUBLIC SOURCE LICENSE. 
+This project is released under the Creative Commons Attribution-NonCommercial 4.0          
 
-Please see APPLE_LICENSE file or <http://www.opensource.apple.com/apsl/> 
+Please see <https://creativecommons.org/licenses/by-nc/4.0/> 
 for detailed license information.
 
 Change Log
@@ -56,7 +56,7 @@ Change Log
 
 08/03/2015 v1.2.1
 
-* Add properties in Info.plist to enable/disable bootargs & CSR valid flags scan.
+* Add properties in Info.plist to enable/disable bootargs & CSR flags scan.
 
 07/31/2015 v1.2.0
 

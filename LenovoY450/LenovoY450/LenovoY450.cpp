@@ -1,9 +1,8 @@
 /*
- * Copyright (c) 2016 Linus. All rights reserved.
+ * Copyright (c) 2015-2016 Linus Lin. All rights reserved.
  *
- * This IOKit driver is written for the Info.plist properties injection
- * and CSR config flags checking.
- *
+ * License -> Creative Commons Attribution-NonCommercial 4.0
+ *            https://creativecommons.org/licenses/by-nc/4.0/
  */
 
 #include <IOKit/IOLib.h>
@@ -125,11 +124,11 @@ void LenovoY450::checkCSRFlags(void)
     csrOpConfig = args->csrCapabilities & CSR_VALID_CAPABILITIES;
     if (csrOpConfig) {
         iLog("Scanning csrCapabilities = 0x%08x\n", csrOpConfig);
-        if (csrOpConfig & CSR_ALLOW_UNTRUSTED_KEXTS)
+        if (csrOpConfig & CSR_CAPABILITY_UNLIMITED)
             iLog("[0] CSR_CAPABILITY_UNLIMITED\n");
-        if (csrOpConfig & CSR_ALLOW_UNRESTRICTED_FS)
+        if (csrOpConfig & CSR_CAPABILITY_CONFIG)
             iLog("[1] CSR_CAPABILITY_CONFIG\n");
-        if (csrOpConfig & CSR_ALLOW_TASK_FOR_PID)
+        if (csrOpConfig & CSR_CAPABILITY_APPLE_INTERNAL)
             iLog("[2] CSR_CAPABILITY_APPLE_INTERNAL\n");
     }
 
