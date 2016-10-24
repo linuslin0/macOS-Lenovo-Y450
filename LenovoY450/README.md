@@ -1,6 +1,8 @@
 LenovoY450
 ==========
 
+Note: This project was deprecated and will be replaced with SIProxy.
+
 This is an IOKit Driver which can be used as Info.plist injector for other kexts.
 
 And this driver would also check CSR and bootargs flags.
@@ -42,7 +44,11 @@ for detailed license information.
 Change Log
 ----------
 
-08/03/2015 v1.2.5
+10/24/2016
+
+* Deprecated, will be replaced with SIProxy.
+
+08/03/2016 v1.2.5
 
 * Add CSR capability flag check, some log cleanup.
 

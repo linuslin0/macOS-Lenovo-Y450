@@ -116,8 +116,8 @@ void LenovoY450::checkCSRFlags(void)
             iLog("[6] Allow Unrestricted NVRAM\n");
         if (config & CSR_ALLOW_DEVICE_CONFIGURATION)
             iLog("[7] Allow Device Configuration\n");
-        if (config & CSR_PLACEHOLDER_BASESYSTEM)  // new in 10.12
-            iLog("[8] PLACEHOLDER for BaseSystem Verification\n");
+        if (config & CSR_ALLOW_ANY_RECOVERY_OS)  // new in 10.12
+            iLog("[8] Allow Any Recovery OS\n");
     }
     
     csr_op_t csrOpConfig;
