@@ -141,24 +141,6 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Bypass check-nvram-set</string>
-				<key>Disabled</key>
-				<true/>
-				<key>Find</key>
-				<data>
-				hcAPhUkBAAA=
-				</data>
-				<key>MatchOS</key>
-				<string>10.12.x</string>
-				<key>Name</key>
-				<string>AppleEFINVRAM</string>
-				<key>Replace</key>
-				<data>
-				hcDrBJCQkJA=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>ALC262 to ALC269</string>
 				<key>Disabled</key>
 				<true/>
@@ -171,24 +153,6 @@
 				<key>Replace</key>
 				<data>
 				aQLsEA==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Bypass check-nvram-delete</string>
-				<key>Disabled</key>
-				<true/>
-				<key>Find</key>
-				<data>
-				hcB0C0iD
-				</data>
-				<key>MatchOS</key>
-				<string>10.12.x</string>
-				<key>Name</key>
-				<string>AppleEFINVRAM</string>
-				<key>Replace</key>
-				<data>
-				hcDrC0iD
 				</data>
 			</dict>
 			<dict>
@@ -221,11 +185,11 @@
 	<key>SMBIOS</key>
 	<dict>
 		<key>BiosReleaseDate</key>
-		<string>09/23/15</string>
+		<string>05/02/17</string>
 		<key>BiosVendor</key>
 		<string>Apple Inc.</string>
 		<key>BiosVersion</key>
-		<string>MBP61.88Z.0057.B11.1509232013</string>
+		<string>MBP61.88Z.0057.B1B.1705021138</string>
 		<key>Board-ID</key>
 		<string>Mac-F22589C8</string>
 		<key>BoardManufacturer</key>
@@ -242,8 +206,6 @@
 		<string>8</string>
 		<key>Family</key>
 		<string>MacBook Pro</string>
-		<key>FirmwareFeatures</key>
-		<string>0xC0001403</string>
 		<key>LocationInChassis</key>
 		<string>MLB</string>
 		<key>Manufacturer</key>
