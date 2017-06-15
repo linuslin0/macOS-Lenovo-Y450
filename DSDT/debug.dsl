@@ -1,55 +1,31 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20141107-64 [Jan  2 2015]
- * Copyright (c) 2000 - 2014 Intel Corporation
+ * AML/ASL+ Disassembler version 20161210-64(RM)
+ * Copyright (c) 2000 - 2016 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of iASLYYg2aq.aml, Fri Jul 17 15:43:35 2015
+ * Disassembly of iASL4HHr4J.aml, Wed Jun 14 23:31:29 2017
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A99F (43423)
+ *     Length           0x0000A9F2 (43506)
  *     Revision         0x02
- *     Checksum         0xBE
+ *     Checksum         0xBD
  *     OEM ID           "LENOVO"
  *     OEM Table ID     "CB-01   "
  *     OEM Revision     0x06040000 (100925440)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20141107 (538185991)
+ *     Compiler Version 0x20161210 (538317328)
  */
-DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
+DefinitionBlock ("", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 {
-    /*
-     * iASL Warning: There were 1 external control methods found during
-     * disassembly, but additional ACPI tables to resolve these externals
-     * were not specified. This resulting disassembler output file may not
-     * compile because the disassembler did not know how many arguments
-     * to assign to these methods. To specify the tables needed to resolve
-     * external control method references, the -e option can be used to
-     * specify the filenames. Example iASL invocations:
-     *     iasl -e ssdt1.aml ssdt2.aml ssdt3.aml -d dsdt.aml
-     *     iasl -e dsdt.aml ssdt2.aml -d ssdt1.aml
-     *     iasl -e ssdt*.aml -d dsdt.aml
-     *
-     * In addition, the -fe option can be used to specify a file containing
-     * control method external declarations with the associated method
-     * argument counts. Each line of the file must be of the form:
-     *     External (<method pathname>, MethodObj, <argument count>)
-     * Invocation:
-     *     iasl -fe refs.txt -d dsdt.aml
-     *
-     * The following methods were unresolved and many not compile properly
-     * because the disassembler had to guess at the number of arguments
-     * required for each:
-     */
-    External (_SB_.PCI0.TMEM.GPEH, MethodObj)    // Warning: Unresolved method, guessing 0 arguments
-
-    External (_PR_.CPU0._PPC, UnknownObj)
-    External (_PR_.CPU1._PPC, UnknownObj)
-    External (CFGD, UnknownObj)
-    External (PDC0, UnknownObj)
-    External (PDC1, UnknownObj)
+    External (_PR_.CPU0._PPC, UnknownObj)    // (from opcode)
+    External (_PR_.CPU1._PPC, UnknownObj)    // (from opcode)
+    External (_SB_.PCI0.TMEM.GPEH, MethodObj)    // 0 Arguments (from opcode)
+    External (CFGD, UnknownObj)    // (from opcode)
+    External (PDC0, UnknownObj)    // (from opcode)
+    External (PDC1, UnknownObj)    // (from opcode)
 
     Name (SP2O, 0x4E)
     Name (SP1O, 0x164E)
@@ -1247,11 +1223,23 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 }, 
 
                                 "@0,built-in", 
-                                Unicode ("\x01"), 
+                                Buffer (0x04)
+                                {
+                                     0x01, 0x00, 0x00, 0x00                         
+                                }, 
+
                                 "AAPL,aux-power-connected", 
-                                Unicode ("\x01"), 
+                                Buffer (0x04)
+                                {
+                                     0x01, 0x00, 0x00, 0x00                         
+                                }, 
+
                                 "AAPL,backlight-control", 
-                                Unicode ("\x01"), 
+                                Buffer (0x04)
+                                {
+                                     0x01, 0x00, 0x00, 0x00                         
+                                }, 
+
                                 "@0,use-backlight-blanking", 
                                 Buffer (Zero) {}, 
                                 "@0,AAPL,boot-display", 
@@ -1274,7 +1262,11 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 }, 
 
                                 "@0,backlight-control", 
-                                Unicode ("\x01"), 
+                                Buffer (0x04)
+                                {
+                                     0x01, 0x00, 0x00, 0x00                         
+                                }, 
+
                                 "@0,display-cfg", 
                                 Buffer (0x04)
                                 {
@@ -1439,7 +1431,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x00000CF7,         // Range Maximum
                     0x00000000,         // Translation Offset
                     0x00000CF8,         // Length
-                    ,, , TypeStatic)
+                    ,, , TypeStatic, DenseTranslation)
                 IO (Decode16,
                     0x0CF8,             // Range Minimum
                     0x0CF8,             // Range Maximum
@@ -1452,7 +1444,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     0x0000FFFF,         // Range Maximum
                     0x00000000,         // Translation Offset
                     0x0000F300,         // Length
-                    ,, , TypeStatic)
+                    ,, , TypeStatic, DenseTranslation)
                 DWordMemory (ResourceProducer, PosDecode, MinFixed, MaxFixed, Cacheable, ReadWrite,
                     0x00000000,         // Granularity
                     0x000A0000,         // Range Minimum
@@ -1989,22 +1981,19 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         {
                             Return (0x0B)
                         }
+                        ElseIf (SCIP ())
+                        {
+                            Return (CDDS (DID3))
+                        }
                         Else
                         {
-                            If (SCIP ())
+                            TRAP (TRTI, GCDD)
+                            If (And (CSTE, 0x04))
                             {
-                                Return (CDDS (DID3))
+                                Return (0x1F)
                             }
-                            Else
-                            {
-                                TRAP (TRTI, GCDD)
-                                If (And (CSTE, 0x04))
-                                {
-                                    Return (0x1F)
-                                }
 
-                                Return (0x1D)
-                            }
+                            Return (0x1D)
                         }
                     }
 
@@ -2069,22 +2058,19 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         {
                             Return (0x0B)
                         }
+                        ElseIf (SCIP ())
+                        {
+                            Return (CDDS (DID4))
+                        }
                         Else
                         {
-                            If (SCIP ())
+                            TRAP (TRTI, GCDD)
+                            If (And (CSTE, 0x08))
                             {
-                                Return (CDDS (DID4))
+                                Return (0x1F)
                             }
-                            Else
-                            {
-                                TRAP (TRTI, GCDD)
-                                If (And (CSTE, 0x08))
-                                {
-                                    Return (0x1F)
-                                }
 
-                                Return (0x1D)
-                            }
+                            Return (0x1D)
                         }
                     }
 
@@ -2134,22 +2120,19 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         {
                             Return (0x0B)
                         }
+                        ElseIf (SCIP ())
+                        {
+                            Return (CDDS (DID5))
+                        }
                         Else
                         {
-                            If (SCIP ())
+                            TRAP (TRTI, GCDD)
+                            If (And (CSTE, 0x10))
                             {
-                                Return (CDDS (DID5))
+                                Return (0x1F)
                             }
-                            Else
-                            {
-                                TRAP (TRTI, GCDD)
-                                If (And (CSTE, 0x10))
-                                {
-                                    Return (0x1F)
-                                }
 
-                                Return (0x1D)
-                            }
+                            Return (0x1D)
                         }
                     }
 
@@ -2591,8 +2574,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             Or (PARM, ShiftLeft (GMFN, One), PARM)
                             Or (PARM, 0x1800, PARM)
                             Or (PARM, ShiftLeft (IDMS, 0x11), PARM)
-                            Or (ShiftLeft (DerefOf (Index (DerefOf (Index (CDCT, HVCO)), CDVL)), 0x15
-                                ), PARM, PARM)
+                            Or (ShiftLeft (DerefOf (Index (DerefOf (Index (CDCT, HVCO)), CDVL)), 0x15), PARM, PARM)
                             Store (One, GESF)
                             Return (SUCC)
                         }
@@ -2902,16 +2884,13 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 {
                                     Store (0x06, PFIT)
                                 }
+                                ElseIf (And (Local1, 0x08))
+                                {
+                                    Store (0x08, PFIT)
+                                }
                                 Else
                                 {
-                                    If (And (Local1, 0x08))
-                                    {
-                                        Store (0x08, PFIT)
-                                    }
-                                    Else
-                                    {
-                                        Store (One, PFIT)
-                                    }
+                                    Store (One, PFIT)
                                 }
                             }
 
@@ -2921,16 +2900,13 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 {
                                     Store (0x08, PFIT)
                                 }
+                                ElseIf (And (Local1, One))
+                                {
+                                    Store (One, PFIT)
+                                }
                                 Else
                                 {
-                                    If (And (Local1, One))
-                                    {
-                                        Store (One, PFIT)
-                                    }
-                                    Else
-                                    {
-                                        Store (0x06, PFIT)
-                                    }
+                                    Store (0x06, PFIT)
                                 }
                             }
 
@@ -2940,16 +2916,13 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                                 {
                                     Store (One, PFIT)
                                 }
+                                ElseIf (And (Local1, 0x06))
+                                {
+                                    Store (0x06, PFIT)
+                                }
                                 Else
                                 {
-                                    If (And (Local1, 0x06))
-                                    {
-                                        Store (0x06, PFIT)
-                                    }
-                                    Else
-                                    {
-                                        Store (0x08, PFIT)
-                                    }
+                                    Store (0x08, PFIT)
                                 }
                             }
                         }
@@ -2961,26 +2934,20 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         Or (PFIT, 0x80000000, PFIT)
                         Store (0x04, ASLC)
                     }
+                    ElseIf (LEqual (Arg0, One))
+                    {
+                        Store (Divide (Multiply (Arg1, 0xFF), 0x64, ), BCLP)
+                        Or (BCLP, 0x80000000, BCLP)
+                        Store (0x02, ASLC)
+                    }
+                    ElseIf (LEqual (Arg0, Zero))
+                    {
+                        Store (Arg1, ALSI)
+                        Store (One, ASLC)
+                    }
                     Else
                     {
-                        If (LEqual (Arg0, One))
-                        {
-                            Store (Divide (Multiply (Arg1, 0xFF), 0x64, ), BCLP)
-                            Or (BCLP, 0x80000000, BCLP)
-                            Store (0x02, ASLC)
-                        }
-                        Else
-                        {
-                            If (LEqual (Arg0, Zero))
-                            {
-                                Store (Arg1, ALSI)
-                                Store (One, ASLC)
-                            }
-                            Else
-                            {
-                                Return (One)
-                            }
-                        }
+                        Return (One)
                     }
 
                     Store (Zero, LBPC)
@@ -3643,8 +3610,9 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             0x00000400,         // Address Length
                             )
                     })
-                    Name (ATT4, ResourceTemplate ()
+                    Name (ATT4, Buffer (0x02)
                     {
+                         0x79, 0x00                                     
                     })
                     Method (_STA, 0, NotSerialized)  // _STA: Status
                     {
@@ -4261,7 +4229,11 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
 
                 Name (_ADR, 0x001D0007)  // _ADR: Address
-
+                Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
+                {
+                    0x0D, 
+                    One
+                })
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
                     Store (Package (0x04)
@@ -4506,7 +4478,11 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 }
 
                 Name (_ADR, 0x001A0007)  // _ADR: Address
-
+                Name (_PRW, Package (0x02)  // _PRW: Power Resources for Wake
+                {
+                    0x0D, 
+                    0x03
+                })
                 Device (HUB0)
                 {
                     Name (_ADR, Zero)  // _ADR: Address
@@ -5128,16 +5104,13 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         Return (Add (0x0AAC, Multiply (T15C, 0x0A)))
                     }
                 }
+                ElseIf (\_SB.FL13)
+                {
+                    Return (Add (0x0AAC, Multiply (T85C, 0x0A)))
+                }
                 Else
                 {
-                    If (\_SB.FL13)
-                    {
-                        Return (Add (0x0AAC, Multiply (T85C, 0x0A)))
-                    }
-                    Else
-                    {
-                        Return (Add (0x0AAC, Multiply (T10C, 0x0A)))
-                    }
+                    Return (Add (0x0AAC, Multiply (T10C, 0x0A)))
                 }
             }
 
@@ -5221,16 +5194,13 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         Return (Add (0x0AAC, Multiply (T15S, 0x0A)))
                     }
                 }
+                ElseIf (\_SB.FL13)
+                {
+                    Return (Add (0x0AAC, Multiply (T85S, 0x0A)))
+                }
                 Else
                 {
-                    If (\_SB.FL13)
-                    {
-                        Return (Add (0x0AAC, Multiply (T85S, 0x0A)))
-                    }
-                    Else
-                    {
-                        Return (Add (0x0AAC, Multiply (T10S, 0x0A)))
-                    }
+                    Return (Add (0x0AAC, Multiply (T10S, 0x0A)))
                 }
             }
 
@@ -5461,8 +5431,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
             If (And (CFGD, 0x01000000))
             {
-                If (LAnd (And (CFGD, 0xF0), LAnd (LEqual (OSYS, 0x07D1), LNot (And (
-                    PDC0, 0x10)))))
+                If (LAnd (And (CFGD, 0xF0), LAnd (LEqual (OSYS, 0x07D1), LNot (And (PDC0, 0x10)))))
                 {
                     TRAP (TRTP, ESCS)
                 }
@@ -5610,75 +5579,45 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             {
                 Store (Zero, BRNS)
             }
-            Else
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x03)), One)))
             {
-                If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x03)), One)))
-                {
-                    Store (One, BRNS)
-                }
-                Else
-                {
-                    If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x04)), One)))
-                    {
-                        Store (0x02, BRNS)
-                    }
-                    Else
-                    {
-                        If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x05)), One)))
-                        {
-                            Store (0x03, BRNS)
-                        }
-                        Else
-                        {
-                            If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x06)), One)))
-                            {
-                                Store (0x04, BRNS)
-                            }
-                            Else
-                            {
-                                If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x07)), One)))
-                                {
-                                    Store (0x05, BRNS)
-                                }
-                                Else
-                                {
-                                    If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x08)), One)))
-                                    {
-                                        Store (0x06, BRNS)
-                                    }
-                                    Else
-                                    {
-                                        If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x09)), One)))
-                                        {
-                                            Store (0x07, BRNS)
-                                        }
-                                        Else
-                                        {
-                                            If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x0A)), One)))
-                                            {
-                                                Store (0x08, BRNS)
-                                            }
-                                            Else
-                                            {
-                                                If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x0B)), One)))
-                                                {
-                                                    Store (0x09, BRNS)
-                                                }
-                                                Else
-                                                {
-                                                    If (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x0C)), One)))
-                                                    {
-                                                        Store (0x0A, BRNS)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                Store (One, BRNS)
+            }
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x04)), One)))
+            {
+                Store (0x02, BRNS)
+            }
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x05)), One)))
+            {
+                Store (0x03, BRNS)
+            }
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x06)), One)))
+            {
+                Store (0x04, BRNS)
+            }
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x07)), One)))
+            {
+                Store (0x05, BRNS)
+            }
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x08)), One)))
+            {
+                Store (0x06, BRNS)
+            }
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x09)), One)))
+            {
+                Store (0x07, BRNS)
+            }
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x0A)), One)))
+            {
+                Store (0x08, BRNS)
+            }
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x0B)), One)))
+            {
+                Store (0x09, BRNS)
+            }
+            ElseIf (LLess (EBRL, Add (DerefOf (Index (IBCL, 0x0C)), One)))
+            {
+                Store (0x0A, BRNS)
             }
 
             Store (BRNS, ^LPCB.EC0.BLVL)
@@ -5743,81 +5682,45 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             {
                 If (GI19)
                 {
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), Zero))), 
-                        Index (PNLS, Zero))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), One))), 
-                        Index (PNLS, One))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x02))), 
-                        Index (PNLS, 0x02))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x03))), 
-                        Index (PNLS, 0x03))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x04))), 
-                        Index (PNLS, 0x04))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x05))), 
-                        Index (PNLS, 0x05))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x06))), 
-                        Index (PNLS, 0x06))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x07))), 
-                        Index (PNLS, 0x07))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x08))), 
-                        Index (PNLS, 0x08))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x09))), 
-                        Index (PNLS, 0x09))
-                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x0A))), 
-                        Index (PNLS, 0x0A))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), Zero))), Index (PNLS, Zero))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), One))), Index (PNLS, One))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x02))), Index (PNLS, 0x02))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x03))), Index (PNLS, 0x03))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x04))), Index (PNLS, 0x04))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x05))), Index (PNLS, 0x05))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x06))), Index (PNLS, 0x06))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x07))), Index (PNLS, 0x07))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x08))), Index (PNLS, 0x08))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x09))), Index (PNLS, 0x09))
+                    Store (DerefOf (Index (PKT1, Add (Multiply (PLID, 0x0B), 0x0A))), Index (PNLS, 0x0A))
+                }
+                ElseIf (GI37)
+                {
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), Zero))), Index (PNLS, Zero))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), One))), Index (PNLS, One))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x02))), Index (PNLS, 0x02))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x03))), Index (PNLS, 0x03))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x04))), Index (PNLS, 0x04))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x05))), Index (PNLS, 0x05))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x06))), Index (PNLS, 0x06))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x07))), Index (PNLS, 0x07))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x08))), Index (PNLS, 0x08))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x09))), Index (PNLS, 0x09))
+                    Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x0A))), Index (PNLS, 0x0A))
                 }
                 Else
                 {
-                    If (GI37)
-                    {
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), Zero))), 
-                            Index (PNLS, Zero))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), One))), 
-                            Index (PNLS, One))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x02))), 
-                            Index (PNLS, 0x02))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x03))), 
-                            Index (PNLS, 0x03))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x04))), 
-                            Index (PNLS, 0x04))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x05))), 
-                            Index (PNLS, 0x05))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x06))), 
-                            Index (PNLS, 0x06))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x07))), 
-                            Index (PNLS, 0x07))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x08))), 
-                            Index (PNLS, 0x08))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x09))), 
-                            Index (PNLS, 0x09))
-                        Store (DerefOf (Index (PLT8, Add (Multiply (PLID, 0x0B), 0x0A))), 
-                            Index (PNLS, 0x0A))
-                    }
-                    Else
-                    {
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), Zero))), 
-                            Index (PNLS, Zero))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), One))), 
-                            Index (PNLS, One))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x02))), 
-                            Index (PNLS, 0x02))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x03))), 
-                            Index (PNLS, 0x03))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x04))), 
-                            Index (PNLS, 0x04))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x05))), 
-                            Index (PNLS, 0x05))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x06))), 
-                            Index (PNLS, 0x06))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x07))), 
-                            Index (PNLS, 0x07))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x08))), 
-                            Index (PNLS, 0x08))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x09))), 
-                            Index (PNLS, 0x09))
-                        Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x0A))), 
-                            Index (PNLS, 0x0A))
-                    }
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), Zero))), Index (PNLS, Zero))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), One))), Index (PNLS, One))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x02))), Index (PNLS, 0x02))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x03))), Index (PNLS, 0x03))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x04))), Index (PNLS, 0x04))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x05))), Index (PNLS, 0x05))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x06))), Index (PNLS, 0x06))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x07))), Index (PNLS, 0x07))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x08))), Index (PNLS, 0x08))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x09))), Index (PNLS, 0x09))
+                    Store (DerefOf (Index (PLT6, Add (Multiply (PLID, 0x0B), 0x0A))), Index (PNLS, 0x0A))
                 }
 
                 Store (DerefOf (Index (PNLS, Zero)), ^GFX0.BC0A)
@@ -5841,86 +5744,49 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             Store (Arg0, IBC0)
             If (IGDS)
             {
-                If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x0A)), 0x64
-                    ), 0xFF, ), One)))
+                If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x0A)), 0x64), 0xFF, ), One)))
                 {
                     Store (Zero, BRNS)
                 }
+                ElseIf (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x09)), 0x64), 0xFF, ), One)))
+                {
+                    Store (One, BRNS)
+                }
+                ElseIf (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x08)), 0x64), 0xFF, ), One)))
+                {
+                    Store (0x02, BRNS)
+                }
+                ElseIf (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x07)), 0x64), 0xFF, ), One)))
+                {
+                    Store (0x03, BRNS)
+                }
+                ElseIf (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x06)), 0x64), 0xFF, ), One)))
+                {
+                    Store (0x04, BRNS)
+                }
+                ElseIf (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x05)), 0x64), 0xFF, ), One)))
+                {
+                    Store (0x05, BRNS)
+                }
+                ElseIf (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x04)), 0x64), 0xFF, ), One)))
+                {
+                    Store (0x06, BRNS)
+                }
+                ElseIf (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x03)), 0x64), 0xFF, ), One)))
+                {
+                    Store (0x07, BRNS)
+                }
+                ElseIf (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x02)), 0x64), 0xFF, ), One)))
+                {
+                    Store (0x08, BRNS)
+                }
+                ElseIf (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, One)), 0x64), 0xFF, ), One)))
+                {
+                    Store (0x09, BRNS)
+                }
                 Else
                 {
-                    If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x09)), 0x64
-                        ), 0xFF, ), One)))
-                    {
-                        Store (One, BRNS)
-                    }
-                    Else
-                    {
-                        If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x08)), 0x64
-                            ), 0xFF, ), One)))
-                        {
-                            Store (0x02, BRNS)
-                        }
-                        Else
-                        {
-                            If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x07)), 0x64
-                                ), 0xFF, ), One)))
-                            {
-                                Store (0x03, BRNS)
-                            }
-                            Else
-                            {
-                                If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x06)), 0x64
-                                    ), 0xFF, ), One)))
-                                {
-                                    Store (0x04, BRNS)
-                                }
-                                Else
-                                {
-                                    If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x05)), 0x64
-                                        ), 0xFF, ), One)))
-                                    {
-                                        Store (0x05, BRNS)
-                                    }
-                                    Else
-                                    {
-                                        If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x04)), 0x64
-                                            ), 0xFF, ), One)))
-                                        {
-                                            Store (0x06, BRNS)
-                                        }
-                                        Else
-                                        {
-                                            If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x03)), 0x64
-                                                ), 0xFF, ), One)))
-                                            {
-                                                Store (0x07, BRNS)
-                                            }
-                                            Else
-                                            {
-                                                If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, 0x02)), 0x64
-                                                    ), 0xFF, ), One)))
-                                                {
-                                                    Store (0x08, BRNS)
-                                                }
-                                                Else
-                                                {
-                                                    If (LLess (IBC0, Add (Divide (Multiply (DerefOf (Index (PNLS, One)), 0x64
-                                                        ), 0xFF, ), One)))
-                                                    {
-                                                        Store (0x09, BRNS)
-                                                    }
-                                                    Else
-                                                    {
-                                                        Store (0x0A, BRNS)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    Store (0x0A, BRNS)
                 }
 
                 Store (BRNS, ^LPCB.EC0.BLVL)
@@ -6330,8 +6196,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
         Method (GETT, 1, Serialized)
         {
-            Return (Multiply (0x1E, Subtract (0x09, Add (And (ShiftRight (Arg0, 0x02), 0x03
-                ), And (Arg0, 0x03)))))
+            Return (Multiply (0x1E, Subtract (0x09, Add (And (ShiftRight (Arg0, 0x02), 0x03), And (Arg0, 0x03)))))
         }
 
         Method (GETF, 3, Serialized)
@@ -7151,26 +7016,23 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
             {
                 \_SB.PCI0.GFX0.GSCI ()
             }
+            ElseIf (LEqual (And (\_SB.PCI0.ESCS, 0x08), 0x08))
+            {
+                Store (One, Local0)
+                Store (\_SB.PCI0.T0IS, \_SB.PCI0.T0IS)
+                Store (\_SB.PCI0.T0IS, Local0)
+                Store (\_SB.PCI0.T1IS, \_SB.PCI0.T1IS)
+                Store (\_SB.PCI0.T1IS, Local0)
+                Store (One, SCIS)
+                Store (One, \_SB.PCI0.GTSE)
+                If (CondRefOf (\_SB.PCI0.TMEM.GPEH))
+                {
+                    \_SB.PCI0.TMEM.GPEH ()
+                }
+            }
             Else
             {
-                If (LEqual (And (\_SB.PCI0.ESCS, 0x08), 0x08))
-                {
-                    Store (One, Local0)
-                    Store (\_SB.PCI0.T0IS, \_SB.PCI0.T0IS)
-                    Store (\_SB.PCI0.T0IS, Local0)
-                    Store (\_SB.PCI0.T1IS, \_SB.PCI0.T1IS)
-                    Store (\_SB.PCI0.T1IS, Local0)
-                    Store (One, SCIS)
-                    Store (One, \_SB.PCI0.GTSE)
-                    If (CondRefOf (\_SB.PCI0.TMEM.GPEH))
-                    {
-                        \_SB.PCI0.TMEM.GPEH ()
-                    }
-                }
-                Else
-                {
-                    Store (One, SCIS)
-                }
+                Store (One, SCIS)
             }
         }
 
@@ -8099,20 +7961,14 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                             ^^^GFX0.GHDS (Zero)
                         }
                     }
+                    ElseIf (LEqual (^^^P0P2.VGA.SWIT, One))
+                    {
+                        PHSR (0x87)
+                    }
+                    ElseIf (LEqual (^^^P0P2.VGA.SWIT, 0x02)) {}
                     Else
                     {
-                        If (LEqual (^^^P0P2.VGA.SWIT, One))
-                        {
-                            PHSR (0x87)
-                        }
-                        Else
-                        {
-                            If (LEqual (^^^P0P2.VGA.SWIT, 0x02)) {}
-                            Else
-                            {
-                                ^^^P0P2.VGA.SWIH ()
-                            }
-                        }
+                        ^^^P0P2.VGA.SWIH ()
                     }
 
                     Release (SXXX)
@@ -8141,8 +7997,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Else
                     {
                         Store (One, LIDS)
-                        If (LNot (LOr (LOr (LEqual (^^^GFX0.CPDL, ^^^GFX0.DDL2), LEqual (^^^GFX0.CPL2, ^^^GFX0.DDL2)), LEqual (^^^GFX0.CPL2, 
-                            ^^^GFX0.DDL2))))
+                        If (LNot (LOr (LOr (LEqual (^^^GFX0.CPDL, ^^^GFX0.DDL2), LEqual (^^^GFX0.CPL2, ^^^GFX0.DDL2)), LEqual (^^^GFX0.CPL2, ^^^GFX0.DDL2))))
                         {
                             Store (One, ^^^GFX0.CLID)
                         }
@@ -8559,7 +8414,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     If (LEqual (Arg0, 0x0B))
                     {
                         Store (BCNT, Local3)
-                        ShiftRight (0x0100, 0x03, Local2)
+                        Store (0x20, Local2)
                         If (LGreater (Local3, Local2))
                         {
                             Store (Local2, Local3)
@@ -8567,24 +8422,15 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
 
                         If (LLess (Local3, 0x11))
                         {
-                            Store (L1L4 (B1B4 (DL10, DL11, DL12, DL13), B1B4 (DL14, DL15, DL16, DL17), 
-                                B1B4 (DL18, DL19, DL1A, DL1B), B1B4 (DL1C, DL1D, DL1E, DL1F)), Local2)
+                            Store (L1L4 (B1B4 (DL10, DL11, DL12, DL13), B1B4 (DL14, DL15, DL16, DL17), B1B4 (DL18, DL19, DL1A, DL1B), B1B4 (DL1C, DL1D, DL1E, DL1F)), Local2)
+                        }
+                        ElseIf (LLess (Local3, 0x19))
+                        {
+                            Store (L1L6 (B1B4 (DL20, DL21, DL22, DL23), B1B4 (DL24, DL25, DL26, DL27), B1B4 (DL28, DL29, DL2A, DL2B), B1B4 (DL2C, DL2D, DL2E, DL2F), B1B4 (DL2G, DL2H, DL2I, DL2J), B1B4 (DL2K, DL2L, DL2M, DL2N)), Local2)
                         }
                         Else
                         {
-                            If (LLess (Local3, 0x19))
-                            {
-                                Store (L1L6 (B1B4 (DL20, DL21, DL22, DL23), B1B4 (DL24, DL25, DL26, DL27), 
-                                    B1B4 (DL28, DL29, DL2A, DL2B), B1B4 (DL2C, DL2D, DL2E, DL2F), B1B4 (DL2G, DL2H, 
-                                    DL2I, DL2J), B1B4 (DL2K, DL2L, DL2M, DL2N)), Local2)
-                            }
-                            Else
-                            {
-                                Store (D2D4 (L1L4 (B1B4 (DL30, DL31, DL32, DL33), B1B4 (DL34, DL35, DL36, 
-                                    DL37), B1B4 (DL38, DL39, DL3A, DL3B), B1B4 (DL3C, DL3D, DL3E, DL3F)), L1L4 (B1B4 (
-                                    DL3G, DL3H, DL3I, DL3J), B1B4 (DL3K, DL3L, DL3M, DL3N), B1B4 (DL3O, DL3P, DL3Q, 
-                                    DL3R), B1B4 (DL3S, DL3T, DL3U, DL3V))), Local2)
-                            }
+                            Store (D2D4 (L1L4 (B1B4 (DL30, DL31, DL32, DL33), B1B4 (DL34, DL35, DL36, DL37), B1B4 (DL38, DL39, DL3A, DL3B), B1B4 (DL3C, DL3D, DL3E, DL3F)), L1L4 (B1B4 (DL3G, DL3H, DL3I, DL3J), B1B4 (DL3K, DL3L, DL3M, DL3N), B1B4 (DL3O, DL3P, DL3Q, DL3R), B1B4 (DL3S, DL3T, DL3U, DL3V))), Local2)
                         }
 
                         Increment (Local3)
@@ -9314,25 +9160,19 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 {
                     Store (BLVL, Local0)
                 }
+                ElseIf (LEqual (T_0, 0x13))
+                {
+                    Store (Arg1, BLVL)
+                    Store (BLVL, Local0)
+                }
+                ElseIf (LEqual (T_0, 0x29))
+                {
+                    Store (GCPU, Local0)
+                }
                 Else
                 {
-                    If (LEqual (T_0, 0x13))
-                    {
-                        Store (Arg1, BLVL)
-                        Store (BLVL, Local0)
-                    }
-                    Else
-                    {
-                        If (LEqual (T_0, 0x29))
-                        {
-                            Store (GCPU, Local0)
-                        }
-                        Else
-                        {
-                            P8H4 (0x77)
-                            Store ("No Match Case in VPCM", Debug)
-                        }
-                    }
+                    P8H4 (0x77)
+                    Store ("No Match Case in VPCM", Debug)
                 }
 
                 Store (Local0, VDAT)
@@ -9403,23 +9243,20 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 {
                     Or (VPCY, 0x00700000, VPCY)
                 }
-                Else
+                ElseIf (GI37)
                 {
-                    If (GI37)
-                    {
-                        If (GI36)
-                        {
-                            Or (VPCY, 0x00100000, VPCY)
-                        }
-                        Else
-                        {
-                            Or (VPCY, 0x00200000, VPCY)
-                        }
-                    }
-                    Else
+                    If (GI36)
                     {
                         Or (VPCY, 0x00100000, VPCY)
                     }
+                    Else
+                    {
+                        Or (VPCY, 0x00200000, VPCY)
+                    }
+                }
+                Else
+                {
+                    Or (VPCY, 0x00100000, VPCY)
                 }
 
                 If (CCDE)
@@ -9446,16 +9283,13 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                 {
                     Or (VPCY, Zero, VPCY)
                 }
+                ElseIf (GI37)
+                {
+                    Or (VPCY, Zero, VPCY)
+                }
                 Else
                 {
-                    If (GI37)
-                    {
-                        Or (VPCY, Zero, VPCY)
-                    }
-                    Else
-                    {
-                        Or (VPCY, Zero, VPCY)
-                    }
+                    Or (VPCY, Zero, VPCY)
                 }
 
                 If (IGDS)
@@ -9524,72 +9358,45 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     {
                         Store (DerefOf (Index (IBCL, 0x02)), VQ01)
                     }
+                    ElseIf (LEqual (VQ00, One))
+                    {
+                        Store (DerefOf (Index (IBCL, 0x03)), VQ01)
+                    }
+                    ElseIf (LEqual (VQ00, 0x02))
+                    {
+                        Store (DerefOf (Index (IBCL, 0x04)), VQ01)
+                    }
+                    ElseIf (LEqual (VQ00, 0x03))
+                    {
+                        Store (DerefOf (Index (IBCL, 0x05)), VQ01)
+                    }
+                    ElseIf (LEqual (VQ00, 0x04))
+                    {
+                        Store (DerefOf (Index (IBCL, 0x06)), VQ01)
+                    }
+                    ElseIf (LEqual (VQ00, 0x05))
+                    {
+                        Store (DerefOf (Index (IBCL, 0x07)), VQ01)
+                    }
+                    ElseIf (LEqual (VQ00, 0x06))
+                    {
+                        Store (DerefOf (Index (IBCL, 0x08)), VQ01)
+                    }
+                    ElseIf (LEqual (VQ00, 0x07))
+                    {
+                        Store (DerefOf (Index (IBCL, 0x09)), VQ01)
+                    }
+                    ElseIf (LEqual (VQ00, 0x08))
+                    {
+                        Store (DerefOf (Index (IBCL, 0x0A)), VQ01)
+                    }
+                    ElseIf (LEqual (VQ00, 0x09))
+                    {
+                        Store (DerefOf (Index (IBCL, 0x0B)), VQ01)
+                    }
                     Else
                     {
-                        If (LEqual (VQ00, One))
-                        {
-                            Store (DerefOf (Index (IBCL, 0x03)), VQ01)
-                        }
-                        Else
-                        {
-                            If (LEqual (VQ00, 0x02))
-                            {
-                                Store (DerefOf (Index (IBCL, 0x04)), VQ01)
-                            }
-                            Else
-                            {
-                                If (LEqual (VQ00, 0x03))
-                                {
-                                    Store (DerefOf (Index (IBCL, 0x05)), VQ01)
-                                }
-                                Else
-                                {
-                                    If (LEqual (VQ00, 0x04))
-                                    {
-                                        Store (DerefOf (Index (IBCL, 0x06)), VQ01)
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (VQ00, 0x05))
-                                        {
-                                            Store (DerefOf (Index (IBCL, 0x07)), VQ01)
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (VQ00, 0x06))
-                                            {
-                                                Store (DerefOf (Index (IBCL, 0x08)), VQ01)
-                                            }
-                                            Else
-                                            {
-                                                If (LEqual (VQ00, 0x07))
-                                                {
-                                                    Store (DerefOf (Index (IBCL, 0x09)), VQ01)
-                                                }
-                                                Else
-                                                {
-                                                    If (LEqual (VQ00, 0x08))
-                                                    {
-                                                        Store (DerefOf (Index (IBCL, 0x0A)), VQ01)
-                                                    }
-                                                    Else
-                                                    {
-                                                        If (LEqual (VQ00, 0x09))
-                                                        {
-                                                            Store (DerefOf (Index (IBCL, 0x0B)), VQ01)
-                                                        }
-                                                        Else
-                                                        {
-                                                            Store (DerefOf (Index (IBCL, 0x0C)), VQ01)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        Store (DerefOf (Index (IBCL, 0x0C)), VQ01)
                     }
 
                     ^^^GFX0.DD03._BCM (VQ01)
@@ -9874,8 +9681,7 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     {
                         Store (Local1, Index (PBIF, One))
                         Store (Divide (Local1, 0x0A, ), Index (PBIF, 0x05))
-                        Store (Divide (Multiply (Local1, 0x03), 0x64, ), Index (PBIF, 0x06
-                            ))
+                        Store (Divide (Multiply (Local1, 0x03), 0x64, ), Index (PBIF, 0x06))
                     }
 
                     If (LNot (^^PCI0.LPCB.EC0.SMRD (0x09, 0x16, 0x19, RefOf (Local1))))
@@ -10265,282 +10071,222 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     SBSW ()
                     Return (BUF1)
                 }
-                Else
+                ElseIf (LEqual (T_0, 0x02))
                 {
-                    If (LEqual (T_0, 0x02))
+                    Store (Arg0, EID2)
+                    Return (BUF2)
+                }
+                ElseIf (LEqual (T_0, 0x08))
+                {
+                    Store (Arg0, EID1)
+                    If (Arg2)
                     {
-                        Store (Arg0, EID2)
-                        Return (BUF2)
+                        Store (One, AP00)
                     }
                     Else
                     {
-                        If (LEqual (T_0, 0x08))
-                        {
-                            Store (Arg0, EID1)
-                            If (Arg2)
-                            {
-                                Store (One, AP00)
-                            }
-                            Else
-                            {
-                                Store (Zero, AP00)
-                            }
+                        Store (Zero, AP00)
+                    }
 
-                            Return (BUF1)
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x09))
+                {
+                    Store (Arg0, EID1)
+                    If (Arg2)
+                    {
+                        Store (One, AP01)
+                    }
+                    Else
+                    {
+                        Store (Zero, AP01)
+                    }
+
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x0A))
+                {
+                    Store (Arg0, EID1)
+                    If (Arg2)
+                    {
+                        Store (One, AP02)
+                        Store (One, SBLI)
+                        SBSV ()
+                    }
+                    Else
+                    {
+                        Store (Zero, AP02)
+                        Store (Zero, SBLI)
+                        SBSV ()
+                    }
+
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x0B))
+                {
+                    Store (Arg0, EID1)
+                    If (Arg2)
+                    {
+                        Store (One, AP03)
+                    }
+                    Else
+                    {
+                        Store (Zero, AP03)
+                    }
+
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x0C))
+                {
+                    Store (Arg0, EID1)
+                    If (Arg2)
+                    {
+                        Store (One, AP04)
+                    }
+                    Else
+                    {
+                        Store (Zero, AP04)
+                    }
+
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x0D))
+                {
+                    Store (Arg0, EID1)
+                    If (Arg2)
+                    {
+                        Store (One, AP05)
+                    }
+                    Else
+                    {
+                        Store (Zero, AP05)
+                    }
+
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x0E))
+                {
+                    Store (Arg0, EID1)
+                    If (Arg2)
+                    {
+                        Store (One, AP06)
+                    }
+                    Else
+                    {
+                        Store (Zero, AP06)
+                    }
+
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x0F))
+                {
+                    Store (Arg0, EID1)
+                    If (Arg2)
+                    {
+                        Store (One, AP07)
+                    }
+                    Else
+                    {
+                        Store (Zero, AP07)
+                    }
+
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x19))
+                {
+                    Store (Arg0, EID1)
+                    Store (Arg2, SKEY)
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x2A))
+                {
+                    Store (Arg0, EID1)
+                    Store (^^PCI0.LPCB.EC0.SLB0, SBR0)
+                    Store (^^PCI0.LPCB.EC0.SLB1, SBR1)
+                    Store (^^PCI0.LPCB.EC0.SLB2, SBR2)
+                    Return (BUF1)
+                }
+                ElseIf (LEqual (T_0, 0x2B))
+                {
+                    Store (Arg0, EID1)
+                    Name (T_1, Zero)
+                    Store (Arg1, T_1)
+                    If (LEqual (T_1, One))
+                    {
+                        SBSW ()
+                    }
+                    ElseIf (LEqual (T_1, 0x03))
+                    {
+                        Name (T_2, Zero)
+                        Store (Arg2, T_2)
+                        If (LEqual (T_2, Zero))
+                        {
+                            Store (Zero, SBBR)
+                            SBSV ()
+                        }
+                        ElseIf (LEqual (T_2, One))
+                        {
+                            Store (One, SBBR)
+                            SBSV ()
+                        }
+                        ElseIf (LEqual (T_2, 0x10))
+                        {
+                            Store (Zero, SBLI)
+                            SBSV ()
+                        }
+                        ElseIf (LEqual (T_2, 0x11))
+                        {
+                            Store (One, SBLI)
+                            SBSV ()
                         }
                         Else
                         {
-                            If (LEqual (T_0, 0x09))
-                            {
-                                Store (Arg0, EID1)
-                                If (Arg2)
-                                {
-                                    Store (One, AP01)
-                                }
-                                Else
-                                {
-                                    Store (Zero, AP01)
-                                }
-
-                                Return (BUF1)
-                            }
-                            Else
-                            {
-                                If (LEqual (T_0, 0x0A))
-                                {
-                                    Store (Arg0, EID1)
-                                    If (Arg2)
-                                    {
-                                        Store (One, AP02)
-                                        Store (One, SBLI)
-                                        SBSV ()
-                                    }
-                                    Else
-                                    {
-                                        Store (Zero, AP02)
-                                        Store (Zero, SBLI)
-                                        SBSV ()
-                                    }
-
-                                    Return (BUF1)
-                                }
-                                Else
-                                {
-                                    If (LEqual (T_0, 0x0B))
-                                    {
-                                        Store (Arg0, EID1)
-                                        If (Arg2)
-                                        {
-                                            Store (One, AP03)
-                                        }
-                                        Else
-                                        {
-                                            Store (Zero, AP03)
-                                        }
-
-                                        Return (BUF1)
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (T_0, 0x0C))
-                                        {
-                                            Store (Arg0, EID1)
-                                            If (Arg2)
-                                            {
-                                                Store (One, AP04)
-                                            }
-                                            Else
-                                            {
-                                                Store (Zero, AP04)
-                                            }
-
-                                            Return (BUF1)
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (T_0, 0x0D))
-                                            {
-                                                Store (Arg0, EID1)
-                                                If (Arg2)
-                                                {
-                                                    Store (One, AP05)
-                                                }
-                                                Else
-                                                {
-                                                    Store (Zero, AP05)
-                                                }
-
-                                                Return (BUF1)
-                                            }
-                                            Else
-                                            {
-                                                If (LEqual (T_0, 0x0E))
-                                                {
-                                                    Store (Arg0, EID1)
-                                                    If (Arg2)
-                                                    {
-                                                        Store (One, AP06)
-                                                    }
-                                                    Else
-                                                    {
-                                                        Store (Zero, AP06)
-                                                    }
-
-                                                    Return (BUF1)
-                                                }
-                                                Else
-                                                {
-                                                    If (LEqual (T_0, 0x0F))
-                                                    {
-                                                        Store (Arg0, EID1)
-                                                        If (Arg2)
-                                                        {
-                                                            Store (One, AP07)
-                                                        }
-                                                        Else
-                                                        {
-                                                            Store (Zero, AP07)
-                                                        }
-
-                                                        Return (BUF1)
-                                                    }
-                                                    Else
-                                                    {
-                                                        If (LEqual (T_0, 0x19))
-                                                        {
-                                                            Store (Arg0, EID1)
-                                                            Store (Arg2, SKEY)
-                                                            Return (BUF1)
-                                                        }
-                                                        Else
-                                                        {
-                                                            If (LEqual (T_0, 0x2A))
-                                                            {
-                                                                Store (Arg0, EID1)
-                                                                Store (^^PCI0.LPCB.EC0.SLB0, SBR0)
-                                                                Store (^^PCI0.LPCB.EC0.SLB1, SBR1)
-                                                                Store (^^PCI0.LPCB.EC0.SLB2, SBR2)
-                                                                Return (BUF1)
-                                                            }
-                                                            Else
-                                                            {
-                                                                If (LEqual (T_0, 0x2B))
-                                                                {
-                                                                    Store (Arg0, EID1)
-                                                                    Name (T_1, Zero)
-                                                                    Store (Arg1, T_1)
-                                                                    If (LEqual (T_1, One))
-                                                                    {
-                                                                        SBSW ()
-                                                                    }
-                                                                    Else
-                                                                    {
-                                                                        If (LEqual (T_1, 0x03))
-                                                                        {
-                                                                            Name (T_2, Zero)
-                                                                            Store (Arg2, T_2)
-                                                                            If (LEqual (T_2, Zero))
-                                                                            {
-                                                                                Store (Zero, SBBR)
-                                                                                SBSV ()
-                                                                            }
-                                                                            Else
-                                                                            {
-                                                                                If (LEqual (T_2, One))
-                                                                                {
-                                                                                    Store (One, SBBR)
-                                                                                    SBSV ()
-                                                                                }
-                                                                                Else
-                                                                                {
-                                                                                    If (LEqual (T_2, 0x10))
-                                                                                    {
-                                                                                        Store (Zero, SBLI)
-                                                                                        SBSV ()
-                                                                                    }
-                                                                                    Else
-                                                                                    {
-                                                                                        If (LEqual (T_2, 0x11))
-                                                                                        {
-                                                                                            Store (One, SBLI)
-                                                                                            SBSV ()
-                                                                                        }
-                                                                                        Else
-                                                                                        {
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-
-                                                                    Return (BUF1)
-                                                                }
-                                                                Else
-                                                                {
-                                                                    If (LEqual (T_0, 0x30))
-                                                                    {
-                                                                        Store (Arg0, EID1)
-                                                                        Name (T_3, Zero)
-                                                                        Store (Arg1, T_3)
-                                                                        If (LEqual (T_3, 0x03))
-                                                                        {
-                                                                            Name (T_4, Zero)
-                                                                            Store (Arg2, T_4)
-                                                                            If (LEqual (T_4, 0x02)) {}
-                                                                            Else
-                                                                            {
-                                                                                If (LEqual (T_4, 0x03)) {}
-                                                                                Else
-                                                                                {
-                                                                                    If (LEqual (T_4, 0x04))
-                                                                                    {
-                                                                                        Store (One, ^^PCI0.LPCB.EC0.TPDS)
-                                                                                        Store (One, ^^PCI0.LPCB.EC0.TPNT)
-                                                                                        If (^^PCI0.LPCB.EC0.CCDE)
-                                                                                        {
-                                                                                            PHSR (0x8B)
-                                                                                            Store (One, ^^PCI0.LPCB.EC0.CCDS)
-                                                                                        }
-                                                                                    }
-                                                                                    Else
-                                                                                    {
-                                                                                        If (LEqual (T_4, 0x05)) {}
-                                                                                        Else
-                                                                                        {
-                                                                                            If (LEqual (T_4, 0x06)) {}
-                                                                                            Else
-                                                                                            {
-                                                                                            }
-                                                                                        }
-                                                                                    }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                        Else
-                                                                        {
-                                                                        }
-
-                                                                        Return (BUF1)
-                                                                    }
-                                                                    Else
-                                                                    {
-                                                                        Return (Zero)
-                                                                    }
-
-                                                                    Return (Zero)
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
                         }
                     }
+
+                    Return (BUF1)
+                }
+                Else
+                {
+                    If (LEqual (T_0, 0x30))
+                    {
+                        Store (Arg0, EID1)
+                        Name (T_3, Zero)
+                        Store (Arg1, T_3)
+                        If (LEqual (T_3, 0x03))
+                        {
+                            Name (T_4, Zero)
+                            Store (Arg2, T_4)
+                            If (LEqual (T_4, 0x02)) {}
+                            ElseIf (LEqual (T_4, 0x03)) {}
+                            ElseIf (LEqual (T_4, 0x04))
+                            {
+                                Store (One, ^^PCI0.LPCB.EC0.TPDS)
+                                Store (One, ^^PCI0.LPCB.EC0.TPNT)
+                                If (^^PCI0.LPCB.EC0.CCDE)
+                                {
+                                    PHSR (0x8B)
+                                    Store (One, ^^PCI0.LPCB.EC0.CCDS)
+                                }
+                            }
+                            ElseIf (LEqual (T_4, 0x05)) {}
+                            ElseIf (LEqual (T_4, 0x06)) {}
+                            Else
+                            {
+                            }
+                        }
+                        Else
+                        {
+                        }
+
+                        Return (BUF1)
+                    }
+                    Else
+                    {
+                        Return (Zero)
+                    }
+
+                    Return (Zero)
                 }
             }
 
@@ -10553,35 +10299,26 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     Store (One, SBLI)
                     Store (One, SBBR)
                 }
+                ElseIf (LEqual (T_0, One))
+                {
+                    Store (One, SBLI)
+                    Store (Zero, SBBR)
+                }
+                ElseIf (LEqual (T_0, 0x02))
+                {
+                    Store (Zero, SBLI)
+                    Store (Zero, SBBR)
+                }
+                ElseIf (LEqual (T_0, 0x03))
+                {
+                    Store (Zero, SBLI)
+                    Store (One, SBBR)
+                }
                 Else
                 {
-                    If (LEqual (T_0, One))
-                    {
-                        Store (One, SBLI)
-                        Store (Zero, SBBR)
-                    }
-                    Else
-                    {
-                        If (LEqual (T_0, 0x02))
-                        {
-                            Store (Zero, SBLI)
-                            Store (Zero, SBBR)
-                        }
-                        Else
-                        {
-                            If (LEqual (T_0, 0x03))
-                            {
-                                Store (Zero, SBLI)
-                                Store (One, SBBR)
-                            }
-                            Else
-                            {
-                                Store (Zero, SBLI)
-                                Store (One, SBBR)
-                                Store (0x03, CMSB)
-                            }
-                        }
-                    }
+                    Store (Zero, SBLI)
+                    Store (One, SBBR)
+                    Store (0x03, CMSB)
                 }
             }
 
@@ -10599,41 +10336,32 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                     {
                         Store (0x02, CMSB)
                     }
+                    ElseIf (LEqual (T_1, One))
+                    {
+                        Store (0x03, CMSB)
+                    }
                     Else
                     {
-                        If (LEqual (T_1, One))
-                        {
-                            Store (0x03, CMSB)
-                        }
-                        Else
-                        {
-                        }
+                    }
+                }
+                ElseIf (LEqual (T_0, One))
+                {
+                    Name (T_2, Zero)
+                    Store (SBBR, T_2)
+                    If (LEqual (T_2, Zero))
+                    {
+                        Store (One, CMSB)
+                    }
+                    ElseIf (LEqual (T_2, One))
+                    {
+                        Store (Zero, CMSB)
+                    }
+                    Else
+                    {
                     }
                 }
                 Else
                 {
-                    If (LEqual (T_0, One))
-                    {
-                        Name (T_2, Zero)
-                        Store (SBBR, T_2)
-                        If (LEqual (T_2, Zero))
-                        {
-                            Store (One, CMSB)
-                        }
-                        Else
-                        {
-                            If (LEqual (T_2, One))
-                            {
-                                Store (Zero, CMSB)
-                            }
-                            Else
-                            {
-                            }
-                        }
-                    }
-                    Else
-                    {
-                    }
                 }
 
                 Store (CMSB, ^^PCI0.LPCB.EC0.SEBT)
@@ -10702,44 +10430,32 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         {
                             SBSW ()
                         }
-                        Else
+                        ElseIf (LEqual (T_1, 0x03))
                         {
-                            If (LEqual (T_1, 0x03))
+                            Name (T_2, Zero)
+                            Store (Arg2, T_2)
+                            If (LEqual (T_2, Zero))
                             {
-                                Name (T_2, Zero)
-                                Store (Arg2, T_2)
-                                If (LEqual (T_2, Zero))
-                                {
-                                    Store (Zero, SBBR)
-                                    SBSV ()
-                                }
-                                Else
-                                {
-                                    If (LEqual (T_2, One))
-                                    {
-                                        Store (One, SBBR)
-                                        SBSV ()
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (T_2, 0x10))
-                                        {
-                                            Store (Zero, SBLI)
-                                            SBSV ()
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (T_2, 0x11))
-                                            {
-                                                Store (One, SBLI)
-                                                SBSV ()
-                                            }
-                                            Else
-                                            {
-                                            }
-                                        }
-                                    }
-                                }
+                                Store (Zero, SBBR)
+                                SBSV ()
+                            }
+                            ElseIf (LEqual (T_2, One))
+                            {
+                                Store (One, SBBR)
+                                SBSV ()
+                            }
+                            ElseIf (LEqual (T_2, 0x10))
+                            {
+                                Store (Zero, SBLI)
+                                SBSV ()
+                            }
+                            ElseIf (LEqual (T_2, 0x11))
+                            {
+                                Store (One, SBLI)
+                                SBSV ()
+                            }
+                            Else
+                            {
                             }
                         }
 
@@ -11025,138 +10741,108 @@ DefinitionBlock ("iASLYYg2aq.aml", "DSDT", 2, "LENOVO", "CB-01   ", 0x06040000)
                         Store (Zero, CRTA)
                         Store (Zero, HDTV)
                     }
+                    ElseIf (LEqual (Local1, 0x02))
+                    {
+                        Store (Zero, LCDA)
+                        Store (One, CRTA)
+                        Store (Zero, HDTV)
+                    }
+                    ElseIf (LEqual (Local1, 0x03))
+                    {
+                        Store (One, LCDA)
+                        Store (One, CRTA)
+                        Store (Zero, HDTV)
+                    }
                     Else
                     {
-                        If (LEqual (Local1, 0x02))
+                        Store (One, TOGF)
+                        Store (One, LCDA)
+                        Store (Zero, CRTA)
+                        Store (Zero, HDTV)
+                    }
+                }
+                ElseIf (GI19)
+                {
+                    If (LEqual (Local0, 0x05))
+                    {
+                        GETD ()
+                        Increment (TOGF)
+                        Store (TOGF, Local1)
+                        If (LEqual (Local1, One))
+                        {
+                            Store (One, LCDA)
+                            Store (Zero, CRTA)
+                            Store (Zero, HDTV)
+                        }
+                        ElseIf (LEqual (Local1, 0x05))
+                        {
+                            Store (Zero, TOGF)
+                            Store (One, LCDA)
+                            Store (Zero, CRTA)
+                            Store (One, HDTV)
+                        }
+                        Else
+                        {
+                            Store (Zero, LCDA)
+                            Store (Zero, CRTA)
+                            Store (One, HDTV)
+                        }
+                    }
+                    ElseIf (LEqual (Local0, 0x07))
+                    {
+                        GETS ()
+                        Increment (TOGF)
+                        Store (TOGF, Local1)
+                        If (LEqual (Local1, One))
+                        {
+                            Store (One, LCDA)
+                            Store (Zero, CRTA)
+                            Store (Zero, HDTV)
+                        }
+                        ElseIf (LEqual (Local1, 0x02))
                         {
                             Store (Zero, LCDA)
                             Store (One, CRTA)
                             Store (Zero, HDTV)
                         }
+                        ElseIf (LEqual (Local1, 0x03))
+                        {
+                            Store (One, LCDA)
+                            Store (One, CRTA)
+                            Store (Zero, HDTV)
+                        }
+                        ElseIf (LEqual (Local1, 0x04))
+                        {
+                            Store (Zero, LCDA)
+                            Store (Zero, CRTA)
+                            Store (One, HDTV)
+                        }
+                        ElseIf (LEqual (Local1, 0x05))
+                        {
+                            Store (One, LCDA)
+                            Store (Zero, CRTA)
+                            Store (One, HDTV)
+                        }
+                        ElseIf (LEqual (Local1, 0x06))
+                        {
+                            Store (Zero, LCDA)
+                            Store (One, CRTA)
+                            Store (One, HDTV)
+                        }
                         Else
                         {
-                            If (LEqual (Local1, 0x03))
-                            {
-                                Store (One, LCDA)
-                                Store (One, CRTA)
-                                Store (Zero, HDTV)
-                            }
-                            Else
-                            {
-                                Store (One, TOGF)
-                                Store (One, LCDA)
-                                Store (Zero, CRTA)
-                                Store (Zero, HDTV)
-                            }
+                            Store (Zero, TOGF)
+                            Store (One, LCDA)
+                            Store (Zero, CRTA)
+                            Store (One, HDTV)
                         }
                     }
-                }
-                Else
-                {
-                    If (GI19)
+                    Else
                     {
-                        If (LEqual (Local0, 0x05))
-                        {
-                            GETD ()
-                            Increment (TOGF)
-                            Store (TOGF, Local1)
-                            If (LEqual (Local1, One))
-                            {
-                                Store (One, LCDA)
-                                Store (Zero, CRTA)
-                                Store (Zero, HDTV)
-                            }
-                            Else
-                            {
-                                If (LEqual (Local1, 0x05))
-                                {
-                                    Store (Zero, TOGF)
-                                    Store (One, LCDA)
-                                    Store (Zero, CRTA)
-                                    Store (One, HDTV)
-                                }
-                                Else
-                                {
-                                    Store (Zero, LCDA)
-                                    Store (Zero, CRTA)
-                                    Store (One, HDTV)
-                                }
-                            }
-                        }
-                        Else
-                        {
-                            If (LEqual (Local0, 0x07))
-                            {
-                                GETS ()
-                                Increment (TOGF)
-                                Store (TOGF, Local1)
-                                If (LEqual (Local1, One))
-                                {
-                                    Store (One, LCDA)
-                                    Store (Zero, CRTA)
-                                    Store (Zero, HDTV)
-                                }
-                                Else
-                                {
-                                    If (LEqual (Local1, 0x02))
-                                    {
-                                        Store (Zero, LCDA)
-                                        Store (One, CRTA)
-                                        Store (Zero, HDTV)
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (Local1, 0x03))
-                                        {
-                                            Store (One, LCDA)
-                                            Store (One, CRTA)
-                                            Store (Zero, HDTV)
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (Local1, 0x04))
-                                            {
-                                                Store (Zero, LCDA)
-                                                Store (Zero, CRTA)
-                                                Store (One, HDTV)
-                                            }
-                                            Else
-                                            {
-                                                If (LEqual (Local1, 0x05))
-                                                {
-                                                    Store (One, LCDA)
-                                                    Store (Zero, CRTA)
-                                                    Store (One, HDTV)
-                                                }
-                                                Else
-                                                {
-                                                    If (LEqual (Local1, 0x06))
-                                                    {
-                                                        Store (Zero, LCDA)
-                                                        Store (One, CRTA)
-                                                        Store (One, HDTV)
-                                                    }
-                                                    Else
-                                                    {
-                                                        Store (Zero, TOGF)
-                                                        Store (One, LCDA)
-                                                        Store (Zero, CRTA)
-                                                        Store (One, HDTV)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            Else
-                            {
-                                Store (One, TOGF)
-                                Store (One, LCDA)
-                                Store (Zero, CRTA)
-                                Store (Zero, HDTV)
-                            }
-                        }
+                        Store (One, TOGF)
+                        Store (One, LCDA)
+                        Store (Zero, CRTA)
+                        Store (Zero, HDTV)
                     }
                 }
 
